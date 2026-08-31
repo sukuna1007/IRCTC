@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>IRCTC</title>
+
+
+    <!-- ========================= -->
+    <!-- Flatpickr -->
+    <!-- ========================= -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+
+    <!-- ========================= -->
+    <!-- Google Font -->
+    <!-- ========================= -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap"
+        rel="stylesheet">
+
+
+    <!-- ========================= -->
+    <!-- Font Awesome -->
+    <!-- ========================= -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+
+    <!-- ========================= -->
+    <!-- Bootstrap -->
+    <!-- ========================= -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+
+    <!-- ========================= -->
+    <!-- CSS -->
+    <!-- ========================= -->
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================= -->
+    <!-- BACKDROP -->
+    <!-- ========================= -->
+
+    <div class="backdrop"></div>
+
+
+    <!-- ========================= -->
+    <!-- NAVBAR -->
+    <!-- ========================= -->
+
+    <nav class="navbar navbar-expand-lg">
+
+        <div class="container">
+
+
+            <!-- LOGO -->
+
+            <a
+                class="navbar-brand"
+                href="index.html">
+
+                <img
+                    src="../images/logo_second.png"
+                    class="img-fluid"
+                    alt="IRCTC">
+
+            </a>
+
+
+            <div
+                class="collapse navbar-collapse"
+                id="navbarSupportedContent">
+
+                <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+
+
+                    <!-- HOME -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link active"
+                            href="index.html">
+
+                            <i class="fa-solid fa-house-chimney"></i>
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- LOGIN -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link btnlogin-popup"
+                            id="loginBtn"
+                            href="#">
+
+                            LOGIN / REGISTER
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- PROFILE -->
+
+                    <li
+                        class="nav-item dropdown"
+                        id="profileMenu"
+                        style="display: none;">
+
+                        <a
+                            class="nav-link dropdown-toggle d-flex align-items-center"
+                            href="#"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+
+                            <img
+                                id="navProfileImage"
+                                src="../images/default-profile.png"
+                                width="40"
+                                height="40"
+                                class="rounded-circle border border-2 border-primary"
+                                alt="Profile">
+
+                        </a>
+
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+
+
+                            <!-- ADMIN DASHBOARD -->
+
+                            <li
+                                id="adminDashboardMenu"
+                                style="display: none;">
+
+                                <a
+                                    class="dropdown-item"
+                                    href="admin.html">
+
+                                    <i class="fa-solid fa-gauge-high me-2"></i>
+
+                                    Admin Dashboard
+
+                                </a>
+
+                            </li>
+
+
+                            <!-- MY PROFILE -->
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item"
+                                    href="profile.html">
+
+                                    <i class="fa-solid fa-user me-2"></i>
+
+                                    My Profile
+
+                                </a>
+
+                            </li>
+
+
+                            <!-- MY BOOKINGS -->
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item"
+                                    href="mybooking.html">
+
+                                    <i class="fa-solid fa-ticket me-2"></i>
+
+                                    My Bookings
+
+                                </a>
+
+                            </li>
+
+
+                            <li>
+
+                                <hr class="dropdown-divider">
+
+                            </li>
+
+
+                            <!-- LOGOUT -->
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item text-danger"
+                                    href="#"
+                                    id="logout">
+
+                                    <i class="fa-solid fa-right-from-bracket me-2"></i>
+
+                                    Logout
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+
+                    <!-- TRAINS -->
+
+                    <li class="nav-item dropdown">
+
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            data-bs-toggle="dropdown">
+
+                            TRAINS
+
+                        </a>
+
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item"
+                                    href="search.html">
+
+                                    Book Ticket
+
+                                </a>
+
+                            </li>
+
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item"
+                                    href="mybooking.html">
+
+                                    Cancel E-Ticket
+
+                                </a>
+
+                            </li>
+
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item"
+                                    href="#">
+
+                                    Link Your Aadhaar
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+
+                    <!-- MEALS -->
+
+                    <li class="nav-item dropdown">
+
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            data-bs-toggle="dropdown">
+
+                            MEALS
+
+                        </a>
+
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item"
+                                    href="#">
+
+                                    Book Food – E-Pantry
+
+                                </a>
+
+                            </li>
+
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item"
+                                    href="#">
+
+                                    Order Food - E-Catering
+
+                                </a>
+
+                            </li>
+
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item"
+                                    href="#">
+
+                                    Cooked Food Menu
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+
+                    <!-- E-WALLET -->
+
+                    <li class="nav-item dropdown">
+
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            data-bs-toggle="dropdown">
+
+                            E-WALLET
+
+                        </a>
+
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item"
+                                    href="#">
+
+                                    About IRCTC eWallet
+
+                                </a>
+
+                            </li>
+
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item"
+                                    href="#">
+
+                                    IRCTC eWallet User Guide
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+
+                    <!-- ALERTS -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="#">
+
+                            ALERTS
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- OTHER SERVICES -->
+
+                    <li class="nav-item dropdown">
+
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            data-bs-toggle="dropdown">
+
+                            OTHER SERVICES
+
+                        </a>
+
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item"
+                                    href="#">
+
+                                    IRCTC-iPAY
+
+                                </a>
+
+                            </li>
+
+
+                            <li>
+
+                                <a
+                                    class="dropdown-item"
+                                    href="#">
+
+                                    Flights
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+
+                    <!-- CONTACT -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="#">
+
+                            CONTACT US
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+
+                <!-- SECOND LOGO -->
+
+                <div class="navbar-logo">
+
+                    <div class="logo">
+
+                        <a
+                            class="navbar-brand"
+                            href="index.html">
+
+                            <img
+                                src="../images/logo_second.png"
+                                class="img-fluid"
+                                alt="IRCTC">
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ========================= -->
+    <!-- MAIN -->
+    <!-- ========================= -->
+
+    <section class="main">
+
+
+        <!-- ========================= -->
+        <!-- LOGIN / REGISTER POPUP -->
+        <!-- ========================= -->
+
+        <div class="wrapper">
+
+
+            <!-- CLOSE BUTTON -->
+
+            <span class="icon-close">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </span>
+
+
+            <!-- ========================= -->
+            <!-- LOGIN FORM -->
+            <!-- ========================= -->
+
+            <div
+                class="form-box login"
+                id="loginFormBox">
+
+                <h2>Login</h2>
+
+
+                <form id="loginForm">
+
+
+                    <!-- EMAIL -->
+
+                    <div class="input-box">
+
+                        <span class="icon">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                        </span>
+
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            autocomplete="email"
+                            required>
+
+                        <label>Email</label>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-box">
+
+                        <span class="icon">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                        </span>
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            autocomplete="current-password"
+                            required>
+
+                        <label>Password</label>
+
+                    </div>
+
+
+                    <!-- REMEMBER -->
+
+                    <div class="remembar-forgot">
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                id="rememberMe">
+
+                            Remember Me
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="btn login-btn"
+                        id="loginSubmitBtn">
+
+                        Login
+
+                    </button>
+
+
+                    <!-- REGISTER LINK -->
+
+                    <div class="login-register">
+
+                        <p>
+
+                            Don't have an account?
+
+                            <a
+                                href="#"
+                                class="register-link">
+
+                                Register
+
+                            </a>
+
+                        </p>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+            <!-- ========================= -->
+            <!-- REGISTER FORM -->
+            <!-- ========================= -->
+
+            <div
+                class="form-box register"
+                id="registerFormBox">
+
+                <h2>Register</h2>
+
+
+                <form id="registerForm">
+
+
+                    <!-- FULL NAME -->
+
+                    <div class="input-box">
+
+                        <span class="icon">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </span>
+
+                        <input
+                            type="text"
+                            id="regUsername"
+                            autocomplete="name"
+                            required>
+
+                        <label>Full Name</label>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="input-box">
+
+                        <span class="icon">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                        </span>
+
+                        <input
+                            type="email"
+                            id="regEmail"
+                            autocomplete="email"
+                            required>
+
+                        <label>Email</label>
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="input-box">
+
+                        <span class="icon">
+
+                            <i class="fa-solid fa-phone"></i>
+
+                        </span>
+
+                        <input
+                            type="tel"
+                            id="regPhone"
+                            autocomplete="tel"
+                            inputmode="numeric"
+                            maxlength="10"
+                            pattern="[0-9]{10}"
+                            required>
+
+                        <label>Phone</label>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-box">
+
+                        <span class="icon">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                        </span>
+
+                        <input
+                            type="password"
+                            id="regPassword"
+                            autocomplete="new-password"
+                            minlength="6"
+                            required>
+
+                        <label>Password</label>
+
+                    </div>
+
+
+                    <!-- TERMS -->
+
+                    <div class="remembar-forgot">
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                id="termsCheckbox"
+                                required>
+
+                            I agree to the terms & conditions
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- REGISTER BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="btn register-btn"
+                        id="registerSubmitBtn">
+
+                        Register
+
+                    </button>
+
+
+                    <!-- LOGIN LINK -->
+
+                    <div class="login-register">
+
+                        <p>
+
+                            Already have an account?
+
+                            <a
+                                href="#"
+                                class="login-link">
+
+                                Login
+
+                            </a>
+
+                        </p>
+
+                    </div>
+
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- HERO -->
+        <!-- ========================= -->
+
+        <div class="hero-msg">
+
+            <h1>INDIAN RAILWAY</h1>
+
+            <p>
+                Safety | Security | Punctuality
+            </p>
+
+        </div>
+
+
+        <!-- ========================= -->
+        <!-- BOOK TICKET -->
+        <!-- ========================= -->
+
+        <div class="ticket-box">
+
+            <h2>BOOK TICKET</h2>
+
+
+            <form id="bookingForm">
+
+
+                <!-- FROM / TO -->
+
+                <div class="row">
+
+
+                    <!-- FROM -->
+
+                    <div class="field">
+
+                        <span class="icon">
+
+                            <i class="fa-solid fa-paper-plane"></i>
+
+                        </span>
+
+                        <label for="from">
+                            From
+                        </label>
+
+                        <input
+                            type="text"
+                            id="from"
+                            placeholder="From Station"
+                            required>
+
+                    </div>
+
+
+                    <!-- SWAP -->
+
+                    <button
+                        type="button"
+                        class="btn reverse-btn"
+                        id="swapBtn">
+
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+
+                    </button>
+
+
+                    <!-- TO -->
+
+                    <div class="field">
+
+                        <span class="icon">
+
+                            <i class="fa-solid fa-location-crosshairs"></i>
+
+                        </span>
+
+                        <label for="to">
+                            To
+                        </label>
+
+                        <input
+                            type="text"
+                            id="to"
+                            placeholder="To Station"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DATE -->
+
+                <div class="field">
+
+                    <span class="icon">
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                    </span>
+
+                    <label for="date">
+                        Journey Date
+                    </label>
+
+                    <input
+                        type="text"
+                        id="date"
+                        required>
+
+                </div>
+
+
+                <!-- CLASS -->
+
+                <div class="field">
+
+                    <span class="icon">
+
+                        <i class="fa-solid fa-briefcase"></i>
+
+                    </span>
+
+                    <label for="all-classes">
+                        All Classes
+                    </label>
+
+                    <select id="all-classes">
+
+                        <option value="ALL CLASSES">
+                            ALL CLASSES
+                        </option>
+
+                        <option value="SL">
+                            Sleeper (SL)
+                        </option>
+
+                        <option value="3A">
+                            3A
+                        </option>
+
+                        <option value="2A">
+                            2A
+                        </option>
+
+                        <option value="1A">
+                            1A
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- FLEXIBLE -->
+
+                <div class="flexible">
+
+                    <label>
+
+                        <input type="checkbox">
+
+                        Flexible with Date
+
+                    </label>
+
+                </div>
+
+
+                <!-- SEARCH -->
+
+                <button
+                    type="submit"
+                    class="btn search-btn">
+
+                    Search Train
+
+                </button>
+
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================= -->
+    <!-- FOOTER -->
+    <!-- ========================= -->
+
+    <div class="footerpanal">
+
+        <h1>
+            Get Connected with us on social networks
+        </h1>
+
+
+        <span class="icon">
+
+            <i class="fa-brands fa-facebook"></i>
+
+            <i class="fa-brands fa-youtube"></i>
+
+            <i class="fa-brands fa-instagram"></i>
+
+        </span>
+
+    </div>
+
+
+    <div class="footer-panal1">
+
+        <div class="panal">
+
+
+            <ul>
+
+                <li>IRCTC Trains</li>
+                <li>Information</li>
+                <li>Important Information</li>
+                <li>Agents</li>
+                <li>Enquiries</li>
+
+            </ul>
+
+
+            <ul>
+
+                <li>How To</li>
+                <li>IRCTC Official App</li>
+                <li>Advertise with us</li>
+                <li>Refund Rules</li>
+                <li>Person With Disability Facilities</li>
+
+            </ul>
+
+
+            <ul>
+
+                <li>E-Wallet</li>
+                <li>IRCTC Co-branded Card Benefits</li>
+                <li>IRCTC-iPAY Payment Gateway</li>
+                <li>IRCTC Zone</li>
+                <li>DMRC Ticket Booking at IRCTC</li>
+
+            </ul>
+
+
+            <ul>
+
+                <li>For Newly Migrated</li>
+                <li>Mobile Zone</li>
+                <li>Policies</li>
+                <li>Ask Disha ChatBot</li>
+                <li>About us</li>
+
+            </ul>
+
+
+            <ul>
+
+                <li>Help & Support</li>
+                <li>E-Pantry</li>
+
+            </ul>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- SCRIPTS -->
+    <!-- ========================= -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/flatpickr">
+    </script>
+
+
+    <script
+        src="../javascript/script.js">
+    </script>
+
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+</body>
+
+</html>
