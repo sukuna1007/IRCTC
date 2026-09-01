@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Live Train Location - IRCTC Clone</title>
+
+
+    <!-- =========================
+         GOOGLE FONT
+    ========================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+    <!-- =========================
+         BOOTSTRAP
+    ========================== -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+
+    <!-- =========================
+         FONT AWESOME
+    ========================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+
+    <!-- =========================
+         LEAFLET MAP CSS
+    ========================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+
+    <!-- =========================
+         LIVE TRAIN CSS
+    ========================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/livetrain.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+
+        <div class="container">
+
+
+            <!-- LOGO -->
+
+            <a
+                class="navbar-brand"
+                href="index.html">
+
+                <img
+                    src="../images/logo_second.png"
+                    alt="IRCTC"
+                    id="logo">
+
+            </a>
+
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#liveNavbar"
+                aria-controls="liveNavbar"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <div
+                class="collapse navbar-collapse"
+                id="liveNavbar">
+
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+
+
+                    <!-- HOME -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="index.html">
+
+                            <i class="fa-solid fa-house me-1"></i>
+
+                            Home
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- SEARCH TRAINS -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="search.html">
+
+                            <i class="fa-solid fa-magnifying-glass me-1"></i>
+
+                            Search Trains
+
+                        </a>
+
+                    </li>
+
+
+                    <!-- MY BOOKINGS -->
+
+                    <li class="nav-item">
+
+                        <a
+                            class="nav-link"
+                            href="mybooking.html">
+
+                            <i class="fa-solid fa-ticket me-1"></i>
+
+                            My Bookings
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         MAIN PAGE
+    ====================================================== -->
+
+    <main class="live-train-page">
+
+
+        <div class="container">
+
+
+            <!-- =================================================
+                 BACK BUTTON
+            ================================================== -->
+
+            <div class="top-actions">
+
+                <button
+                    type="button"
+                    class="back-btn"
+                    id="backBtn">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Search
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <section class="page-header">
+
+                <div>
+
+                    <span class="live-badge">
+
+                        <span class="live-dot"></span>
+
+                        LIVE
+
+                    </span>
+
+
+                    <h1>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        Live Train Location
+
+                    </h1>
+
+
+                    <p>
+                        Track your train journey, current station,
+                        next station and running status.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 TRAIN INFORMATION
+            ================================================== -->
+
+            <section class="train-card">
+
+
+                <div class="train-main-info">
+
+
+                    <div class="train-icon-box">
+
+                        <i class="fa-solid fa-train"></i>
+
+                    </div>
+
+
+                    <div class="train-title">
+
+                        <div class="train-number">
+
+                            Train No.
+
+                            <strong id="trainNo">
+                                ----
+                            </strong>
+
+                        </div>
+
+
+                        <h2 id="trainName">
+
+                            Loading Train...
+
+                        </h2>
+
+
+                        <div class="route-name">
+
+                            <span id="sourceStation">
+                                -
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right-long"></i>
+
+                            <span id="destinationStation">
+                                -
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- RUNNING STATUS -->
+
+                    <div
+                        class="running-status"
+                        id="runningStatus">
+
+                        <span class="status-dot"></span>
+
+                        Running
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 STATUS CARDS
+            ================================================== -->
+
+            <section class="status-grid">
+
+
+                <!-- CURRENT STATION -->
+
+                <div class="status-card">
+
+                    <div class="status-icon">
+
+                        <i class="fa-solid fa-location-crosshairs"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Current Station
+                        </p>
+
+                        <h3 id="currentStation">
+                            -
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- NEXT STATION -->
+
+                <div class="status-card">
+
+                    <div class="status-icon">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Next Station
+                        </p>
+
+                        <h3 id="nextStation">
+                            -
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SPEED -->
+
+                <div class="status-card">
+
+                    <div class="status-icon">
+
+                        <i class="fa-solid fa-gauge-high"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Current Speed
+                        </p>
+
+                        <h3>
+
+                            <span id="trainSpeed">
+                                0
+                            </span>
+
+                            <small>
+                                km/h
+                            </small>
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- DELAY -->
+
+                <div class="status-card">
+
+                    <div class="status-icon">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Running Delay
+                        </p>
+
+                        <h3 id="delayStatus">
+
+                            On Time
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ETA -->
+
+                <div class="status-card">
+
+                    <div class="status-icon">
+
+                        <i class="fa-solid fa-hourglass-half"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Next Station ETA
+                        </p>
+
+                        <h3 id="nextStationETA">
+                            -
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- DISTANCE -->
+
+                <div class="status-card">
+
+                    <div class="status-icon">
+
+                        <i class="fa-solid fa-route"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Distance Remaining
+                        </p>
+
+                        <h3>
+
+                            <span id="distanceRemaining">
+                                0
+                            </span>
+
+                            <small>
+                                km
+                            </small>
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 LIVE MAP SECTION
+            ================================================== -->
+
+            <section class="map-section">
+
+
+                <div class="section-heading">
+
+
+                    <div>
+
+                        <h2>
+
+                            <i class="fa-solid fa-map-location-dot"></i>
+
+                            Live Route Map
+
+                        </h2>
+
+
+                        <p>
+
+                            Current location of the train
+                            on its route.
+
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="last-update">
+
+                        <i class="fa-solid fa-arrows-rotate"></i>
+
+                        Last Updated:
+
+                        <span id="lastUpdated">
+                            Just now
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- MAP -->
+
+                <div
+                    id="map">
+
+                    <div
+                        class="map-loading"
+                        id="mapLoading">
+
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                        <p>
+                            Loading live train map...
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 JOURNEY PROGRESS
+            ================================================== -->
+
+            <section class="journey-section">
+
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h2>
+
+                            <i class="fa-solid fa-route"></i>
+
+                            Journey Progress
+
+                        </h2>
+
+                        <p>
+
+                            Station-by-station running progress.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PROGRESS BAR -->
+
+                <div class="journey-progress-wrapper">
+
+                    <div class="progress-info">
+
+                        <span>
+                            Journey Completed
+                        </span>
+
+                        <strong id="journeyPercentage">
+                            0%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="journey-progress">
+
+                        <div
+                            class="journey-progress-bar"
+                            id="journeyProgressBar">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STATION TIMELINE -->
+
+                <div
+                    class="station-timeline"
+                    id="stationTimeline">
+
+
+                    <!-- JS WILL GENERATE STATIONS HERE -->
+
+                    <div class="timeline-loading">
+
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                        Loading route stations...
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 TRAIN DETAIL SECTION
+            ================================================== -->
+
+            <section class="details-section">
+
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <h2>
+
+                            <i class="fa-solid fa-circle-info"></i>
+
+                            Running Information
+
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="details-grid">
+
+
+                    <!-- JOURNEY DATE -->
+
+                    <div class="detail-item">
+
+                        <span>
+
+                            <i class="fa-solid fa-calendar-days"></i>
+
+                            Journey Date
+
+                        </span>
+
+                        <strong id="journeyDate">
+                            -
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- DEPARTURE -->
+
+                    <div class="detail-item">
+
+                        <span>
+
+                            <i class="fa-solid fa-train-subway"></i>
+
+                            Departure
+
+                        </span>
+
+                        <strong id="departureTime">
+                            -
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- ARRIVAL -->
+
+                    <div class="detail-item">
+
+                        <span>
+
+                            <i class="fa-solid fa-flag-checkered"></i>
+
+                            Expected Arrival
+
+                        </span>
+
+                        <strong id="arrivalTime">
+                            -
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- PLATFORM -->
+
+                    <div class="detail-item">
+
+                        <span>
+
+                            <i class="fa-solid fa-signs-post"></i>
+
+                            Platform
+
+                        </span>
+
+                        <strong id="platformNumber">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 DEMO NOTICE
+            ================================================== -->
+
+            <section class="tracking-notice">
+
+                <div class="notice-icon">
+
+                    <i class="fa-solid fa-circle-info"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h4>
+                        Project Live Tracking
+                    </h4>
+
+                    <p>
+                        This live location feature demonstrates train
+                        tracking for the IRCTC Clone project. Train
+                        position and running information shown here are
+                        simulated project data and are not official
+                        Indian Railways live-running information.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <div class="footer-content">
+
+
+                <div>
+
+                    <strong>
+                        IRCTC Clone
+                    </strong>
+
+                    <p>
+                        Railway Reservation System
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <p>
+
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                        Educational Project
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         BOOTSTRAP JS
+    ====================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+
+    <!-- =====================================================
+         LEAFLET MAP JS
+    ====================================================== -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+
+
+    <!-- =====================================================
+         LIVE TRAIN JS
+    ====================================================== -->
+
+    <script
+        src="../javascript/livetrain.js">
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1800 @@
+/* =========================================================
+   IRCTC CLONE
+   MODERN RAILWAY DESIGN
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #222;
+    overflow-x: hidden;
+    background: #111;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    position: fixed;
+
+    top: 15px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 94%;
+    height: 82px;
+
+    background: rgba(20, 20, 20, 0.94);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    border-radius: 20px;
+
+    z-index: 1000;
+
+    padding: 0;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+
+/* =========================================================
+   NAVBAR CONTAINER
+========================================================= */
+
+.navbar > .container {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.navbar-brand {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 !important;
+    margin: 0;
+}
+
+.navbar-brand img {
+    width: 78px;
+    max-height: 70px;
+    height: auto;
+
+    object-fit: contain;
+
+    transition: 0.3s ease;
+}
+
+.navbar-brand img:hover {
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   NAVBAR COLLAPSE
+========================================================= */
+
+.navbar-collapse {
+    height: 100%;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.navbar-nav {
+    height: 100%;
+
+    display: flex;
+
+    align-items: center !important;
+
+    justify-content: center;
+
+    gap: 2px;
+
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+
+/* =========================================================
+   NAV ITEMS
+========================================================= */
+
+.navbar-nav .nav-item {
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
+.navbar .nav-link {
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    color: #ffffff !important;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    padding: 0 11px !important;
+
+    border-radius: 10px;
+
+    white-space: nowrap;
+
+    transition: 0.3s ease;
+}
+
+
+/* Remove Bootstrap dropdown arrow */
+
+.navbar .nav-link::after {
+    display: none;
+}
+
+
+/* Hover */
+
+.navbar .nav-link:hover {
+    color: #ff7a00 !important;
+
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+/* Active */
+
+.navbar .nav-link.active {
+    color: #ff7a00 !important;
+}
+
+
+/* =========================================================
+   HOME ICON
+========================================================= */
+
+.navbar .fa-house-chimney {
+    font-size: 16px;
+
+    color: #ff7a00;
+}
+
+
+/* =========================================================
+   LOGIN / REGISTER BUTTON
+========================================================= */
+
+.btnlogin-popup {
+    height: 46px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    padding: 0 17px !important;
+
+    margin-left: 5px;
+
+    background: #ff7a00;
+
+    color: #ffffff !important;
+
+    border-radius: 14px;
+
+    font-size: 12px !important;
+
+    font-weight: 800 !important;
+
+    box-shadow:
+        0 8px 20px rgba(255, 122, 0, 0.28);
+
+    transition: 0.3s ease;
+}
+
+.btnlogin-popup:hover {
+    background: #ff941f !important;
+
+    color: #ffffff !important;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+#profileMenu {
+    height: 100%;
+
+    align-items: center;
+}
+
+#profileMenu .nav-link {
+    height: 50px;
+
+    padding: 5px !important;
+
+    display: flex;
+
+    align-items: center;
+}
+
+#navProfileImage {
+    width: 40px;
+    height: 40px;
+
+    object-fit: cover;
+
+    border: 2px solid #ff7a00 !important;
+}
+
+
+/* =========================================================
+   SECOND LOGO
+========================================================= */
+
+.navbar-logo {
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    margin-left: 15px;
+}
+
+.navbar-logo .navbar-brand {
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+}
+
+.navbar-logo .navbar-brand img {
+    width: 78px;
+
+    max-height: 70px;
+}
+
+
+/* =========================================================
+   DROPDOWN
+========================================================= */
+
+.dropdown-menu {
+    margin-top: 8px !important;
+
+    padding: 8px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.dropdown-item {
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    transition: 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background: #fff1e5;
+
+    color: #ff7a00;
+}
+
+
+/* =========================================================
+   MAIN HERO SECTION
+========================================================= */
+
+.main {
+    position: relative;
+
+    min-height: 900px;
+
+    padding-top: 110px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: visible;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.88) 0%,
+            rgba(0, 0, 0, 0.68) 28%,
+            rgba(0, 0, 0, 0.35) 55%,
+            rgba(0, 0, 0, 0.15) 100%
+        ),
+        url("../images/hero-section.webp");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+}
+
+
+/* =========================================================
+   EXTRA BACKGROUND OVERLAY
+========================================================= */
+
+.main::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.25)
+        );
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* Keep content above background */
+
+.main > * {
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* =========================================================
+   HERO MESSAGE
+========================================================= */
+
+.hero-msg {
+    position: absolute;
+
+    left: 7%;
+
+    top: 245px;
+
+    max-width: 650px;
+
+    color: #ffffff;
+
+    z-index: 3;
+
+    animation: heroAppear 1s ease;
+}
+
+.hero-msg h1 {
+    margin: 0 0 18px;
+
+    font-size: 60px;
+
+    line-height: 1.05;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+
+    text-shadow:
+        0 5px 25px rgba(0, 0, 0, 0.45);
+}
+
+.hero-msg p {
+    margin: 0;
+
+    color: #ff7a00;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    letter-spacing: 5px;
+
+    text-shadow:
+        0 3px 15px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes heroAppear {
+
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+/* =========================================================
+   BOOK TICKET CARD
+========================================================= */
+
+.ticket-box {
+    position: absolute;
+
+    z-index: 5;
+
+    top: 220px;
+
+    right: 8%;
+
+    width: 570px;
+
+    padding: 35px;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    backdrop-filter: blur(15px);
+
+    -webkit-backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    border-radius: 26px;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.40);
+
+    animation: cardAppear 1s ease;
+
+    overflow: visible;
+}
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   BOOK TICKET TITLE
+========================================================= */
+
+.ticket-box h2 {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 30px;
+
+    color: #181818;
+
+    font-size: 26px;
+
+    font-weight: 800;
+}
+
+.ticket-box h2::before {
+    content: "";
+
+    width: 5px;
+
+    height: 32px;
+
+    background: #ff7a00;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   FROM / TO
+========================================================= */
+
+.ticket-box .row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 0;
+
+    overflow: visible;
+}
+
+
+/* =========================================================
+   FORM FIELD
+========================================================= */
+
+.field {
+    position: relative;
+
+    width: 100%;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================================================
+   FIELD ICON
+========================================================= */
+
+.field .icon {
+    position: absolute;
+
+    left: 18px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff1e5;
+
+    color: #ff7a00;
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   FIELD LABEL
+========================================================= */
+
+.field label {
+    position: absolute;
+
+    left: 65px;
+
+    top: 10px;
+
+    color: #777;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    z-index: 3;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   INPUT / SELECT
+========================================================= */
+
+.field input,
+.field select {
+    width: 100%;
+
+    height: 74px;
+
+    padding:
+        25px
+        15px
+        5px
+        65px;
+
+    border: 1px solid #dedede;
+
+    border-radius: 17px;
+
+    outline: none;
+
+    background: #fafafa;
+
+    color: #222;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.3s ease;
+}
+
+.field input:focus,
+.field select:focus {
+    background: #ffffff;
+
+    border-color: #ff7a00;
+
+    box-shadow:
+        0 0 0 4px rgba(255, 122, 0, 0.10);
+}
+
+
+/* =========================================================
+   STATION FIELD
+========================================================= */
+
+.station-field {
+    position: relative;
+
+    overflow: visible;
+}
+
+
+/* =========================================================
+   STATION AUTOCOMPLETE DROPDOWN
+========================================================= */
+
+.station-suggestions {
+    position: absolute;
+
+    top: calc(100% - 14px);
+
+    left: 0;
+
+    width: 100%;
+
+    min-width: 220px;
+
+    max-height: 320px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    display: none;
+
+    padding: 6px 0;
+
+    background: #ffffff;
+
+    border: 1px solid #e7e7e7;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.25);
+
+    z-index: 99999;
+}
+
+
+/* =========================================================
+   AUTOCOMPLETE TITLE
+========================================================= */
+
+.station-suggestion-title {
+    padding: 10px 15px;
+
+    background: #fafafa;
+
+    border-bottom: 1px solid #eeeeee;
+
+    color: #777;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.7px;
+}
+
+
+/* =========================================================
+   AUTOCOMPLETE STATION ITEM
+========================================================= */
+
+.station-suggestion-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 14px;
+
+    cursor: pointer;
+
+    border-bottom: 1px solid #f1f1f1;
+
+    transition: 0.2s ease;
+}
+
+.station-suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.station-suggestion-item:hover {
+    background: #fff4e9;
+}
+
+
+/* =========================================================
+   AUTOCOMPLETE TRAIN ICON
+========================================================= */
+
+.station-suggestions .station-icon {
+    width: 38px;
+    height: 38px;
+
+    min-width: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff1e5;
+
+    color: #ff7a00;
+
+    font-size: 14px;
+}
+
+.station-suggestions .station-icon i {
+    color: #ff7a00;
+}
+
+
+/* =========================================================
+   AUTOCOMPLETE DETAILS
+========================================================= */
+
+.station-details {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+/* =========================================================
+   AUTOCOMPLETE STATION NAME
+========================================================= */
+
+.station-name {
+    color: #222;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   AUTOCOMPLETE STATION CODE
+========================================================= */
+
+.station-code {
+    margin-top: 3px;
+
+    color: #ff7a00;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.7px;
+}
+
+
+/* =========================================================
+   NO STATION FOUND
+========================================================= */
+
+.station-no-result {
+    padding: 18px;
+
+    color: #777;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+.station-no-result i {
+    margin-right: 6px;
+
+    color: #ff7a00;
+}
+
+
+/* =========================================================
+   AUTOCOMPLETE SCROLLBAR
+========================================================= */
+
+.station-suggestions::-webkit-scrollbar {
+    width: 6px;
+}
+
+.station-suggestions::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.station-suggestions::-webkit-scrollbar-thumb {
+    background: #d4d4d4;
+
+    border-radius: 20px;
+}
+
+.station-suggestions::-webkit-scrollbar-thumb:hover {
+    background: #ff7a00;
+}
+
+
+/* =========================================================
+   SWAP BUTTON
+========================================================= */
+
+.reverse-btn {
+    flex: 0 0 48px;
+
+    width: 48px;
+    height: 48px;
+
+    margin-bottom: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 2px solid #ff7a00;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    color: #ff7a00;
+
+    font-size: 17px;
+
+    transition: 0.4s ease;
+}
+
+.reverse-btn:hover {
+    background: #ff7a00;
+
+    color: #ffffff;
+
+    transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   FLEXIBLE DATE
+========================================================= */
+
+.flexible {
+    margin:
+        2px
+        0
+        22px;
+
+    color: #666;
+
+    font-size: 12px;
+}
+
+.flexible label {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    cursor: pointer;
+}
+
+.flexible input {
+    width: 17px;
+    height: 17px;
+
+    accent-color: #ff7a00;
+}
+
+
+/* =========================================================
+   SEARCH BUTTON
+========================================================= */
+
+.search-btn {
+    width: 100%;
+
+    height: 58px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background: #ff7a00;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 12px 30px rgba(255, 122, 0, 0.30);
+
+    transition: 0.3s ease;
+}
+
+.search-btn:hover {
+    background: #e96800;
+
+    color: #ffffff;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 18px 35px rgba(255, 122, 0, 0.38);
+}
+
+
+/* =========================================================
+   BACKDROP
+========================================================= */
+
+.backdrop {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: 0.3s ease;
+
+    z-index: 1500;
+}
+
+.backdrop.active {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+/* =========================================================
+   LOGIN / REGISTER WRAPPER
+========================================================= */
+
+.wrapper {
+    position: fixed !important;
+
+    top: 50% !important;
+    left: 50% !important;
+
+    width: 410px;
+
+    max-width: 92%;
+
+    max-height: 90vh;
+
+    padding: 40px 35px;
+
+    background: #ffffff;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.45);
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.85);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    z-index: 2000 !important;
+
+    transition: 0.3s ease;
+}
+
+
+/* Popup opened */
+
+.wrapper.active-popup {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1);
+}
+
+
+/* =========================================================
+   SHOW LOGIN ONLY BY DEFAULT
+========================================================= */
+
+.wrapper .form-box.login {
+    display: block;
+}
+
+.wrapper .form-box.register {
+    display: none;
+}
+
+
+/* =========================================================
+   REGISTER ACTIVE
+========================================================= */
+
+.wrapper.active .form-box.login {
+    display: none;
+}
+
+.wrapper.active .form-box.register {
+    display: block;
+}
+
+.wrapper.register-active .form-box.login {
+    display: none;
+}
+
+.wrapper.register-active .form-box.register {
+    display: block;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.icon-close {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #ff7a00;
+
+    color: #ffffff;
+
+    border-bottom-left-radius: 18px;
+
+    font-size: 19px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+
+    z-index: 10;
+}
+
+.icon-close:hover {
+    background: #222;
+
+    transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   FORM BOX
+========================================================= */
+
+.form-box {
+    width: 100%;
+}
+
+.form-box h2 {
+    margin-bottom: 30px;
+
+    color: #222;
+
+    text-align: center;
+
+    font-size: 28px;
+
+    font-weight: 800;
+}
+
+.form-box h2::after {
+    content: "";
+
+    display: block;
+
+    width: 45px;
+    height: 4px;
+
+    margin: 10px auto;
+
+    background: #ff7a00;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   INPUT BOX
+========================================================= */
+
+.input-box {
+    position: relative;
+
+    height: 52px;
+
+    margin: 28px 0;
+
+    border-bottom: 2px solid #ddd;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+
+    padding:
+        0
+        40px
+        0
+        5px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: 13px;
+}
+
+.input-box label {
+    position: absolute;
+
+    left: 5px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #888;
+
+    font-size: 13px;
+
+    pointer-events: none;
+
+    transition: 0.3s ease;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+    top: -5px;
+
+    color: #ff7a00;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+.input-box .icon {
+    position: absolute;
+
+    right: 5px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #ff7a00;
+}
+
+
+/* =========================================================
+   REMEMBER / FORGOT
+========================================================= */
+
+.remembar-forgot {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin:
+        -10px
+        0
+        20px;
+
+    font-size: 10px;
+}
+
+.remembar-forgot label {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: #777;
+}
+
+.remembar-forgot input {
+    accent-color: #ff7a00;
+}
+
+.remembar-forgot a {
+    color: #ff7a00;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   LOGIN / REGISTER BUTTON
+========================================================= */
+
+.login-btn,
+.register-btn {
+    width: 100%;
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #222;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition: 0.3s ease;
+}
+
+.login-btn:hover,
+.register-btn:hover {
+    background: #ff7a00;
+
+    color: #ffffff;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   LOGIN / REGISTER LINK
+========================================================= */
+
+.login-register {
+    margin-top: 22px;
+
+    color: #777;
+
+    text-align: center;
+
+    font-size: 11px;
+}
+
+.login-register a {
+    color: #ff7a00;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   OTP SECTION
+========================================================= */
+
+#loginOtpSection,
+#registerOtpSection {
+    padding: 10px;
+
+    background: #fff8f2;
+
+    border: 1px solid #ffe0c4;
+
+    border-radius: 12px;
+}
+
+#loginOtpMessage,
+#registerOtpMessage {
+    color: #ff7a00;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   FOOTER SOCIAL
+========================================================= */
+
+.footerpanal {
+    padding: 45px 20px;
+
+    background: #171717;
+
+    color: #ffffff;
+
+    text-align: center;
+}
+
+.footerpanal h1 {
+    margin-bottom: 20px;
+
+    font-size: 17px;
+
+    font-weight: 600;
+}
+
+.footerpanal .icon {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+}
+
+.footerpanal i {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #292929;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.footerpanal i:hover {
+    background: #ff7a00;
+
+    transform: translateY(-5px);
+}
+
+
+/* =========================================================
+   FOOTER LINKS
+========================================================= */
+
+.footer-panal1 {
+    padding: 45px 7%;
+
+    background: #101010;
+}
+
+.panal {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 25px;
+}
+
+.panal ul {
+    padding: 0;
+
+    list-style: none;
+}
+
+.panal li {
+    margin-bottom: 12px;
+
+    color: #999;
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.panal li:first-child {
+    margin-bottom: 18px;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.panal li:hover {
+    color: #ff7a00;
+
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .navbar {
+        width: 96%;
+    }
+
+    .navbar .nav-link {
+        padding-left: 7px !important;
+        padding-right: 7px !important;
+
+        font-size: 9px;
+    }
+
+    .ticket-box {
+        right: 4%;
+
+        width: 520px;
+    }
+
+    .hero-msg {
+        left: 5%;
+    }
+
+    .hero-msg h1 {
+        font-size: 50px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE / TABLET
+========================================================= */
+
+@media (max-width: 991px) {
+
+    .navbar {
+        top: 10px;
+
+        height: auto;
+
+        padding: 10px;
+    }
+
+    .navbar > .container {
+        height: auto;
+    }
+
+    .navbar-collapse {
+        height: auto;
+
+        display: none !important;
+
+        padding-top: 10px;
+    }
+
+    .navbar-collapse.show {
+        display: block !important;
+    }
+
+    .navbar-nav {
+        height: auto;
+
+        margin-top: 10px !important;
+
+        padding: 10px;
+
+        background: #171717;
+
+        border-radius: 12px;
+
+        align-items: stretch !important;
+    }
+
+    .navbar-nav .nav-item {
+        height: auto;
+
+        display: block;
+    }
+
+    .navbar .nav-link {
+        height: 42px;
+
+        padding: 0 10px !important;
+    }
+
+    #profileMenu {
+        height: auto;
+    }
+
+    .navbar-logo {
+        display: none;
+    }
+
+    .main {
+        min-height: 1150px;
+
+        padding-top: 140px;
+
+        display: block;
+    }
+
+    .hero-msg {
+        position: relative;
+
+        top: auto;
+        left: auto;
+
+        width: 90%;
+
+        margin: 60px auto 30px;
+
+        text-align: center;
+    }
+
+    .hero-msg h1 {
+        font-size: 45px;
+    }
+
+    .hero-msg p {
+        font-size: 12px;
+
+        letter-spacing: 3px;
+    }
+
+    .ticket-box {
+        position: relative;
+
+        top: auto;
+        right: auto;
+
+        width: 90%;
+
+        margin: 50px auto;
+    }
+
+    .panal {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        width: 94%;
+    }
+
+    .navbar > .container {
+        padding-left: 15px;
+
+        padding-right: 15px;
+    }
+
+    .navbar-brand img,
+    .navbar-logo .navbar-brand img {
+        width: 65px;
+
+        max-height: 58px;
+    }
+
+    .main {
+        min-height: 1200px;
+    }
+
+    .hero-msg {
+        margin-top: 50px;
+    }
+
+    .hero-msg h1 {
+        font-size: 34px;
+
+        letter-spacing: -1px;
+    }
+
+    .hero-msg p {
+        font-size: 10px;
+
+        letter-spacing: 2px;
+    }
+
+    .ticket-box {
+        width: 94%;
+
+        padding: 25px 20px;
+
+        border-radius: 20px;
+    }
+
+    .ticket-box .row {
+        flex-direction: column;
+
+        gap: 0;
+    }
+
+    .reverse-btn {
+        margin:
+            -5px
+            auto
+            12px;
+    }
+
+    .station-suggestions {
+        top: calc(100% - 14px);
+
+        min-width: 100%;
+
+        max-height: 260px;
+
+        border-radius: 14px;
+    }
+
+    .station-suggestion-item {
+        padding: 11px 13px;
+    }
+
+    .station-suggestions .station-icon {
+        width: 35px;
+        height: 35px;
+
+        min-width: 35px;
+    }
+
+    .station-name {
+        font-size: 11px;
+    }
+
+    .station-code {
+        font-size: 9px;
+    }
+
+    .wrapper {
+        width: 94%;
+
+        max-height: 88vh;
+
+        padding: 35px 22px;
+    }
+
+    .panal {
+        grid-template-columns: 1fr;
+    }
+}
