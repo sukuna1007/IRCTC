@@ -2,7 +2,7 @@
 
 A full-stack railway reservation web application inspired by the Indian Railway Catering and Tourism Corporation (IRCTC).
 
-This project allows users to register, log in, search for trains, book tickets, make payments, view bookings, generate electronic tickets, cancel bookings, and process refunds.
+This project allows users to register, log in, search for trains, book tickets, make payments, view bookings, generate electronic tickets, cancel bookings, process refunds, and view simulated live train locations.
 
 ---
 
@@ -31,6 +31,7 @@ The application uses a service-based backend architecture with separate routes, 
 
 - Search Trains
 - Search by Source and Destination
+- Station Suggestions
 - Display Train Number
 - Display Train Name
 - Departure Time
@@ -38,6 +39,8 @@ The application uses a service-based backend architecture with separate routes, 
 - Journey Duration
 - Available Seats
 - Train Fare
+- Simulated Live Train Location
+- Map-based Train Tracking
 
 ### 🎫 Booking Features
 
@@ -49,6 +52,7 @@ The application uses a service-based backend architecture with separate routes, 
 - Electronic Railway Ticket
 - Print Ticket
 - Booking Status
+- Live Location Button
 
 ### 💳 Payment Features
 
@@ -69,6 +73,20 @@ The application uses a service-based backend architecture with separate routes, 
 - Refund Status
 - Refund Date
 
+### 📍 Live Train Tracking
+
+- Train source and destination coordinates
+- Interactive map using Leaflet
+- Train location marker
+- Source and destination markers
+- Journey progress
+- Estimated arrival time
+- Distance remaining
+- Simulated train speed
+- Route visualization
+
+> Live train tracking is simulated for educational/project demonstration purposes and does not use official Indian Railways live train data.
+
 ---
 
 ## 🛠️ Technologies Used
@@ -80,6 +98,7 @@ The application uses a service-based backend architecture with separate routes, 
 - JavaScript
 - Bootstrap 5
 - Font Awesome
+- Leaflet.js
 
 ### Backend
 
@@ -102,33 +121,51 @@ The application uses a service-based backend architecture with separate routes, 
 
 - Razorpay
 
-### Development Tools
+### Development & Testing Tools
 
 - Visual Studio Code
 - MySQL Workbench
 - Thunder Client
-- Git / GitHub
+- BrowserStack
+- Git
+- GitHub
 
 ---
 
 ## 📂 Project Structure
 
 ```text
-IRCTC-Clone/
+IRCTC/
 │
 ├── Frontend/
 │   │
 │   ├── html/
-│   │   ├── index.html
-│   │   ├── search.html
+│   │   ├── admin.html
 │   │   ├── booking.html
+│   │   ├── index.html
+│   │   ├── livetrain.html
 │   │   ├── mybooking.html
-│   │   ├── ticket.html
-│   │   └── profile.html
+│   │   ├── profile.html
+│   │   ├── search.html
+│   │   ├── success.html
+│   │   └── ticket.html
 │   │
 │   ├── css/
+│   │   ├── livetrain.css
+│   │   ├── profile.css
+│   │   ├── search.css
+│   │   └── style.css
 │   │
 │   ├── javascript/
+│   │   ├── admin.js
+│   │   ├── booking.js
+│   │   ├── livetrain.js
+│   │   ├── mybooking.js
+│   │   ├── profile.js
+│   │   ├── script.js
+│   │   ├── search.js
+│   │   ├── success.js
+│   │   └── ticket.js
 │   │
 │   └── images/
 │
@@ -156,6 +193,9 @@ IRCTC-Clone/
 │   ├── package.json
 │   └── .env
 │
+├── booking_db.sql
+├── irctc_id.sql
+├── .gitignore
 └── README.md
 ```
 
@@ -166,13 +206,13 @@ IRCTC-Clone/
 ## 1. Clone the Project
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/sukuna1007/IRCTC.git
 ```
 
 Open the project:
 
 ```bash
-cd IRCTC-Clone
+cd IRCTC
 ```
 
 ---
@@ -212,6 +252,9 @@ The application uses MySQL tables including:
 - users
 - trains
 - bookings
+- stations
+
+Import the provided SQL files if required.
 
 ---
 
@@ -235,7 +278,7 @@ RAZORPAY_KEY_ID=your_razorpay_key_id
 RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 ```
 
-> ⚠️ Never upload your real `.env` file or secret keys to GitHub.
+> ⚠️ Never upload your real `.env` file, database password, JWT secret, Razorpay secret, or other credentials to GitHub.
 
 ---
 
@@ -253,13 +296,13 @@ Start the server:
 npm start
 ```
 
-The backend server runs on port:
+The backend server runs by default at:
 
 ```text
-5000
+http://localhost:5000
 ```
 
-Then open the frontend `index.html` page in your browser or use Live Server.
+Open the application in your browser.
 
 ---
 
@@ -270,7 +313,6 @@ Then open the frontend `index.html` page in your browser or use Live Server.
 ```text
 POST /api/auth/register
 POST /api/auth/login
-PUT  /api/auth/change-password
 ```
 
 ## Trains
@@ -279,7 +321,7 @@ PUT  /api/auth/change-password
 GET /api/trains/search
 ```
 
-Example query:
+Example:
 
 ```text
 /api/trains/search?from=Delhi&to=Mumbai
@@ -292,9 +334,9 @@ GET /api/bookings
 GET /api/bookings/pnr/:pnr
 ```
 
-Authenticated booking APIs require a JWT token.
+Authenticated APIs require a JWT token.
 
-Example authorization header:
+Example:
 
 ```text
 Authorization: Bearer YOUR_JWT_TOKEN
@@ -306,6 +348,15 @@ Authorization: Bearer YOUR_JWT_TOKEN
 POST /api/payment/create-order
 POST /api/payment/verify
 ```
+
+## Admin
+
+The project also includes protected admin functionality for managing:
+
+- Dashboard
+- Users
+- Trains
+- Bookings
 
 ---
 
@@ -336,6 +387,8 @@ My Bookings
        ↓
 View E-Ticket
        ↓
+Live Train Location
+       ↓
 Cancel Ticket
        ↓
 Refund
@@ -353,6 +406,7 @@ The project implements several security measures:
 - Razorpay payment signatures are verified on the backend.
 - Environment variables are used for sensitive configuration.
 - SQL queries use parameterized values.
+- `.env` is excluded from Git using `.gitignore`.
 
 ---
 
@@ -360,6 +414,9 @@ The project implements several security measures:
 
 Possible future improvements include:
 
+- Real Indian Railways API integration
+- Real-time train tracking
+- Intermediate route stations
 - Seat selection
 - Multiple passenger booking
 - Waiting-list system
@@ -368,11 +425,9 @@ Possible future improvements include:
 - Email ticket confirmation
 - SMS notifications
 - Forgot password
-- Admin dashboard
-- Train management
-- User management
+- Advanced admin dashboard
 - Booking reports
-- Responsive mobile improvements
+- Improved mobile responsiveness
 
 ---
 
@@ -389,6 +444,8 @@ This project was developed for educational purposes to demonstrate full-stack we
 - Payment Gateway Integration
 - CRUD Operations
 - Error Handling
+- Interactive Map Integration
+- Git & GitHub Version Control
 
 ---
 
@@ -396,7 +453,9 @@ This project was developed for educational purposes to demonstrate full-stack we
 
 This is an educational project and is **not affiliated with or operated by IRCTC or Indian Railways**.
 
-It should not be used for real railway reservations.
+The live train tracking functionality is simulated for demonstration purposes.
+
+This project should not be used for real railway reservations.
 
 ---
 
@@ -406,4 +465,4 @@ It should not be used for real railway reservations.
 
 Built using:
 
-`HTML` • `CSS` • `JavaScript` • `Bootstrap` • `Node.js` • `Express.js` • `MySQL` • `JWT` • `Razorpay`
+`HTML` • `CSS` • `JavaScript` • `Bootstrap` • `Node.js` • `Express.js` • `MySQL` • `JWT` • `Razorpay` • `Leaflet`
