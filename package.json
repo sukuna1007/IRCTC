@@ -1,11 +1,10 @@
 {
-  "name": "irctc-clone",
+  "name": "irctc-backend",
   "version": "1.0.0",
-  "private": true,
-  "type": "commonjs",
-  "main": "Backend/server.js",
+  "description": "IRCTC Clone Backend API",
+  "main": "server.js",
   "scripts": {
-    "start": "node Backend/server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "bcrypt": "6.0.0",
