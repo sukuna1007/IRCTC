@@ -1,122 +1,70 @@
+require("dotenv").config();
+
 const mysql = require("mysql2");
 
+// ==========================================================
+// MYSQL CONNECTION POOL
+// ==========================================================
 
-// ==========================================
-// MYSQL DATABASE CONNECTION
-// ==========================================
+const db = mysql.createPool({
 
-const connection = mysql.createConnection({
+    host: process.env.DB_HOST,
 
-    host: process.env.DB_HOST || "localhost",
+    user: process.env.DB_USER,
 
-    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD,
 
-    password: process.env.DB_PASSWORD || "",
+    database: process.env.DB_NAME,
 
-    database: process.env.DB_NAME || "irctc_db"
+    port: process.env.DB_PORT || 3306,
+
+
+    // ======================================================
+    // POOL SETTINGS
+    // ======================================================
+
+    waitForConnections: true,
+
+    connectionLimit: 10,
+
+    queueLimit: 0,
+
+    enableKeepAlive: true,
+
+    keepAliveInitialDelay: 0
 
 });
 
 
-// ==========================================
-// CONNECT TO MYSQL
-// ==========================================
+// ==========================================================
+// TEST DATABASE CONNECTION
+// ==========================================================
 
-connection.connect((err) => {
+db.query(
+    "SELECT 1",
+    (error) => {
 
-    if (err) {
+        if (error) {
 
-        console.error(
-            "=========================================="
-        );
-
-        console.error(
-            "MySQL Connection Failed"
-        );
-
-        console.error(
-            "Error:",
-            err.message
-        );
-
-        console.error(
-            "=========================================="
-        );
-
-        return;
-    }
-
-
-    console.log(
-        "=========================================="
-    );
-
-    console.log(
-        "MySQL Connected Successfully"
-    );
-
-    console.log(
-        "Database:",
-        process.env.DB_NAME || "irctc_db"
-    );
-
-    console.log(
-        "=========================================="
-    );
-
-
-    // ==========================================
-    // VERIFY ACTIVE DATABASE
-    // ==========================================
-
-    connection.query(
-
-        "SELECT DATABASE() AS database_name",
-
-        (error, results) => {
-
-            if (error) {
-
-                console.error(
-                    "Unable to verify database:",
-                    error.message
-                );
-
-                return;
-            }
-
-
-            console.log(
-                "Active MySQL Database:",
-                results[0].database_name
+            console.error(
+                "❌ MySQL connection failed:",
+                error.message
             );
+
+            return;
 
         }
 
-    );
-
-});
-
-
-// ==========================================
-// DATABASE ERROR HANDLER
-// ==========================================
-
-connection.on(
-    "error",
-    (err) => {
-
-        console.error(
-            "MySQL Error:",
-            err.message
+        console.log(
+            "✅ MySQL database connected successfully"
         );
 
     }
 );
 
 
-// ==========================================
-// EXPORT CONNECTION
-// ==========================================
+// ==========================================================
+// EXPORT POOL
+// ==========================================================
 
-module.exports = connection;
+module.exports = db;
