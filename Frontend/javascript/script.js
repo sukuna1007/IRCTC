@@ -824,42 +824,201 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =========================================================
-    // LOGIN
-    // =========================================================
+// LOGIN
+// =========================================================
 
-    if (loginForm) {
+if (loginForm) {
 
-        loginForm.addEventListener(
-            "submit",
-            async (event) => {
+    loginForm.addEventListener(
+        "submit",
+        async (event) => {
 
-                event.preventDefault();
+            event.preventDefault();
+
+            const email =
+                document
+                    .getElementById("loginEmail")
+                    ?.value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("loginPassword")
+                    ?.value;
 
 
-                const email =
-                    document
-                        .getElementById(
-                            "loginEmail"
-                        )
-                        ?.value
-                        .trim();
+            // -----------------------------------------
+            // VALIDATION
+            // -----------------------------------------
+
+            if (!email || !password) {
+
+                alert(
+                    "Please enter email and password."
+                );
+
+                return;
+
+            }
 
 
-                const password =
-                    document
-                        .getElementById(
-                            "loginPassword"
-                        )
-                        ?.value;
+            // Basic email validation
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+            if (!emailPattern.test(email)) {
+
+                alert(
+                    "Please enter a valid email address."
+                );
+
+                return;
+
+            }
+
+
+            try {
+
+                console.log(
+                    "Attempting login...",
+                    email
+                );
+
+
+                // -----------------------------------------
+                // SEND LOGIN REQUEST
+                // -----------------------------------------
+
+                const response =
+                    await fetch(
+                        `${API_BASE}/api/auth/login`,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json",
+
+                                "Accept":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    email: email,
+                                    password: password
+                                })
+                        }
+                    );
+
+
+                // -----------------------------------------
+                // READ SERVER RESPONSE SAFELY
+                // -----------------------------------------
+
+                const responseText =
+                    await response.text();
+
+                let data = {};
+
+                try {
+
+                    data =
+                        responseText
+                            ? JSON.parse(responseText)
+                            : {};
+
+                }
+                catch (jsonError) {
+
+                    console.error(
+                        "Server returned invalid JSON:",
+                        responseText
+                    );
+
+                    data = {
+                        message:
+                            responseText ||
+                            "Server returned an invalid response."
+                    };
+
+                }
+
+
+                console.log(
+                    "Login HTTP Status:",
+                    response.status
+                );
+
+                console.log(
+                    "Login Response:",
+                    data
+                );
+
+
+                // -----------------------------------------
+                // LOGIN FAILED
+                // -----------------------------------------
+
+                if (!response.ok) {
+
+                    console.error(
+                        "Login request failed:",
+                        {
+                            status:
+                                response.status,
+
+                            statusText:
+                                response.statusText,
+
+                            response:
+                                data
+                        }
+                    );
+
+
+                    if (
+                        response.status === 500
+                    ) {
+
+                        alert(
+                            "The login server has an internal error. Please check the backend/API."
+                        );
+
+                    }
+                    else {
+
+                        alert(
+                            data.message ||
+                            data.error ||
+                            `Login failed (${response.status}).`
+                        );
+
+                    }
+
+
+                    return;
+
+                }
+
+
+                // -----------------------------------------
+                // CHECK LOGIN RESPONSE
+                // -----------------------------------------
 
                 if (
-                    !email ||
-                    !password
+                    !data.token ||
+                    !data.user
                 ) {
 
+                    console.error(
+                        "Invalid login response:",
+                        data
+                    );
+
+
                     alert(
-                        "Please enter email and password."
+                        "Login failed: server did not return a token or user."
                     );
 
                     return;
@@ -867,229 +1026,153 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
 
-                try {
+                // -----------------------------------------
+                // CREATE CURRENT USER
+                // -----------------------------------------
 
-                    const response =
-                        await fetch(
-                            `${API_BASE}/api/auth/login`,
-                            {
-                                method:
-                                    "POST",
+                const loggedInUser = {
 
-                                headers: {
-                                    "Content-Type":
-                                        "application/json"
-                                },
+                    id:
+                        data.user.id,
 
-                                body:
-                                    JSON.stringify(
-                                        {
-                                            email:
-                                                email,
+                    full_name:
+                        data.user.full_name ||
+                        data.user.fullName ||
+                        data.user.username ||
+                        "",
 
-                                            password:
-                                                password
-                                        }
-                                    )
-                            }
-                        );
+                    username:
+                        data.user.username ||
+                        data.user.full_name ||
+                        "",
 
+                    email:
+                        data.user.email ||
+                        email,
 
-                    const data =
-                        await response.json();
+                    phone:
+                        data.user.phone ||
+                        "",
 
+                    role:
+                        data.user.role ||
+                        "user",
 
-                    console.log(
-                        "Login Response:",
-                        data
-                    );
+                    profile_image:
+                        data.user.profile_image ||
+                        data.user.profileImage ||
+                        null
 
-
-                    // -----------------------------------------
-                    // LOGIN FAILED
-                    // -----------------------------------------
-
-                    if (!response.ok) {
-
-                        alert(
-                            data.message ||
-                            "Login failed."
-                        );
-
-                        return;
-
-                    }
+                };
 
 
-                    // -----------------------------------------
-                    // CHECK TOKEN + USER
-                    // -----------------------------------------
+                // -----------------------------------------
+                // SAVE TOKEN
+                // -----------------------------------------
 
-                    if (
-                        !data.token ||
-                        !data.user
-                    ) {
-
-                        console.error(
-                            "Invalid login response:",
-                            data
-                        );
+                localStorage.setItem(
+                    "token",
+                    data.token
+                );
 
 
-                        alert(
-                            "Login response is missing token or user."
-                        );
+                // -----------------------------------------
+                // SAVE CURRENT USER
+                // -----------------------------------------
 
-                        return;
-
-                    }
-
-
-                    // -----------------------------------------
-                    // CREATE CURRENT USER
-                    // -----------------------------------------
-
-                    const loggedInUser = {
-
-                        id:
-                            data.user.id,
-
-                        full_name:
-                            data.user.full_name ||
-                            data.user.fullName ||
-                            data.user.username ||
-                            "",
-
-                        username:
-                            data.user.username ||
-                            data.user.full_name ||
-                            "",
-
-                        email:
-                            data.user.email ||
-                            email,
-
-                        phone:
-                            data.user.phone ||
-                            "",
-
-                        role:
-                            data.user.role ||
-                            "user",
-
-                        profile_image:
-                            data.user.profile_image ||
-                            data.user.profileImage ||
-                            null
-
-                    };
+                localStorage.setItem(
+                    "currentUser",
+                    JSON.stringify(
+                        loggedInUser
+                    )
+                );
 
 
-                    // -----------------------------------------
-                    // SAVE LOGIN
-                    // -----------------------------------------
-
-                    localStorage.setItem(
-                        "token",
-                        data.token
-                    );
+                localStorage.setItem(
+                    "isLoggedIn",
+                    "true"
+                );
 
 
-                    localStorage.setItem(
-                        "currentUser",
-                        JSON.stringify(
-                            loggedInUser
-                        )
-                    );
+                console.log(
+                    "Login successful."
+                );
+
+                console.log(
+                    "Token saved:",
+                    localStorage.getItem(
+                        "token"
+                    )
+                );
+
+                console.log(
+                    "Current User:",
+                    loggedInUser
+                );
 
 
-                    localStorage.setItem(
-                        "isLoggedIn",
-                        "true"
-                    );
+                // -----------------------------------------
+                // UPDATE NAVBAR
+                // -----------------------------------------
+
+                updateNavbar();
 
 
-                    console.log(
-                        "Token saved:",
-                        localStorage.getItem(
-                            "token"
-                        )
-                    );
+                // -----------------------------------------
+                // CLOSE LOGIN POPUP
+                // -----------------------------------------
+
+                closePopup();
 
 
-                    console.log(
-                        "Current User:",
-                        getCurrentUser()
-                    );
+                // Reset form
+                loginForm.reset();
 
 
-                    // -----------------------------------------
-                    // UPDATE NAVBAR IMMEDIATELY
-                    // -----------------------------------------
+                // -----------------------------------------
+                // ADMIN REDIRECT
+                // -----------------------------------------
 
-                    updateNavbar();
-
-
-                    // -----------------------------------------
-                    // CLOSE LOGIN
-                    // -----------------------------------------
-
-                    closePopup();
-
-
-                    loginForm.reset();
-
-
-                    alert(
-                        "Login successful!"
-                    );
-
-
-                    // -----------------------------------------
-                    // ADMIN
-                    // -----------------------------------------
-
-                    if (
-                        String(
-                            loggedInUser.role
-                        ).toLowerCase()
-                        === "admin"
-                    ) {
-
-                        window.location.href =
-                            "admin.html";
-
-                        return;
-
-                    }
-
-
-                    // -----------------------------------------
-                    // NORMAL USER
-                    // -----------------------------------------
+                if (
+                    String(
+                        loggedInUser.role
+                    ).toLowerCase() === "admin"
+                ) {
 
                     window.location.href =
-                        "index.html";
+                        "admin.html";
+
+                    return;
 
                 }
-                catch (error) {
-
-                    console.error(
-                        "Login Error:",
-                        error
-                    );
 
 
-                    alert(
-                        "Unable to connect to server."
-                    );
+                // -----------------------------------------
+                // NORMAL USER REDIRECT
+                // -----------------------------------------
 
-                }
+                window.location.href =
+                    "index.html";
 
             }
-        );
+            catch (error) {
 
-    }
+                console.error(
+                    "Login Network Error:",
+                    error
+                );
+
+
+                alert(
+                    "Unable to connect to the login server. Please try again."
+                );
+
+            }
+
+        }
+    );
+
+}
 
 
     // =========================================================
@@ -1693,134 +1776,108 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =========================================================
-    // SWAP FROM / TO
-    // =========================================================
+// SWAP FROM / TO
+// =========================================================
 
-    if (
-        swapButton &&
-        fromInput &&
-        toInput
-    ) {
+if (
+    swapButton &&
+    fromInput &&
+    toInput
+) {
 
-        swapButton.addEventListener(
-            "click",
-            () => {
+    swapButton.addEventListener(
+        "click",
+        () => {
 
-                // -----------------------------------------
-                // VISIBLE VALUES
-                // -----------------------------------------
+            // Save everything first
+            const fromValue =
+                fromInput.value;
 
-                const fromValue =
-                    fromInput.value;
+            const toValue =
+                toInput.value;
 
-                const toValue =
-                    toInput.value;
+            const fromStationName =
+                fromInput.dataset.stationName ||
+                "";
 
+            const toStationName =
+                toInput.dataset.stationName ||
+                "";
 
-                fromInput.value =
-                    toValue;
+            const fromStationCode =
+                fromInput.dataset.stationCode ||
+                "";
 
-                toInput.value =
-                    fromValue;
-
-
-                // -----------------------------------------
-                // STATION NAMES
-                // -----------------------------------------
-
-                const fromStationName =
-                    fromInput.dataset
-                        .stationName ||
-                    "";
-
-                const toStationName =
-                    toInput.dataset
-                        .stationName ||
-                    "";
+            const toStationCode =
+                toInput.dataset.stationCode ||
+                "";
 
 
-                if (toStationName) {
+            // Swap visible values
+            fromInput.value =
+                toValue;
 
-                    fromInput.dataset
-                        .stationName =
-                        toStationName;
-
-                }
-                else {
-
-                    delete fromInput
-                        .dataset
-                        .stationName;
-
-                }
+            toInput.value =
+                fromValue;
 
 
-                if (fromStationName) {
+            // Swap station names
+            if (toStationName) {
 
-                    toInput.dataset
-                        .stationName =
-                        fromStationName;
-
-                }
-                else {
-
-                    delete toInput
-                        .dataset
-                        .stationName;
-
-                }
-
-
-                // -----------------------------------------
-                // STATION CODES
-                // -----------------------------------------
-
-                const fromStationCode =
-                    fromInput.dataset
-                        .stationCode ||
-                    "";
-
-                const toStationCode =
-                    toInput.dataset
-                        .stationCode ||
-                    "";
-
-
-                if (toStationCode) {
-
-                    fromInput.dataset
-                        .stationCode =
-                        toStationCode;
-
-                }
-                else {
-
-                    delete fromInput
-                        .dataset
-                        .stationCode;
-
-                }
-
-
-                if (fromStationCode) {
-
-                    toInput.dataset
-                        .stationCode =
-                        fromStationCode;
-
-                }
-                else {
-
-                    delete toInput
-                        .dataset
-                        .stationCode;
-
-                }
+                fromInput.dataset.stationName =
+                    toStationName;
 
             }
-        );
+            else {
 
-    }
+                delete fromInput.dataset.stationName;
+
+            }
+
+
+            if (fromStationName) {
+
+                toInput.dataset.stationName =
+                    fromStationName;
+
+            }
+            else {
+
+                delete toInput.dataset.stationName;
+
+            }
+
+
+            // Swap station codes
+            if (toStationCode) {
+
+                fromInput.dataset.stationCode =
+                    toStationCode;
+
+            }
+            else {
+
+                delete fromInput.dataset.stationCode;
+
+            }
+
+
+            if (fromStationCode) {
+
+                toInput.dataset.stationCode =
+                    fromStationCode;
+
+            }
+            else {
+
+                delete toInput.dataset.stationCode;
+
+            }
+
+        }
+    );
+
+}
 
 
     // =========================================================
