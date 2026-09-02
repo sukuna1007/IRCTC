@@ -15,6 +15,12 @@ app.use(cors());
 
 app.use(express.json());
 
+app.use(
+    express.urlencoded({
+        extended: true
+    })
+);
+
 
 // ==========================================
 // DATABASE
@@ -106,7 +112,6 @@ const frontendPath =
         "../Frontend"
     );
 
-
 const htmlPath =
     path.join(
         frontendPath,
@@ -136,18 +141,6 @@ console.log(
 
 // ==========================================
 // SERVE FRONTEND ASSETS
-// ==========================================
-// Examples:
-//
-// /css/style.css
-// /css/search.css
-// /css/live-train.css
-//
-// /javascript/script.js
-// /javascript/search.js
-// /javascript/livetrain.js
-//
-// /images/...
 // ==========================================
 
 app.use(
@@ -342,12 +335,6 @@ app.get(
 // ==========================================
 // LIVE TRAIN PAGE
 // ==========================================
-// IMPORTANT:
-// Actual filename = livetrain.html
-//
-// URL:
-// http://localhost:5000/livetrain.html
-// ==========================================
 
 app.get(
     "/livetrain.html",
@@ -378,21 +365,26 @@ app.get(
                     );
 
 
-                    if (!res.headersSent) {
+                    if (
+                        !res.headersSent
+                    ) {
 
-                        return res.status(
-                            error.status || 500
-                        ).json({
+                        return res
+                            .status(
+                                error.status ||
+                                500
+                            )
+                            .json({
 
-                            success: false,
+                                success: false,
 
-                            message:
-                                "Unable to open livetrain.html",
+                                message:
+                                    "Unable to open livetrain.html",
 
-                            error:
-                                error.message
+                                error:
+                                    error.message
 
-                        });
+                            });
 
                     }
 
@@ -406,13 +398,7 @@ app.get(
 
 
 // ==========================================
-// OPTIONAL OLD LIVE-TRAIN URL REDIRECT
-// ==========================================
-// If old search.js still opens:
-// /live-train.html
-//
-// Redirect it automatically to:
-// /livetrain.html
+// OLD LIVE TRAIN URL REDIRECT
 // ==========================================
 
 app.get(
@@ -421,10 +407,12 @@ app.get(
 
         const query =
             req.originalUrl.includes("?")
-                ? req.originalUrl.substring(
+                ?
+                req.originalUrl.substring(
                     req.originalUrl.indexOf("?")
                 )
-                : "";
+                :
+                "";
 
 
         return res.redirect(
@@ -436,8 +424,29 @@ app.get(
 
 
 // ==========================================
+// API HEALTH CHECK
+// ==========================================
+
+app.get(
+    "/api",
+    (req, res) => {
+
+        return res.status(200).json({
+
+            success: true,
+
+            message:
+                "IRCTC API is running"
+
+        });
+
+    }
+);
+
+
+// ==========================================
 // 404 ROUTE
-// IMPORTANT: KEEP THIS LAST
+// KEEP THIS LAST
 // ==========================================
 
 app.use(
@@ -461,36 +470,58 @@ app.use(
 // ==========================================
 
 const PORT =
-    process.env.PORT || 5000;
+    process.env.PORT ||
+    5000;
 
 
-app.listen(
-    PORT,
-    () => {
+// ==========================================
+// LOCAL DEVELOPMENT ONLY
+// ==========================================
 
-        console.log(
-            "=========================================="
-        );
+if (
+    require.main === module
+) {
 
-        console.log(
-            `Server running on port ${PORT}`
-        );
+    app.listen(
+        PORT,
+        () => {
 
-        console.log(
-            `Website: http://localhost:${PORT}`
-        );
+            console.log(
+                "=========================================="
+            );
 
-        console.log(
-            `Admin: http://localhost:${PORT}/admin.html`
-        );
+            console.log(
+                `Server running on port ${PORT}`
+            );
 
-        console.log(
-            `Live Train: http://localhost:${PORT}/livetrain.html`
-        );
+            console.log(
+                `Website: http://localhost:${PORT}`
+            );
 
-        console.log(
-            "=========================================="
-        );
+            console.log(
+                `Admin: http://localhost:${PORT}/admin.html`
+            );
 
-    }
-);
+            console.log(
+                `Live Train: http://localhost:${PORT}/livetrain.html`
+            );
+
+            console.log(
+                `API: http://localhost:${PORT}/api`
+            );
+
+            console.log(
+                "=========================================="
+            );
+
+        }
+    );
+
+}
+
+
+// ==========================================
+// EXPORT APP FOR VERCEL
+// ==========================================
+
+module.exports = app;
