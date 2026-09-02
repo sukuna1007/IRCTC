@@ -1,8 +1,20 @@
-require("dotenv").config();
+const path = require("path");
+
+
+// ==========================================
+// LOAD ENVIRONMENT VARIABLES
+// ==========================================
+
+require("dotenv").config({
+    path: path.join(
+        __dirname,
+        ".env"
+    )
+});
+
 
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
 
 const app = express();
 
@@ -169,7 +181,7 @@ app.get(
     "/",
     (req, res) => {
 
-        res.sendFile(
+        return res.sendFile(
             path.join(
                 htmlPath,
                 "index.html"
@@ -188,7 +200,7 @@ app.get(
     "/index.html",
     (req, res) => {
 
-        res.sendFile(
+        return res.sendFile(
             path.join(
                 htmlPath,
                 "index.html"
@@ -207,7 +219,7 @@ app.get(
     "/admin.html",
     (req, res) => {
 
-        res.sendFile(
+        return res.sendFile(
             path.join(
                 htmlPath,
                 "admin.html"
@@ -226,7 +238,7 @@ app.get(
     "/search.html",
     (req, res) => {
 
-        res.sendFile(
+        return res.sendFile(
             path.join(
                 htmlPath,
                 "search.html"
@@ -245,7 +257,7 @@ app.get(
     "/booking.html",
     (req, res) => {
 
-        res.sendFile(
+        return res.sendFile(
             path.join(
                 htmlPath,
                 "booking.html"
@@ -264,7 +276,7 @@ app.get(
     "/mybooking.html",
     (req, res) => {
 
-        res.sendFile(
+        return res.sendFile(
             path.join(
                 htmlPath,
                 "mybooking.html"
@@ -283,7 +295,7 @@ app.get(
     "/profile.html",
     (req, res) => {
 
-        res.sendFile(
+        return res.sendFile(
             path.join(
                 htmlPath,
                 "profile.html"
@@ -302,7 +314,7 @@ app.get(
     "/success.html",
     (req, res) => {
 
-        res.sendFile(
+        return res.sendFile(
             path.join(
                 htmlPath,
                 "success.html"
@@ -321,7 +333,7 @@ app.get(
     "/ticket.html",
     (req, res) => {
 
-        res.sendFile(
+        return res.sendFile(
             path.join(
                 htmlPath,
                 "ticket.html"
@@ -353,7 +365,7 @@ app.get(
         );
 
 
-        res.sendFile(
+        return res.sendFile(
             liveTrainFile,
             error => {
 
@@ -431,14 +443,16 @@ app.get(
     "/api",
     (req, res) => {
 
-        return res.status(200).json({
+        return res
+            .status(200)
+            .json({
 
-            success: true,
+                success: true,
 
-            message:
-                "IRCTC API is running"
+                message:
+                    "IRCTC API is running"
 
-        });
+            });
 
     }
 );
@@ -452,14 +466,16 @@ app.get(
 app.use(
     (req, res) => {
 
-        return res.status(404).json({
+        return res
+            .status(404)
+            .json({
 
-            success: false,
+                success: false,
 
-            message:
-                `Route not found: ${req.method} ${req.originalUrl}`
+                message:
+                    `Route not found: ${req.method} ${req.originalUrl}`
 
-        });
+            });
 
     }
 );

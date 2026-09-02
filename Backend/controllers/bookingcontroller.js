@@ -5,19 +5,62 @@ const bookingService =
 
 
 // ==========================================
-// RAZORPAY
+// RAZORPAY CONFIGURATION
 // ==========================================
 
-const razorpay =
-    new Razorpay({
+const razorpayKeyId =
+    process.env.RAZORPAY_KEY_ID;
 
-        key_id:
-            process.env.RAZORPAY_KEY_ID,
+const razorpayKeySecret =
+    process.env.RAZORPAY_KEY_SECRET;
 
-        key_secret:
-            process.env.RAZORPAY_KEY_SECRET
 
-    });
+let razorpay = null;
+
+
+if (
+    razorpayKeyId &&
+    razorpayKeySecret
+) {
+
+    razorpay =
+        new Razorpay({
+
+            key_id:
+                razorpayKeyId,
+
+            key_secret:
+                razorpayKeySecret
+
+        });
+
+
+    console.log(
+        "Booking Razorpay configured successfully"
+    );
+
+}
+else {
+
+    console.error(
+        "Booking Razorpay environment variables are missing"
+    );
+
+    console.error(
+        "RAZORPAY_KEY_ID exists:",
+        Boolean(
+            razorpayKeyId
+        )
+    );
+
+    console.error(
+        "RAZORPAY_KEY_SECRET exists:",
+        Boolean(
+            razorpayKeySecret
+        )
+    );
+
+}
 
 
 // ==========================================
@@ -26,7 +69,10 @@ const razorpay =
 // GET /api/bookings
 // ==========================================
 
-exports.getAllBookings = async (req, res) => {
+exports.getAllBookings = async (
+    req,
+    res
+) => {
 
     try {
 
@@ -47,14 +93,16 @@ exports.getAllBookings = async (req, res) => {
                 );
 
 
-        return res.status(200).json({
+        return res
+            .status(200)
+            .json({
 
-            success: true,
+                success: true,
 
-            bookings:
-                bookings
+                bookings:
+                    bookings
 
-        });
+            });
 
     }
     catch (error) {
@@ -65,14 +113,16 @@ exports.getAllBookings = async (req, res) => {
         );
 
 
-        return res.status(500).json({
+        return res
+            .status(500)
+            .json({
 
-            success: false,
+                success: false,
 
-            message:
-                "Unable to fetch bookings"
+                message:
+                    "Unable to fetch bookings"
 
-        });
+            });
 
     }
 
@@ -85,7 +135,10 @@ exports.getAllBookings = async (req, res) => {
 // GET /api/bookings/pnr/:pnr
 // ==========================================
 
-exports.getBookingByPNR = async (req, res) => {
+exports.getBookingByPNR = async (
+    req,
+    res
+) => {
 
     try {
 
@@ -95,23 +148,34 @@ exports.getBookingByPNR = async (req, res) => {
 
         const pnr =
             String(
-                req.params.pnr || ""
+                req.params.pnr ||
+                ""
             ).trim();
 
 
+        // ==========================================
+        // VALIDATE PNR
+        // ==========================================
+
         if (!pnr) {
 
-            return res.status(400).json({
+            return res
+                .status(400)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "PNR is required"
+                    message:
+                        "PNR is required"
 
-            });
+                });
 
         }
 
+
+        // ==========================================
+        // GET BOOKING
+        // ==========================================
 
         const booking =
             await bookingService
@@ -121,28 +185,40 @@ exports.getBookingByPNR = async (req, res) => {
                 );
 
 
+        // ==========================================
+        // NOT FOUND
+        // ==========================================
+
         if (!booking) {
 
-            return res.status(404).json({
+            return res
+                .status(404)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    `Booking not found for PNR ${pnr}`
+                    message:
+                        `Booking not found for PNR ${pnr}`
 
-            });
+                });
 
         }
 
 
-        return res.status(200).json({
+        // ==========================================
+        // SUCCESS
+        // ==========================================
 
-            success: true,
+        return res
+            .status(200)
+            .json({
 
-            booking:
-                booking
+                success: true,
 
-        });
+                booking:
+                    booking
+
+            });
 
     }
     catch (error) {
@@ -153,19 +229,24 @@ exports.getBookingByPNR = async (req, res) => {
         );
 
 
-        return res.status(500).json({
+        return res
+            .status(500)
+            .json({
 
-            success: false,
+                success: false,
 
-            message:
-                "Unable to fetch booking",
+                message:
+                    "Unable to fetch booking",
 
-            error:
-                process.env.NODE_ENV === "development"
-                    ? error.message
-                    : undefined
+                error:
+                    process.env.NODE_ENV ===
+                    "development"
+                        ?
+                        error.message
+                        :
+                        undefined
 
-        });
+            });
 
     }
 
@@ -178,7 +259,10 @@ exports.getBookingByPNR = async (req, res) => {
 // PUT /api/bookings/cancel/:pnr
 // ==========================================
 
-exports.cancelBooking = async (req, res) => {
+exports.cancelBooking = async (
+    req,
+    res
+) => {
 
     const userId =
         req.user.id;
@@ -186,8 +270,34 @@ exports.cancelBooking = async (req, res) => {
 
     const pnr =
         String(
-            req.params.pnr || ""
+            req.params.pnr ||
+            ""
         ).trim();
+
+
+    // ==========================================
+    // CHECK RAZORPAY CONFIGURATION
+    // ==========================================
+
+    if (!razorpay) {
+
+        console.error(
+            "Cancel Booking Error: Razorpay is not configured"
+        );
+
+
+        return res
+            .status(500)
+            .json({
+
+                success: false,
+
+                message:
+                    "Razorpay is not configured on the server"
+
+            });
+
+    }
 
 
     try {
@@ -221,14 +331,16 @@ exports.cancelBooking = async (req, res) => {
 
         if (!pnr) {
 
-            return res.status(400).json({
+            return res
+                .status(400)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "PNR is required"
+                    message:
+                        "PNR is required"
 
-            });
+                });
 
         }
 
@@ -247,14 +359,16 @@ exports.cancelBooking = async (req, res) => {
 
         if (!booking) {
 
-            return res.status(404).json({
+            return res
+                .status(404)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    `Booking not found for PNR ${pnr}`
+                    message:
+                        `Booking not found for PNR ${pnr}`
 
-            });
+                });
 
         }
 
@@ -265,56 +379,70 @@ exports.cancelBooking = async (req, res) => {
 
         if (
             String(
-                booking.booking_status
+                booking.booking_status ||
+                ""
             ).toLowerCase() ===
             "cancelled"
         ) {
 
-            return res.status(400).json({
+            return res
+                .status(400)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "Booking is already cancelled"
+                    message:
+                        "Booking is already cancelled"
 
-            });
+                });
 
         }
 
 
         // ==========================================
-        // VALIDATE PAYMENT
+        // VALIDATE PAYMENT ID
         // ==========================================
 
-        if (!booking.payment_id) {
+        if (
+            !booking.payment_id
+        ) {
 
-            return res.status(400).json({
+            return res
+                .status(400)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "Payment ID not found for this booking"
+                    message:
+                        "Payment ID not found for this booking"
 
-            });
+                });
 
         }
 
+
+        // ==========================================
+        // VALIDATE PAYMENT STATUS
+        // ==========================================
 
         if (
             String(
-                booking.payment_status
+                booking.payment_status ||
+                ""
             ).toLowerCase() !==
             "paid"
         ) {
 
-            return res.status(400).json({
+            return res
+                .status(400)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "Only paid bookings can be refunded"
+                    message:
+                        "Only paid bookings can be refunded"
 
-            });
+                });
 
         }
 
@@ -323,22 +451,26 @@ exports.cancelBooking = async (req, res) => {
         // CHECK EXISTING REFUND
         // ==========================================
 
-        if (booking.refund_id) {
+        if (
+            booking.refund_id
+        ) {
 
-            return res.status(400).json({
+            return res
+                .status(400)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "Refund has already been initiated for this booking",
+                    message:
+                        "Refund has already been initiated for this booking",
 
-                refundId:
-                    booking.refund_id,
+                    refundId:
+                        booking.refund_id,
 
-                refundStatus:
-                    booking.refund_status
+                    refundStatus:
+                        booking.refund_status
 
-            });
+                });
 
         }
 
@@ -348,9 +480,11 @@ exports.cancelBooking = async (req, res) => {
         // ==========================================
 
         const payment =
-            await razorpay.payments.fetch(
-                booking.payment_id
-            );
+            await razorpay
+                .payments
+                .fetch(
+                    booking.payment_id
+                );
 
 
         console.log(
@@ -359,21 +493,25 @@ exports.cancelBooking = async (req, res) => {
         );
 
 
-        // Razorpay refunds require captured payment
+        // ==========================================
+        // PAYMENT MUST BE CAPTURED
+        // ==========================================
 
         if (
             payment.status !==
             "captured"
         ) {
 
-            return res.status(400).json({
+            return res
+                .status(400)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    `Payment cannot be refunded because Razorpay payment status is ${payment.status}`
+                    message:
+                        `Payment cannot be refunded because Razorpay payment status is ${payment.status}`
 
-            });
+                });
 
         }
 
@@ -389,53 +527,63 @@ exports.cancelBooking = async (req, res) => {
 
 
         if (
-            !refundAmount ||
+            !Number.isFinite(
+                refundAmount
+            ) ||
             refundAmount <= 0
         ) {
 
-            return res.status(400).json({
+            return res
+                .status(400)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "Invalid refund amount"
+                    message:
+                        "Invalid refund amount"
 
-            });
+                });
 
         }
 
 
-        // Razorpay expects INR amount in paise
+        // Razorpay uses paise
 
         const refundAmountInPaise =
             Math.round(
-                refundAmount * 100
+                refundAmount *
+                100
             );
 
 
         // ==========================================
-        // CANCEL BOOKING FIRST
+        // CANCEL BOOKING
         // ==========================================
 
         const cancelResult =
-            await bookingService.cancelBooking(
-                pnr,
-                userId
-            );
+            await bookingService
+                .cancelBooking(
+                    pnr,
+                    userId
+                );
 
 
         if (
-            cancelResult.affectedRows === 0
+            !cancelResult ||
+            cancelResult.affectedRows ===
+            0
         ) {
 
-            return res.status(400).json({
+            return res
+                .status(400)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "Unable to cancel booking"
+                    message:
+                        "Unable to cancel booking"
 
-            });
+                });
 
         }
 
@@ -458,33 +606,40 @@ exports.cancelBooking = async (req, res) => {
             // ==========================================
 
             const refund =
-                await razorpay.payments.refund(
+                await razorpay
+                    .payments
+                    .refund(
 
-                    booking.payment_id,
+                        booking.payment_id,
 
-                    {
-                        amount:
-                            refundAmountInPaise,
+                        {
 
-                        speed:
-                            "normal",
+                            amount:
+                                refundAmountInPaise,
 
-                        notes: {
+                            speed:
+                                "normal",
 
-                            pnr:
-                                String(pnr),
+                            notes: {
 
-                            user_id:
-                                String(userId),
+                                pnr:
+                                    String(
+                                        pnr
+                                    ),
 
-                            reason:
-                                "Ticket cancellation"
+                                user_id:
+                                    String(
+                                        userId
+                                    ),
+
+                                reason:
+                                    "Ticket cancellation"
+
+                            }
 
                         }
 
-                    }
-
-                );
+                    );
 
 
             console.log(
@@ -494,67 +649,73 @@ exports.cancelBooking = async (req, res) => {
 
 
             // ==========================================
-            // SAVE REFUND
+            // SAVE REFUND DETAILS
             // ==========================================
 
-            await bookingService.saveRefund(
+            await bookingService
+                .saveRefund(
 
-                pnr,
+                    pnr,
 
-                userId,
+                    userId,
 
-                {
-                    refundId:
-                        refund.id,
+                    {
 
-                    refundAmount:
-                        refundAmount
+                        refundId:
+                            refund.id,
 
-                }
+                        refundAmount:
+                            refundAmount
 
-            );
+                    }
+
+                );
 
 
             // ==========================================
             // SUCCESS
             // ==========================================
 
-            return res.status(200).json({
+            return res
+                .status(200)
+                .json({
 
-                success: true,
+                    success: true,
 
-                message:
-                    "Booking cancelled and refund initiated successfully",
+                    message:
+                        "Booking cancelled and refund initiated successfully",
 
-                pnr:
-                    pnr,
+                    pnr:
+                        pnr,
 
-                bookingStatus:
-                    "Cancelled",
+                    bookingStatus:
+                        "Cancelled",
 
-                paymentStatus:
-                    "Refunded",
+                    paymentStatus:
+                        "Refunded",
 
-                refund: {
+                    refund: {
 
-                    id:
-                        refund.id,
+                        id:
+                            refund.id,
 
-                    amount:
-                        refundAmount,
+                        amount:
+                            refundAmount,
 
-                    razorpayAmount:
-                        refund.amount,
+                        razorpayAmount:
+                            refund.amount,
 
-                    status:
-                        refund.status
+                        status:
+                            refund.status
 
-                }
+                    }
 
-            });
+                });
 
         }
-        catch (refundError) {
+        catch (
+            refundError
+        ) {
 
             console.error(
                 "Razorpay Refund Error:",
@@ -566,30 +727,53 @@ exports.cancelBooking = async (req, res) => {
             // MARK REFUND FAILED
             // ==========================================
 
-            await bookingService
-                .markRefundFailed(
-                    pnr,
-                    userId
+            try {
+
+                await bookingService
+                    .markRefundFailed(
+                        pnr,
+                        userId
+                    );
+
+            }
+            catch (
+                markFailedError
+            ) {
+
+                console.error(
+                    "Mark Refund Failed Error:",
+                    markFailedError
                 );
 
+            }
 
-            return res.status(502).json({
 
-                success: false,
+            return res
+                .status(502)
+                .json({
 
-                message:
-                    refundError.error?.description ||
-                    refundError.description ||
-                    refundError.message ||
-                    "Booking was cancelled but refund could not be processed",
+                    success: false,
 
-                bookingStatus:
-                    "Cancelled",
+                    message:
+                        refundError
+                            ?.error
+                            ?.description ||
 
-                refundStatus:
-                    "Failed"
+                        refundError
+                            ?.description ||
 
-            });
+                        refundError
+                            ?.message ||
+
+                        "Booking was cancelled but refund could not be processed",
+
+                    bookingStatus:
+                        "Cancelled",
+
+                    refundStatus:
+                        "Failed"
+
+                });
 
         }
 
@@ -602,19 +786,24 @@ exports.cancelBooking = async (req, res) => {
         );
 
 
-        return res.status(500).json({
+        return res
+            .status(500)
+            .json({
 
-            success: false,
+                success: false,
 
-            message:
-                "Unable to cancel booking",
+                message:
+                    "Unable to cancel booking",
 
-            error:
-                process.env.NODE_ENV === "development"
-                    ? error.message
-                    : undefined
+                error:
+                    process.env.NODE_ENV ===
+                    "development"
+                        ?
+                        error.message
+                        :
+                        undefined
 
-        });
+            });
 
     }
 
