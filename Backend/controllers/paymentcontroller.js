@@ -15,15 +15,63 @@ const seatAllocator =
 // RAZORPAY CONFIGURATION
 // ==========================================
 
-const razorpay = new Razorpay({
+const razorpayKeyId =
+    process.env.RAZORPAY_KEY_ID;
 
-    key_id:
-        process.env.RAZORPAY_KEY_ID,
+const razorpayKeySecret =
+    process.env.RAZORPAY_KEY_SECRET;
 
-    key_secret:
-        process.env.RAZORPAY_KEY_SECRET
 
-});
+let razorpay = null;
+
+
+// ==========================================
+// INITIALIZE RAZORPAY SAFELY
+// ==========================================
+
+if (
+    razorpayKeyId &&
+    razorpayKeySecret
+) {
+
+    razorpay =
+        new Razorpay({
+
+            key_id:
+                razorpayKeyId,
+
+            key_secret:
+                razorpayKeySecret
+
+        });
+
+
+    console.log(
+        "Razorpay configured successfully"
+    );
+
+}
+else {
+
+    console.error(
+        "Razorpay environment variables are missing"
+    );
+
+    console.error(
+        "RAZORPAY_KEY_ID exists:",
+        Boolean(
+            razorpayKeyId
+        )
+    );
+
+    console.error(
+        "RAZORPAY_KEY_SECRET exists:",
+        Boolean(
+            razorpayKeySecret
+        )
+    );
+
+}
 
 
 // ==========================================
@@ -32,10 +80,11 @@ const razorpay = new Razorpay({
 
 function generatePNR() {
 
-    const datePart = new Date()
-        .toISOString()
-        .slice(2, 10)
-        .replace(/-/g, "");
+    const datePart =
+        new Date()
+            .toISOString()
+            .slice(2, 10)
+            .replace(/-/g, "");
 
 
     const randomPart =
@@ -62,6 +111,24 @@ function generatePNR() {
 exports.createOrder = async (req, res) => {
 
     try {
+
+        // ==========================================
+        // CHECK RAZORPAY CONFIGURATION
+        // ==========================================
+
+        if (!razorpay) {
+
+            return res.status(500).json({
+
+                success: false,
+
+                message:
+                    "Razorpay is not configured on the server"
+
+            });
+
+        }
+
 
         const userId =
             req.user.id;
@@ -246,8 +313,7 @@ exports.createOrder = async (req, res) => {
             success: true,
 
             key_id:
-                process.env
-                    .RAZORPAY_KEY_ID,
+                razorpayKeyId,
 
             train: {
 
@@ -288,7 +354,13 @@ exports.createOrder = async (req, res) => {
             success: false,
 
             message:
-                "Unable to create payment order"
+                "Unable to create payment order",
+
+            error:
+                process.env.NODE_ENV ===
+                "development"
+                    ? error.message
+                    : undefined
 
         });
 
@@ -306,6 +378,24 @@ exports.createOrder = async (req, res) => {
 exports.verifyPayment = async (req, res) => {
 
     try {
+
+        // ==========================================
+        // CHECK RAZORPAY CONFIGURATION
+        // ==========================================
+
+        if (!razorpay) {
+
+            return res.status(500).json({
+
+                success: false,
+
+                message:
+                    "Razorpay is not configured on the server"
+
+            });
+
+        }
+
 
         // ==========================================
         // GET LOGGED-IN USER
@@ -428,13 +518,23 @@ exports.verifyPayment = async (req, res) => {
 
 
         // ==========================================
+        // CLEAN TRAIN NUMBER
+        // ==========================================
+
+        const cleanTrainNo =
+            String(
+                trainNo
+            ).trim();
+
+
+        // ==========================================
         // GET TRAIN FROM DATABASE
         // ==========================================
 
         const train =
             await trainService
                 .getTrainByNumber(
-                    trainNo
+                    cleanTrainNo
                 );
 
 
@@ -543,8 +643,7 @@ exports.verifyPayment = async (req, res) => {
 
                     "sha256",
 
-                    process.env
-                        .RAZORPAY_KEY_SECRET
+                    razorpayKeySecret
 
                 )
                 .update(
@@ -663,7 +762,9 @@ exports.verifyPayment = async (req, res) => {
                     .notes
                     .user_id
             ) !==
-            String(userId)
+            String(
+                userId
+            )
         ) {
 
             return res.status(403).json({
@@ -1122,6 +1223,24 @@ exports.refundBooking = async (req, res) => {
     try {
 
         // ==========================================
+        // CHECK RAZORPAY CONFIGURATION
+        // ==========================================
+
+        if (!razorpay) {
+
+            return res.status(500).json({
+
+                success: false,
+
+                message:
+                    "Razorpay is not configured on the server"
+
+            });
+
+        }
+
+
+        // ==========================================
         // GET LOGGED-IN USER
         // ==========================================
 
@@ -1448,10 +1567,14 @@ exports.refundBooking = async (req, res) => {
                     notes: {
 
                         pnr:
-                            String(pnr),
+                            String(
+                                pnr
+                            ),
 
                         user_id:
-                            String(userId)
+                            String(
+                                userId
+                            )
 
                     },
 
