@@ -1,84 +1,18 @@
 const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
 
 
 // =====================================================
-// PROFILE UPLOAD DIRECTORY
+// MEMORY STORAGE
 // =====================================================
-
-const uploadDirectory =
-    path.join(
-        __dirname,
-        "../uploads/profiles"
-    );
-
-
-// =====================================================
-// CREATE DIRECTORY IF IT DOES NOT EXIST
-// =====================================================
-
-if (
-    !fs.existsSync(
-        uploadDirectory
-    )
-) {
-
-    fs.mkdirSync(
-        uploadDirectory,
-        {
-            recursive: true
-        }
-    );
-
-}
-
-
-// =====================================================
-// STORAGE
+// Vercel serverless should not permanently save uploaded
+// files inside Backend/uploads.
+//
+// The uploaded image will be available as:
+// req.file.buffer
 // =====================================================
 
 const storage =
-    multer.diskStorage({
-
-        destination: function (
-            req,
-            file,
-            cb
-        ) {
-
-            cb(
-                null,
-                uploadDirectory
-            );
-
-        },
-
-
-        filename: function (
-            req,
-            file,
-            cb
-        ) {
-
-            const extension =
-                path.extname(
-                    file.originalname
-                ).toLowerCase();
-
-
-            const filename =
-                `profile-${req.user.id}-${Date.now()}${extension}`;
-
-
-            cb(
-                null,
-                filename
-            );
-
-        }
-
-    });
+    multer.memoryStorage();
 
 
 // =====================================================
@@ -125,7 +59,7 @@ const fileFilter = (
 
 
 // =====================================================
-// MULTER
+// MULTER CONFIGURATION
 // =====================================================
 
 const upload =
@@ -137,6 +71,7 @@ const upload =
 
         limits: {
 
+            // Maximum image size = 5 MB
             fileSize:
                 5 * 1024 * 1024
 

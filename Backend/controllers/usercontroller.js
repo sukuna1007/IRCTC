@@ -1,6 +1,94 @@
 const userService =
     require("../services/userservice");
 
+const cloudinary =
+    require("cloudinary").v2;
+
+const streamifier =
+    require("streamifier");
+
+
+// ==========================================
+// CLOUDINARY CONFIGURATION
+// ==========================================
+
+cloudinary.config({
+
+    cloud_name:
+        process.env.CLOUDINARY_CLOUD_NAME,
+
+    api_key:
+        process.env.CLOUDINARY_API_KEY,
+
+    api_secret:
+        process.env.CLOUDINARY_API_SECRET
+
+});
+
+
+// ==========================================
+// UPLOAD IMAGE TO CLOUDINARY
+// ==========================================
+
+function uploadToCloudinary(
+    fileBuffer,
+    userId
+) {
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const uploadStream =
+                cloudinary.uploader.upload_stream(
+
+                    {
+
+                        folder:
+                            "irctc/profile-images",
+
+                        public_id:
+                            `profile-${userId}-${Date.now()}`,
+
+                        resource_type:
+                            "image",
+
+                        overwrite:
+                            true
+
+                    },
+
+                    (error, result) => {
+
+                        if (error) {
+
+                            return reject(
+                                error
+                            );
+
+                        }
+
+                        return resolve(
+                            result
+                        );
+
+                    }
+
+                );
+
+
+            streamifier
+                .createReadStream(
+                    fileBuffer
+                )
+                .pipe(
+                    uploadStream
+                );
+
+        }
+    );
+
+}
+
 
 // ==========================================
 // GET LOGGED-IN USER PROFILE
@@ -8,7 +96,10 @@ const userService =
 // GET /api/users/profile
 // ==========================================
 
-exports.getProfile = async (req, res) => {
+exports.getProfile = async (
+    req,
+    res
+) => {
 
     try {
 
@@ -28,14 +119,16 @@ exports.getProfile = async (req, res) => {
 
         if (!user) {
 
-            return res.status(404).json({
+            return res
+                .status(404)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "User not found"
+                    message:
+                        "User not found"
 
-            });
+                });
 
         }
 
@@ -44,15 +137,16 @@ exports.getProfile = async (req, res) => {
         // SUCCESS
         // ==========================================
 
-        return res.status(200).json({
+        return res
+            .status(200)
+            .json({
 
-            success: true,
+                success: true,
 
-            user:
-                user
+                user:
+                    user
 
-        });
-
+            });
 
     }
     catch (error) {
@@ -63,20 +157,22 @@ exports.getProfile = async (req, res) => {
         );
 
 
-        return res.status(500).json({
+        return res
+            .status(500)
+            .json({
 
-            success: false,
+                success: false,
 
-            message:
-                "Unable to fetch user profile",
+                message:
+                    "Unable to fetch user profile",
 
-            error:
-                process.env.NODE_ENV ===
-                "development"
-                    ? error.message
-                    : undefined
+                error:
+                    process.env.NODE_ENV ===
+                    "development"
+                        ? error.message
+                        : undefined
 
-        });
+            });
 
     }
 
@@ -89,7 +185,10 @@ exports.getProfile = async (req, res) => {
 // PUT /api/users/profile
 // ==========================================
 
-exports.updateProfile = async (req, res) => {
+exports.updateProfile = async (
+    req,
+    res
+) => {
 
     try {
 
@@ -114,14 +213,16 @@ exports.updateProfile = async (req, res) => {
             !phone
         ) {
 
-            return res.status(400).json({
+            return res
+                .status(400)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "Full name and phone are required"
+                    message:
+                        "Full name and phone are required"
 
-            });
+                });
 
         }
 
@@ -156,14 +257,16 @@ exports.updateProfile = async (req, res) => {
 
         if (!full_name) {
 
-            return res.status(400).json({
+            return res
+                .status(400)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "Full name is required"
+                    message:
+                        "Full name is required"
 
-            });
+                });
 
         }
 
@@ -178,14 +281,16 @@ exports.updateProfile = async (req, res) => {
             )
         ) {
 
-            return res.status(400).json({
+            return res
+                .status(400)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "Phone number must contain exactly 10 digits"
+                    message:
+                        "Phone number must contain exactly 10 digits"
 
-            });
+                });
 
         }
 
@@ -194,7 +299,8 @@ exports.updateProfile = async (req, res) => {
         // VALIDATE DOB
         // ==========================================
 
-        let cleanDob = null;
+        let cleanDob =
+            null;
 
 
         if (dob) {
@@ -213,14 +319,16 @@ exports.updateProfile = async (req, res) => {
 
             if (!validDateFormat) {
 
-                return res.status(400).json({
+                return res
+                    .status(400)
+                    .json({
 
-                    success: false,
+                        success: false,
 
-                    message:
-                        "Date of birth must be in YYYY-MM-DD format"
+                        message:
+                            "Date of birth must be in YYYY-MM-DD format"
 
-                });
+                    });
 
             }
 
@@ -237,14 +345,16 @@ exports.updateProfile = async (req, res) => {
                 )
             ) {
 
-                return res.status(400).json({
+                return res
+                    .status(400)
+                    .json({
 
-                    success: false,
+                        success: false,
 
-                    message:
-                        "Invalid date of birth"
+                        message:
+                            "Invalid date of birth"
 
-                });
+                    });
 
             }
 
@@ -262,14 +372,16 @@ exports.updateProfile = async (req, res) => {
                 today
             ) {
 
-                return res.status(400).json({
+                return res
+                    .status(400)
+                    .json({
 
-                    success: false,
+                        success: false,
 
-                    message:
-                        "Date of birth cannot be in the future"
+                        message:
+                            "Date of birth cannot be in the future"
 
-                });
+                    });
 
             }
 
@@ -292,14 +404,16 @@ exports.updateProfile = async (req, res) => {
 
         if (!currentUser) {
 
-            return res.status(404).json({
+            return res
+                .status(404)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "User not found"
+                    message:
+                        "User not found"
 
-            });
+                });
 
         }
 
@@ -324,14 +438,16 @@ exports.updateProfile = async (req, res) => {
             )
         ) {
 
-            return res.status(409).json({
+            return res
+                .status(409)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "Phone number already exists"
+                    message:
+                        "Phone number already exists"
 
-            });
+                });
 
         }
 
@@ -341,45 +457,46 @@ exports.updateProfile = async (req, res) => {
         // ==========================================
 
         const result =
-            await userService
-                .updateUserProfile(
+            await userService.updateUserProfile(
 
-                    userId,
+                userId,
 
-                    {
+                {
 
-                        fullName:
-                            full_name,
+                    fullName:
+                        full_name,
 
-                        phone:
-                            phone,
+                    phone:
+                        phone,
 
-                        address:
-                            address,
+                    address:
+                        address,
 
-                        dob:
-                            cleanDob,
+                    dob:
+                        cleanDob,
 
-                        profileImage:
-                            currentUser.profile_image
+                    profileImage:
+                        currentUser.profile_image
 
-                    }
+                }
 
-                );
+            );
 
 
         if (
             result.affectedRows === 0
         ) {
 
-            return res.status(404).json({
+            return res
+                .status(404)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "User not found"
+                    message:
+                        "User not found"
 
-            });
+                });
 
         }
 
@@ -396,14 +513,16 @@ exports.updateProfile = async (req, res) => {
 
         if (!updatedUser) {
 
-            return res.status(404).json({
+            return res
+                .status(404)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "Updated user could not be found"
+                    message:
+                        "Updated user could not be found"
 
-            });
+                });
 
         }
 
@@ -412,18 +531,19 @@ exports.updateProfile = async (req, res) => {
         // SUCCESS
         // ==========================================
 
-        return res.status(200).json({
+        return res
+            .status(200)
+            .json({
 
-            success: true,
+                success: true,
 
-            message:
-                "Profile updated successfully",
+                message:
+                    "Profile updated successfully",
 
-            user:
-                updatedUser
+                user:
+                    updatedUser
 
-        });
-
+            });
 
     }
     catch (error) {
@@ -439,32 +559,36 @@ exports.updateProfile = async (req, res) => {
             "ER_DUP_ENTRY"
         ) {
 
-            return res.status(409).json({
+            return res
+                .status(409)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "Phone number already exists"
+                    message:
+                        "Phone number already exists"
 
-            });
+                });
 
         }
 
 
-        return res.status(500).json({
+        return res
+            .status(500)
+            .json({
 
-            success: false,
+                success: false,
 
-            message:
-                "Unable to update user profile",
+                message:
+                    "Unable to update user profile",
 
-            error:
-                process.env.NODE_ENV ===
-                "development"
-                    ? error.message
-                    : undefined
+                error:
+                    process.env.NODE_ENV ===
+                    "development"
+                        ? error.message
+                        : undefined
 
-        });
+            });
 
     }
 
@@ -477,7 +601,10 @@ exports.updateProfile = async (req, res) => {
 // PUT /api/users/profile-image
 // ==========================================
 
-exports.updateProfileImage = async (req, res) => {
+exports.updateProfileImage = async (
+    req,
+    res
+) => {
 
     try {
 
@@ -491,14 +618,36 @@ exports.updateProfileImage = async (req, res) => {
 
         if (!req.file) {
 
-            return res.status(400).json({
+            return res
+                .status(400)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "Please select a profile image"
+                    message:
+                        "Please select a profile image"
 
-            });
+                });
+
+        }
+
+
+        // ==========================================
+        // CHECK FILE BUFFER
+        // ==========================================
+
+        if (!req.file.buffer) {
+
+            return res
+                .status(400)
+                .json({
+
+                    success: false,
+
+                    message:
+                        "Invalid profile image"
+
+                });
 
         }
 
@@ -515,24 +664,78 @@ exports.updateProfileImage = async (req, res) => {
 
         if (!currentUser) {
 
-            return res.status(404).json({
+            return res
+                .status(404)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "User not found"
+                    message:
+                        "User not found"
 
-            });
+                });
 
         }
 
 
         // ==========================================
-        // IMAGE PATH
+        // CHECK CLOUDINARY CONFIGURATION
+        // ==========================================
+
+        if (
+            !process.env.CLOUDINARY_CLOUD_NAME ||
+            !process.env.CLOUDINARY_API_KEY ||
+            !process.env.CLOUDINARY_API_SECRET
+        ) {
+
+            console.error(
+                "Cloudinary environment variables are missing"
+            );
+
+
+            return res
+                .status(500)
+                .json({
+
+                    success: false,
+
+                    message:
+                        "Image storage is not configured"
+
+                });
+
+        }
+
+
+        // ==========================================
+        // UPLOAD IMAGE TO CLOUDINARY
+        // ==========================================
+
+        const cloudinaryResult =
+            await uploadToCloudinary(
+                req.file.buffer,
+                userId
+            );
+
+
+        if (
+            !cloudinaryResult ||
+            !cloudinaryResult.secure_url
+        ) {
+
+            throw new Error(
+                "Cloudinary did not return an image URL"
+            );
+
+        }
+
+
+        // ==========================================
+        // CLOUDINARY IMAGE URL
         // ==========================================
 
         const profileImagePath =
-            `/uploads/profiles/${req.file.filename}`;
+            cloudinaryResult.secure_url;
 
 
         // ==========================================
@@ -540,45 +743,46 @@ exports.updateProfileImage = async (req, res) => {
         // ==========================================
 
         const result =
-            await userService
-                .updateUserProfile(
+            await userService.updateUserProfile(
 
-                    userId,
+                userId,
 
-                    {
+                {
 
-                        fullName:
-                            currentUser.full_name,
+                    fullName:
+                        currentUser.full_name,
 
-                        phone:
-                            currentUser.phone,
+                    phone:
+                        currentUser.phone,
 
-                        address:
-                            currentUser.address,
+                    address:
+                        currentUser.address,
 
-                        dob:
-                            currentUser.dob,
+                    dob:
+                        currentUser.dob,
 
-                        profileImage:
-                            profileImagePath
+                    profileImage:
+                        profileImagePath
 
-                    }
+                }
 
-                );
+            );
 
 
         if (
             result.affectedRows === 0
         ) {
 
-            return res.status(404).json({
+            return res
+                .status(404)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "User not found"
+                    message:
+                        "User not found"
 
-            });
+                });
 
         }
 
@@ -595,14 +799,16 @@ exports.updateProfileImage = async (req, res) => {
 
         if (!updatedUser) {
 
-            return res.status(404).json({
+            return res
+                .status(404)
+                .json({
 
-                success: false,
+                    success: false,
 
-                message:
-                    "Updated user could not be found"
+                    message:
+                        "Updated user could not be found"
 
-            });
+                });
 
         }
 
@@ -611,21 +817,22 @@ exports.updateProfileImage = async (req, res) => {
         // SUCCESS
         // ==========================================
 
-        return res.status(200).json({
+        return res
+            .status(200)
+            .json({
 
-            success: true,
+                success: true,
 
-            message:
-                "Profile image updated successfully",
+                message:
+                    "Profile image updated successfully",
 
-            profileImage:
-                profileImagePath,
+                profileImage:
+                    profileImagePath,
 
-            user:
-                updatedUser
+                user:
+                    updatedUser
 
-        });
-
+            });
 
     }
     catch (error) {
@@ -636,20 +843,22 @@ exports.updateProfileImage = async (req, res) => {
         );
 
 
-        return res.status(500).json({
+        return res
+            .status(500)
+            .json({
 
-            success: false,
+                success: false,
 
-            message:
-                "Unable to update profile image",
+                message:
+                    "Unable to update profile image",
 
-            error:
-                process.env.NODE_ENV ===
-                "development"
-                    ? error.message
-                    : undefined
+                error:
+                    process.env.NODE_ENV ===
+                    "development"
+                        ? error.message
+                        : undefined
 
-        });
+            });
 
     }
 

@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "bcrypt": "6.0.0",
+    "cloudinary": "^2.11.0",
     "cors": "2.8.5",
     "dotenv": "17.4.2",
     "express": "5.2.1",
@@ -15,6 +16,7 @@
     "multer": "^2.0.2",
     "mysql2": "3.23.3",
     "razorpay": "2.9.8",
-    "readable-stream": "^3.6.2"
+    "readable-stream": "^3.6.2",
+    "streamifier": "^0.1.1"
   }
 }
