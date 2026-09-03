@@ -1,6 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     // ==========================================
+    // API BASE
+    // ==========================================
+
+    const API_BASE = window.location.origin;
+
+
+    // ==========================================
     // GET TRAIN DETAILS FROM URL
     // ==========================================
 
@@ -318,9 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const response =
                     await fetch(
-
-                        "http://localhost:5000/api/payment/create-order",
-
+                        `${API_BASE}/api/payment/create-order`,
                         {
                             method: "POST",
 
@@ -343,7 +348,6 @@ document.addEventListener("DOMContentLoaded", () => {
                                 })
 
                         }
-
                     );
 
 
@@ -371,12 +375,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     clearLoginSession();
 
-
                     alert(
                         data.message ||
                         "Please login again."
                     );
-
 
                     window.location.href =
                         "index.html";
@@ -395,10 +397,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 ) {
 
                     throw new Error(
-
                         data.message ||
                         "Unable to create payment order"
-
                     );
 
                 }
@@ -587,7 +587,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     key:
                         razorpayKey,
 
-
                     amount:
                         order.amount,
 
@@ -688,9 +687,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                                 const verifyResponse =
                                     await fetch(
-
-                                        "http://localhost:5000/api/payment/verify",
-
+                                        `${API_BASE}/api/payment/verify`,
                                         {
                                             method:
                                                 "POST",
@@ -738,7 +735,6 @@ document.addEventListener("DOMContentLoaded", () => {
                                                 })
 
                                         }
-
                                     );
 
 
