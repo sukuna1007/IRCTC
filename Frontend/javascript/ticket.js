@@ -2,6 +2,9 @@
 // TICKET PAGE SCRIPT
 // ==========================================
 
+const API_BASE = window.location.origin;
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // ==========================================
@@ -51,10 +54,6 @@ async function loadTicket(pnr) {
 
     try {
 
-        // ==========================================
-        // GET JWT TOKEN
-        // ==========================================
-
         const token =
             localStorage.getItem("token");
 
@@ -64,10 +63,6 @@ async function loadTicket(pnr) {
             !!token
         );
 
-
-        // ==========================================
-        // CHECK LOGIN
-        // ==========================================
 
         if (!token) {
 
@@ -82,26 +77,17 @@ async function loadTicket(pnr) {
         }
 
 
-        // ==========================================
-        // GET BOOKING FROM BACKEND
-        // ==========================================
-
         const response =
             await fetch(
-
-                `http://localhost:5000/api/bookings/pnr/${encodeURIComponent(pnr)}`,
-
+                `${API_BASE}/api/bookings/pnr/${encodeURIComponent(pnr)}`,
                 {
                     method: "GET",
 
                     headers: {
-
                         "Authorization":
                             `Bearer ${token}`
-
                     }
                 }
-
             );
 
 
@@ -133,20 +119,14 @@ async function loadTicket(pnr) {
         );
 
 
-        // ==========================================
-        // INVALID / EXPIRED TOKEN
-        // ==========================================
-
         if (response.status === 401) {
 
             clearLoginSession();
-
 
             alert(
                 data.message ||
                 "Your session has expired. Please login again."
             );
-
 
             window.location.href =
                 "index.html";
@@ -155,35 +135,22 @@ async function loadTicket(pnr) {
         }
 
 
-        // ==========================================
-        // CHECK RESPONSE
-        // ==========================================
-
         if (
             !response.ok ||
             !data.success
         ) {
 
             throw new Error(
-
                 data.message ||
                 "Booking not found"
-
             );
+
         }
 
-
-        // ==========================================
-        // GET BOOKING
-        // ==========================================
 
         const booking =
             data.booking;
 
-
-        // ==========================================
-        // CHECK BOOKING DATA
-        // ==========================================
 
         if (!booking) {
 
@@ -194,18 +161,10 @@ async function loadTicket(pnr) {
         }
 
 
-        // ==========================================
-        // SAVE DATABASE BOOKING
-        // ==========================================
-
         saveBookingToLocalStorage(
             booking
         );
 
-
-        // ==========================================
-        // DISPLAY TICKET
-        // ==========================================
 
         displayTicket(
             booking

@@ -4,8 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // API BASE URL
     // =====================================================
 
-    const API_BASE =
-        "http://localhost:5000/api/admin";
+    const API_BASE = window.location.origin;
 
 
     // =====================================================
