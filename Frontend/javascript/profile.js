@@ -35,7 +35,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // BACKEND BASE URL
     // ==========================================
 
-    const API_BASE = window.location.origin;
+    const backendUrl =
+        window.location.origin;
 
 
     // ==========================================
