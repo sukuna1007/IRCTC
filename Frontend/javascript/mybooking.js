@@ -2,7 +2,7 @@
 // MY BOOKINGS PAGE SCRIPT
 // ==========================================
 
-const API_BASE = window.location.origin;
+const API_BASE = "";
 
 
 let selectedCancelPNR =
