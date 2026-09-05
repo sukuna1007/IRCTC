@@ -6,6 +6,28 @@ const userService =
 
 
 // ==========================================
+// HELPER: CHECK JWT SECRET
+// ==========================================
+
+function getJwtSecret() {
+
+    const secret =
+        process.env.JWT_SECRET;
+
+    if (!secret) {
+
+        console.error(
+            "JWT ERROR: JWT_SECRET is missing"
+        );
+
+        return null;
+    }
+
+    return secret;
+}
+
+
+// ==========================================
 // REGISTER
 // ==========================================
 
@@ -244,6 +266,10 @@ exports.login = async (req, res) => {
         } = req.body;
 
 
+        // ==========================================
+        // VALIDATE INPUT
+        // ==========================================
+
         if (
             !email ||
             !password
@@ -270,6 +296,32 @@ exports.login = async (req, res) => {
             String(password);
 
 
+        // ==========================================
+        // CHECK JWT SECRET
+        // ==========================================
+
+        const jwtSecret =
+            getJwtSecret();
+
+
+        if (!jwtSecret) {
+
+            return res.status(500).json({
+
+                success: false,
+
+                message:
+                    "Server authentication configuration error"
+
+            });
+
+        }
+
+
+        // ==========================================
+        // FIND USER
+        // ==========================================
+
         const user =
             await userService.findUserByEmail(
                 email
@@ -289,6 +341,10 @@ exports.login = async (req, res) => {
 
         }
 
+
+        // ==========================================
+        // CHECK PASSWORD
+        // ==========================================
 
         const passwordMatch =
             await bcrypt.compare(
@@ -311,6 +367,10 @@ exports.login = async (req, res) => {
         }
 
 
+        // ==========================================
+        // CREATE JWT TOKEN
+        // ==========================================
+
         const token =
             jwt.sign(
 
@@ -327,7 +387,7 @@ exports.login = async (req, res) => {
 
                 },
 
-                process.env.JWT_SECRET,
+                jwtSecret,
 
                 {
 
@@ -338,6 +398,10 @@ exports.login = async (req, res) => {
 
             );
 
+
+        // ==========================================
+        // SUCCESS
+        // ==========================================
 
         return res.status(200).json({
 
@@ -623,6 +687,28 @@ exports.forgotPassword = async (req, res) => {
                 .toLowerCase();
 
 
+        // ==========================================
+        // CHECK JWT SECRET
+        // ==========================================
+
+        const jwtSecret =
+            getJwtSecret();
+
+
+        if (!jwtSecret) {
+
+            return res.status(500).json({
+
+                success: false,
+
+                message:
+                    "Server authentication configuration error"
+
+            });
+
+        }
+
+
         const user =
             await userService.findUserByEmail(
                 email
@@ -659,7 +745,7 @@ exports.forgotPassword = async (req, res) => {
 
                 },
 
-                process.env.JWT_SECRET,
+                jwtSecret,
 
                 {
 
@@ -774,6 +860,28 @@ exports.resetPassword = async (req, res) => {
         }
 
 
+        // ==========================================
+        // CHECK JWT SECRET
+        // ==========================================
+
+        const jwtSecret =
+            getJwtSecret();
+
+
+        if (!jwtSecret) {
+
+            return res.status(500).json({
+
+                success: false,
+
+                message:
+                    "Server authentication configuration error"
+
+            });
+
+        }
+
+
         let decoded;
 
 
@@ -782,7 +890,7 @@ exports.resetPassword = async (req, res) => {
             decoded =
                 jwt.verify(
                     resetToken,
-                    process.env.JWT_SECRET
+                    jwtSecret
                 );
 
         }
