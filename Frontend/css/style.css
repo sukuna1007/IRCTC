@@ -13,6 +13,11 @@
 
     --success: #198754;
 
+    /* BUTTON COLORS */
+    --button: #2563eb;
+    --button-dark: #1d4ed8;
+    --button-light: #3b82f6;
+
     --background: #f5f7fb;
     --white: #ffffff;
 
@@ -32,33 +37,22 @@
 ========================================================= */
 
 * {
-
     box-sizing: border-box;
-
 }
 
 html {
-
     scroll-behavior: smooth;
-
 }
 
 body {
-
     margin: 0;
-
     font-family: "Montserrat", sans-serif;
-
     background: var(--background);
-
     color: var(--text);
-
 }
 
 a {
-
     text-decoration: none;
-
 }
 
 
@@ -78,31 +72,24 @@ a {
         0 3px 20px rgba(0, 0, 0, 0.06);
 
     z-index: 1000;
-
 }
 
 .brand-area {
 
     display: flex;
-
     align-items: center;
-
     gap: 12px;
-
 }
 
 .brand-icon {
 
     width: 46px;
-
     height: 46px;
 
     border-radius: 13px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     background:
@@ -118,7 +105,6 @@ a {
 
     box-shadow:
         0 8px 20px rgba(13, 43, 82, 0.22);
-
 }
 
 .brand-name {
@@ -128,11 +114,9 @@ a {
     color: var(--primary);
 
     font-size: 20px;
-
     font-weight: 800;
 
     line-height: 1.1;
-
 }
 
 .brand-area small {
@@ -140,9 +124,7 @@ a {
     color: var(--muted);
 
     font-size: 10px;
-
     font-weight: 500;
-
 }
 
 .navbar .nav-link {
@@ -150,7 +132,6 @@ a {
     color: #344054;
 
     font-size: 13px;
-
     font-weight: 600;
 
     padding: 10px 13px !important;
@@ -158,7 +139,6 @@ a {
     border-radius: 8px;
 
     transition: 0.25s ease;
-
 }
 
 .navbar .nav-link:hover {
@@ -166,7 +146,6 @@ a {
     color: var(--primary);
 
     background: #eef4fb;
-
 }
 
 .navbar .nav-link.active {
@@ -174,12 +153,16 @@ a {
     color: var(--primary);
 
     background: #eef4fb;
-
 }
+
+
+/* =========================================================
+   LOGIN NAV BUTTON - CHANGED TO BLUE
+========================================================= */
 
 .login-nav-btn {
 
-    background: var(--accent) !important;
+    background: var(--button) !important;
 
     color: white !important;
 
@@ -187,18 +170,17 @@ a {
 
     padding-right: 18px !important;
 
+    transition: 0.25s ease;
 }
 
 .login-nav-btn:hover {
 
-    background: var(--accent-dark) !important;
-
+    background: var(--button-dark) !important;
 }
 
+
 .profile-nav {
-
     padding: 0 !important;
-
 }
 
 .profile-nav img {
@@ -208,7 +190,6 @@ a {
     border-radius: 50%;
 
     border: 3px solid #e6ebf2;
-
 }
 
 .profile-dropdown {
@@ -220,7 +201,6 @@ a {
     border-radius: 13px;
 
     box-shadow: var(--shadow);
-
 }
 
 .profile-dropdown .dropdown-item {
@@ -230,9 +210,7 @@ a {
     border-radius: 8px;
 
     font-size: 13px;
-
     font-weight: 500;
-
 }
 
 
@@ -261,7 +239,6 @@ a {
         ),
         url("../images/train-bg.jpg")
         center / cover no-repeat;
-
 }
 
 .hero-section::after {
@@ -271,18 +248,15 @@ a {
     position: absolute;
 
     width: 600px;
-
     height: 600px;
 
     border-radius: 50%;
 
     right: -240px;
-
     top: -250px;
 
     background:
         rgba(245, 130, 32, 0.10);
-
 }
 
 .hero-container {
@@ -292,9 +266,7 @@ a {
     z-index: 5;
 
     padding-top: 70px;
-
     padding-bottom: 70px;
-
 }
 
 .hero-content {
@@ -302,7 +274,6 @@ a {
     color: white;
 
     padding-right: 50px;
-
 }
 
 .hero-badge {
@@ -330,7 +301,6 @@ a {
     margin-bottom: 20px;
 
     backdrop-filter: blur(10px);
-
 }
 
 .hero-content h1 {
@@ -342,7 +312,6 @@ a {
     line-height: 1.08;
 
     margin-bottom: 20px;
-
 }
 
 .hero-content h1 span {
@@ -350,7 +319,6 @@ a {
     display: block;
 
     color: var(--accent);
-
 }
 
 .hero-content > p {
@@ -363,7 +331,6 @@ a {
 
     color:
         rgba(255, 255, 255, 0.78);
-
 }
 
 .hero-features {
@@ -375,7 +342,6 @@ a {
     gap: 22px;
 
     margin-top: 28px;
-
 }
 
 .hero-features div {
@@ -389,13 +355,11 @@ a {
     font-size: 12px;
 
     font-weight: 600;
-
 }
 
 .hero-features i {
 
     color: var(--accent);
-
 }
 
 
@@ -413,7 +377,6 @@ a {
 
     box-shadow:
         0 25px 65px rgba(0, 0, 0, 0.22);
-
 }
 
 .ticket-heading {
@@ -425,13 +388,11 @@ a {
     align-items: center;
 
     margin-bottom: 25px;
-
 }
 
 .ticket-heading-icon {
 
     width: 48px;
-
     height: 48px;
 
     flex-shrink: 0;
@@ -447,7 +408,6 @@ a {
     color: white;
 
     background: var(--primary);
-
 }
 
 .ticket-heading h2 {
@@ -459,7 +419,6 @@ a {
     font-weight: 800;
 
     margin: 0 0 3px;
-
 }
 
 .ticket-heading p {
@@ -469,7 +428,6 @@ a {
     color: var(--muted);
 
     margin: 0;
-
 }
 
 
@@ -489,7 +447,6 @@ a {
     align-items: end;
 
     gap: 10px;
-
 }
 
 .field {
@@ -511,7 +468,6 @@ a {
     margin-bottom: 14px;
 
     transition: 0.25s ease;
-
 }
 
 .field:focus-within {
@@ -522,7 +478,6 @@ a {
 
     box-shadow:
         0 0 0 3px rgba(23, 71, 124, 0.10);
-
 }
 
 .field .icon {
@@ -538,7 +493,6 @@ a {
     color: var(--primary);
 
     font-size: 15px;
-
 }
 
 .field label {
@@ -552,7 +506,6 @@ a {
     font-weight: 600;
 
     margin-bottom: 2px;
-
 }
 
 .field input,
@@ -571,7 +524,6 @@ a {
     font-size: 13px;
 
     font-weight: 600;
-
 }
 
 .field input::placeholder {
@@ -579,8 +531,12 @@ a {
     font-weight: 500;
 
     color: #a2aabd;
-
 }
+
+
+/* =========================================================
+   REVERSE BUTTON - CHANGED TO BLUE
+========================================================= */
 
 .reverse-btn {
 
@@ -594,22 +550,20 @@ a {
 
     border: none;
 
-    background: #edf3fa;
+    background: #eff6ff;
 
-    color: var(--primary);
+    color: var(--button);
 
     transition: 0.3s ease;
-
 }
 
 .reverse-btn:hover {
 
     color: white;
 
-    background: var(--primary);
+    background: var(--button);
 
     transform: rotate(180deg);
-
 }
 
 
@@ -630,7 +584,6 @@ a {
         16px;
 
     font-size: 11px;
-
 }
 
 .booking-options label {
@@ -642,13 +595,11 @@ a {
     gap: 7px;
 
     cursor: pointer;
-
 }
 
 .booking-options input {
 
     accent-color: var(--primary);
-
 }
 
 .secure-text {
@@ -656,12 +607,11 @@ a {
     color: var(--success);
 
     font-weight: 600;
-
 }
 
 
 /* =========================================================
-   SEARCH BUTTON
+   SEARCH BUTTON - CHANGED TO BLUE
 ========================================================= */
 
 .search-btn {
@@ -685,8 +635,8 @@ a {
     background:
         linear-gradient(
             135deg,
-            var(--accent),
-            #ff9b42
+            var(--button),
+            var(--button-light)
         );
 
     color: white;
@@ -696,10 +646,9 @@ a {
     font-weight: 700;
 
     box-shadow:
-        0 10px 25px rgba(245, 130, 32, 0.28);
+        0 10px 25px rgba(37, 99, 235, 0.28);
 
     transition: 0.25s ease;
-
 }
 
 .search-btn:hover {
@@ -709,10 +658,9 @@ a {
     background:
         linear-gradient(
             135deg,
-            var(--accent-dark),
-            var(--accent)
+            var(--button-dark),
+            var(--button)
         );
-
 }
 
 
@@ -725,7 +673,6 @@ a {
     padding: 90px 0;
 
     background: white;
-
 }
 
 .section-heading {
@@ -737,7 +684,6 @@ a {
     margin:
         0 auto
         45px;
-
 }
 
 .section-heading span {
@@ -753,7 +699,6 @@ a {
     letter-spacing: 2px;
 
     margin-bottom: 9px;
-
 }
 
 .section-heading h2 {
@@ -765,7 +710,6 @@ a {
     font-weight: 800;
 
     margin-bottom: 10px;
-
 }
 
 .section-heading p {
@@ -775,7 +719,6 @@ a {
     font-size: 13px;
 
     line-height: 1.7;
-
 }
 
 .service-card {
@@ -793,7 +736,6 @@ a {
     background: white;
 
     transition: 0.3s ease;
-
 }
 
 .service-card:hover {
@@ -804,7 +746,6 @@ a {
 
     box-shadow:
         0 20px 50px rgba(13, 43, 82, 0.13);
-
 }
 
 .service-icon {
@@ -830,7 +771,6 @@ a {
     margin-bottom: 20px;
 
     transition: 0.25s;
-
 }
 
 .service-card:hover .service-icon {
@@ -838,7 +778,6 @@ a {
     color: white;
 
     background: var(--primary);
-
 }
 
 .service-card h3 {
@@ -848,7 +787,6 @@ a {
     font-size: 16px;
 
     font-weight: 700;
-
 }
 
 .service-card p {
@@ -860,7 +798,6 @@ a {
     font-size: 12px;
 
     line-height: 1.7;
-
 }
 
 .service-card span {
@@ -876,7 +813,6 @@ a {
     font-size: 11px;
 
     font-weight: 700;
-
 }
 
 
@@ -889,7 +825,6 @@ a {
     padding: 90px 0;
 
     background: var(--background);
-
 }
 
 .process-wrapper {
@@ -899,7 +834,6 @@ a {
     align-items: flex-start;
 
     justify-content: center;
-
 }
 
 .process-step {
@@ -909,7 +843,6 @@ a {
     text-align: center;
 
     position: relative;
-
 }
 
 .process-number {
@@ -921,7 +854,6 @@ a {
     font-weight: 800;
 
     margin-bottom: 10px;
-
 }
 
 .process-icon {
@@ -955,7 +887,6 @@ a {
 
     box-shadow:
         0 10px 25px rgba(13, 43, 82, 0.18);
-
 }
 
 .process-step h4 {
@@ -965,7 +896,6 @@ a {
     font-size: 14px;
 
     font-weight: 700;
-
 }
 
 .process-step p {
@@ -975,7 +905,6 @@ a {
     font-size: 11px;
 
     line-height: 1.6;
-
 }
 
 .process-line {
@@ -987,7 +916,6 @@ a {
     margin-top: 48px;
 
     background: #dce2eb;
-
 }
 
 
@@ -1007,7 +935,6 @@ a {
             var(--primary-dark),
             var(--primary)
         );
-
 }
 
 .stat-item i {
@@ -1017,7 +944,6 @@ a {
     font-size: 23px;
 
     margin-bottom: 10px;
-
 }
 
 .stat-item h3 {
@@ -1027,7 +953,6 @@ a {
     font-weight: 800;
 
     margin: 0;
-
 }
 
 .stat-item p {
@@ -1038,7 +963,6 @@ a {
     font-size: 11px;
 
     margin: 4px 0 0;
-
 }
 
 
@@ -1055,7 +979,6 @@ a {
     background: #07172d;
 
     color: white;
-
 }
 
 .footer-brand {
@@ -1065,7 +988,6 @@ a {
     align-items: center;
 
     gap: 13px;
-
 }
 
 .footer-brand h3 {
@@ -1075,7 +997,6 @@ a {
     font-size: 20px;
 
     font-weight: 800;
-
 }
 
 .footer-brand span {
@@ -1084,7 +1005,6 @@ a {
         rgba(255, 255, 255, 0.55);
 
     font-size: 10px;
-
 }
 
 .footer-about {
@@ -1099,7 +1019,6 @@ a {
     line-height: 1.8;
 
     margin-top: 20px;
-
 }
 
 .main-footer h4 {
@@ -1109,7 +1028,6 @@ a {
     font-weight: 700;
 
     margin-bottom: 20px;
-
 }
 
 .main-footer ul {
@@ -1119,7 +1037,6 @@ a {
     margin: 0;
 
     list-style: none;
-
 }
 
 .main-footer li {
@@ -1130,7 +1047,6 @@ a {
     font-size: 11px;
 
     margin-bottom: 12px;
-
 }
 
 .main-footer li a {
@@ -1139,13 +1055,11 @@ a {
         rgba(255, 255, 255, 0.56);
 
     transition: 0.2s;
-
 }
 
 .main-footer li a:hover {
 
     color: var(--accent);
-
 }
 
 .social-icons {
@@ -1155,7 +1069,6 @@ a {
     gap: 8px;
 
     margin-top: 18px;
-
 }
 
 .social-icons a {
@@ -1178,7 +1091,6 @@ a {
         rgba(255, 255, 255, 0.08);
 
     transition: 0.25s;
-
 }
 
 .social-icons a:hover {
@@ -1186,7 +1098,6 @@ a {
     background: var(--accent);
 
     transform: translateY(-3px);
-
 }
 
 .contact-list i {
@@ -1194,7 +1105,6 @@ a {
     width: 20px;
 
     color: var(--accent);
-
 }
 
 .footer-bottom {
@@ -1211,7 +1121,6 @@ a {
 
     border-top:
         1px solid rgba(255, 255, 255, 0.08);
-
 }
 
 .footer-bottom p {
@@ -1222,7 +1131,6 @@ a {
         rgba(255, 255, 255, 0.45);
 
     font-size: 10px;
-
 }
 
 
@@ -1248,7 +1156,6 @@ a {
     pointer-events: none;
 
     transition: 0.3s;
-
 }
 
 .backdrop.active {
@@ -1256,7 +1163,6 @@ a {
     opacity: 1;
 
     pointer-events: auto;
-
 }
 
 
@@ -1302,7 +1208,6 @@ a {
     transition:
         transform 0.3s ease,
         opacity 0.3s ease;
-
 }
 
 .wrapper.active-popup {
@@ -1316,13 +1221,11 @@ a {
     transform:
         translate(-50%, -50%)
         scale(1);
-
 }
 
 .wrapper.active {
 
     min-height: 610px;
-
 }
 
 .icon-close {
@@ -1354,7 +1257,6 @@ a {
     z-index: 10;
 
     transition: 0.25s;
-
 }
 
 .icon-close:hover {
@@ -1362,7 +1264,6 @@ a {
     color: white;
 
     background: var(--primary);
-
 }
 
 .form-box {
@@ -1373,7 +1274,6 @@ a {
         45px
         40px
         35px;
-
 }
 
 .form-box.register {
@@ -1383,26 +1283,22 @@ a {
     top: 0;
 
     transform: translateX(100%);
-
 }
 
 .wrapper.active .form-box.login {
 
     transform: translateX(-100%);
-
 }
 
 .wrapper.active .form-box.register {
 
     transform: translateX(0);
-
 }
 
 .form-box.login,
 .form-box.register {
 
     transition: transform 0.35s ease;
-
 }
 
 .form-heading-icon {
@@ -1433,7 +1329,6 @@ a {
         );
 
     font-size: 20px;
-
 }
 
 .form-box h2 {
@@ -1445,7 +1340,6 @@ a {
     font-size: 24px;
 
     font-weight: 800;
-
 }
 
 .form-subtitle {
@@ -1457,7 +1351,6 @@ a {
     font-size: 11px;
 
     margin-bottom: 22px;
-
 }
 
 .input-box {
@@ -1472,7 +1365,6 @@ a {
         1px solid var(--border);
 
     border-radius: 10px;
-
 }
 
 .input-box .icon {
@@ -1486,7 +1378,6 @@ a {
     transform: translateY(-50%);
 
     color: var(--primary);
-
 }
 
 .input-box input {
@@ -1508,7 +1399,6 @@ a {
     background: transparent;
 
     font-size: 13px;
-
 }
 
 .input-box label {
@@ -1528,7 +1418,6 @@ a {
     font-size: 12px;
 
     transition: 0.2s;
-
 }
 
 .input-box input:focus ~ label,
@@ -1539,7 +1428,6 @@ a {
     font-size: 8px;
 
     color: var(--primary);
-
 }
 
 .remembar-forgot {
@@ -1549,14 +1437,17 @@ a {
     font-size: 10px;
 
     margin-bottom: 15px;
-
 }
 
 .remembar-forgot input {
 
     accent-color: var(--primary);
-
 }
+
+
+/* =========================================================
+   LOGIN / REGISTER BUTTONS - CHANGED TO BLUE
+========================================================= */
 
 .login-btn,
 .register-btn {
@@ -1569,8 +1460,7 @@ a {
 
     border-radius: 9px;
 
-    background:
-        var(--primary);
+    background: var(--button);
 
     color: white;
 
@@ -1578,6 +1468,7 @@ a {
 
     font-weight: 700;
 
+    transition: 0.25s ease;
 }
 
 .login-btn:hover,
@@ -1585,9 +1476,7 @@ a {
 
     color: white;
 
-    background:
-        var(--primary-light);
-
+    background: var(--button-dark);
 }
 
 .login-register {
@@ -1599,7 +1488,6 @@ a {
     font-size: 10px;
 
     color: var(--muted);
-
 }
 
 .login-register a {
@@ -1607,7 +1495,6 @@ a {
     color: var(--accent);
 
     font-weight: 700;
-
 }
 
 
@@ -1639,7 +1526,6 @@ a {
     border-radius: 12px;
 
     box-shadow: var(--shadow);
-
 }
 
 .station-suggestions .suggestion-title {
@@ -1657,7 +1543,6 @@ a {
     letter-spacing: 1px;
 
     background: #f8fafc;
-
 }
 
 .station-suggestions .suggestion-item {
@@ -1671,7 +1556,6 @@ a {
     font-size: 11px;
 
     border-bottom: 1px solid #f1f3f6;
-
 }
 
 .station-suggestions .suggestion-item:hover {
@@ -1679,7 +1563,6 @@ a {
     background: #edf4fc;
 
     color: var(--primary);
-
 }
 
 
@@ -1694,25 +1577,21 @@ a {
 
         padding:
             12px 0;
-
     }
 
     .navbar-collapse {
 
         padding-top: 15px;
-
     }
 
     .navbar .nav-link {
 
         margin-bottom: 4px;
-
     }
 
     .hero-section {
 
         min-height: auto;
-
     }
 
     .hero-content {
@@ -1722,20 +1601,17 @@ a {
         margin-bottom: 45px;
 
         text-align: center;
-
     }
 
     .hero-content > p {
 
         margin:
             0 auto;
-
     }
 
     .hero-features {
 
         justify-content: center;
-
     }
 
     .process-wrapper {
@@ -1743,13 +1619,11 @@ a {
         flex-wrap: wrap;
 
         gap: 30px;
-
     }
 
     .process-line {
 
         display: none;
-
     }
 
 }
@@ -1761,13 +1635,11 @@ a {
     .brand-area small {
 
         display: none;
-
     }
 
     .brand-name {
 
         font-size: 17px;
-
     }
 
     .hero-container {
@@ -1775,31 +1647,26 @@ a {
         padding-top: 45px;
 
         padding-bottom: 45px;
-
     }
 
     .hero-content h1 {
 
         font-size: 36px;
-
     }
 
     .hero-content > p {
 
         font-size: 13px;
-
     }
 
     .hero-features {
 
         gap: 13px;
-
     }
 
     .ticket-box {
 
         padding: 20px;
-
     }
 
     .station-row {
@@ -1807,7 +1674,6 @@ a {
         grid-template-columns: 1fr;
 
         gap: 0;
-
     }
 
     .reverse-btn {
@@ -1817,13 +1683,11 @@ a {
             10px;
 
         transform: rotate(90deg);
-
     }
 
     .reverse-btn:hover {
 
         transform: rotate(270deg);
-
     }
 
     .booking-options {
@@ -1833,13 +1697,11 @@ a {
         flex-direction: column;
 
         gap: 9px;
-
     }
 
     .section-heading h2 {
 
         font-size: 24px;
-
     }
 
     .quick-services,
@@ -1847,13 +1709,11 @@ a {
 
         padding:
             65px 0;
-
     }
 
     .process-step {
 
         width: 44%;
-
     }
 
     .footer-bottom {
@@ -1861,13 +1721,11 @@ a {
         flex-direction: column;
 
         text-align: center;
-
     }
 
     .wrapper {
 
         width: calc(100% - 24px);
-
     }
 
     .form-box {
@@ -1876,7 +1734,6 @@ a {
             45px
             25px
             30px;
-
     }
 
 }
