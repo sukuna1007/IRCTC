@@ -34,7 +34,6 @@
 
     --shadow-lg:
         0 18px 45px rgba(18, 59, 69, 0.13);
-
 }
 
 
@@ -43,15 +42,11 @@
 ========================================================= */
 
 * {
-
     box-sizing: border-box;
-
 }
 
 html {
-
     scroll-behavior: smooth;
-
 }
 
 body {
@@ -67,20 +62,15 @@ body {
     color: var(--text);
 
     background: var(--background);
-
 }
 
 a {
-
     text-decoration: none;
-
 }
 
 button,
 input {
-
     font-family: inherit;
-
 }
 
 
@@ -93,7 +83,6 @@ input {
     display: flex;
 
     min-height: 100vh;
-
 }
 
 
@@ -134,7 +123,6 @@ input {
     box-shadow:
         5px 0 28px
         rgba(8, 42, 50, 0.15);
-
 }
 
 
@@ -157,13 +145,10 @@ input {
         7px;
 
     color: white;
-
 }
 
 .admin-brand:hover {
-
     color: white;
-
 }
 
 .admin-brand-icon {
@@ -193,8 +178,7 @@ input {
         0 8px 20px
         rgba(230, 162, 60, 0.28);
 
-    font-size: 17px;
-
+    font-size: 19px;
 }
 
 .admin-brand strong {
@@ -203,10 +187,9 @@ input {
 
     color: white;
 
-    font-size: 15px;
+    font-size: 17px;
 
     font-weight: 800;
-
 }
 
 .admin-brand small {
@@ -218,10 +201,9 @@ input {
     color:
         rgba(255, 255, 255, 0.48);
 
-    font-size: 7px;
+    font-size: 9px;
 
     font-weight: 500;
-
 }
 
 
@@ -239,18 +221,16 @@ input {
     color:
         rgba(255, 255, 255, 0.31);
 
-    font-size: 7px;
+    font-size: 9px;
 
     font-weight: 800;
 
     letter-spacing: 1.4px;
-
 }
 
 .sidebar-secondary-label {
 
     margin-top: 22px;
-
 }
 
 
@@ -265,7 +245,6 @@ input {
     flex-direction: column;
 
     gap: 4px;
-
 }
 
 .admin-link {
@@ -289,12 +268,11 @@ input {
     color:
         rgba(255, 255, 255, 0.66);
 
-    font-size: 10px;
+    font-size: 12px;
 
     font-weight: 600;
 
     transition: 0.2s;
-
 }
 
 .admin-link:hover {
@@ -305,7 +283,6 @@ input {
         rgba(255, 255, 255, 0.075);
 
     transform: translateX(2px);
-
 }
 
 .admin-link.active {
@@ -322,7 +299,6 @@ input {
     box-shadow:
         inset 3px 0 0
         var(--orange);
-
 }
 
 .admin-link-icon {
@@ -345,8 +321,7 @@ input {
     background:
         rgba(255, 255, 255, 0.06);
 
-    font-size: 10px;
-
+    font-size: 12px;
 }
 
 .admin-link.active
@@ -356,7 +331,6 @@ input {
 
     background:
         rgba(230, 162, 60, 0.14);
-
 }
 
 
@@ -369,7 +343,6 @@ input {
     margin-top: auto;
 
     padding-top: 25px;
-
 }
 
 .sidebar-admin-user {
@@ -393,7 +366,6 @@ input {
 
     background:
         rgba(255, 255, 255, 0.05);
-
 }
 
 .sidebar-user-icon {
@@ -415,8 +387,7 @@ input {
     background:
         rgba(230, 162, 60, 0.12);
 
-    font-size: 12px;
-
+    font-size: 14px;
 }
 
 .sidebar-admin-user strong {
@@ -429,12 +400,11 @@ input {
 
     color: white;
 
-    font-size: 8px;
+    font-size: 10px;
 
     text-overflow: ellipsis;
 
     white-space: nowrap;
-
 }
 
 .sidebar-admin-user small {
@@ -446,8 +416,7 @@ input {
     color:
         rgba(255, 255, 255, 0.40);
 
-    font-size: 6px;
-
+    font-size: 8px;
 }
 
 
@@ -480,12 +449,11 @@ input {
     background:
         rgba(217, 83, 79, 0.10);
 
-    font-size: 8px;
+    font-size: 10px;
 
     font-weight: 700;
 
     transition: 0.2s;
-
 }
 
 .admin-logout-btn:hover {
@@ -495,7 +463,6 @@ input {
     border-color: var(--red);
 
     background: var(--red);
-
 }
 
 
@@ -515,7 +482,6 @@ input {
 
     margin-left:
         var(--sidebar-width);
-
 }
 
 
@@ -542,7 +508,6 @@ input {
         1px solid var(--border);
 
     background: white;
-
 }
 
 .topbar-label {
@@ -553,12 +518,11 @@ input {
 
     color: var(--orange);
 
-    font-size: 7px;
+    font-size: 9px;
 
     font-weight: 800;
 
     letter-spacing: 1.5px;
-
 }
 
 .admin-topbar h1 {
@@ -570,10 +534,9 @@ input {
 
     color: var(--navy);
 
-    font-size: 27px;
+    font-size: 29px;
 
     font-weight: 800;
-
 }
 
 .admin-topbar p {
@@ -582,10 +545,9 @@ input {
 
     color: var(--muted);
 
-    font-size: 8px;
+    font-size: 10px;
 
     line-height: 1.6;
-
 }
 
 
@@ -613,7 +575,6 @@ input {
     border-radius: 12px;
 
     background: #f7fbfb;
-
 }
 
 .admin-user-icon {
@@ -634,8 +595,7 @@ input {
 
     background: #e4f1f2;
 
-    font-size: 13px;
-
+    font-size: 15px;
 }
 
 .admin-user small {
@@ -644,8 +604,7 @@ input {
 
     color: var(--muted);
 
-    font-size: 6px;
-
+    font-size: 8px;
 }
 
 .admin-user strong {
@@ -660,14 +619,13 @@ input {
 
     color: var(--navy);
 
-    font-size: 8px;
+    font-size: 10px;
 
     font-weight: 800;
 
     text-overflow: ellipsis;
 
     white-space: nowrap;
-
 }
 
 
@@ -682,20 +640,17 @@ input {
         32px;
 
     scroll-margin-top: 15px;
-
 }
 
 .admin-section + .admin-section {
 
     border-top:
         1px solid #dfe8e9;
-
 }
 
 .section-heading {
 
     margin-bottom: 21px;
-
 }
 
 .section-heading-actions {
@@ -706,7 +661,6 @@ input {
     justify-content: space-between;
 
     gap: 20px;
-
 }
 
 .section-heading > div > span {
@@ -715,12 +669,11 @@ input {
 
     color: var(--orange);
 
-    font-size: 7px;
+    font-size: 9px;
 
     font-weight: 800;
 
     letter-spacing: 1.4px;
-
 }
 
 .section-heading h2 {
@@ -732,10 +685,9 @@ input {
 
     color: var(--navy);
 
-    font-size: 20px;
+    font-size: 23px;
 
     font-weight: 800;
-
 }
 
 .section-heading p {
@@ -744,10 +696,9 @@ input {
 
     color: var(--muted);
 
-    font-size: 8px;
+    font-size: 10px;
 
     line-height: 1.6;
-
 }
 
 
@@ -763,7 +714,6 @@ input {
         repeat(4, minmax(0, 1fr));
 
     gap: 15px;
-
 }
 
 .stat-card {
@@ -789,7 +739,6 @@ input {
         rgba(18, 59, 69, 0.045);
 
     transition: 0.2s;
-
 }
 
 .stat-card::before {
@@ -805,25 +754,18 @@ input {
     height: 3px;
 
     background: var(--blue);
-
 }
 
 .stat-card:nth-child(2)::before {
-
     background: var(--orange);
-
 }
 
 .stat-card:nth-child(3)::before {
-
     background: var(--purple);
-
 }
 
 .stat-card:nth-child(4)::before {
-
     background: var(--green);
-
 }
 
 .stat-card:hover {
@@ -831,7 +773,6 @@ input {
     transform: translateY(-3px);
 
     box-shadow: var(--shadow);
-
 }
 
 .stat-card-top {
@@ -842,7 +783,6 @@ input {
     justify-content: space-between;
 
     margin-bottom: 17px;
-
 }
 
 .stat-icon {
@@ -857,8 +797,7 @@ input {
 
     border-radius: 11px;
 
-    font-size: 14px;
-
+    font-size: 16px;
 }
 
 .stat-icon.users {
@@ -866,7 +805,6 @@ input {
     color: var(--blue);
 
     background: #e6f3f5;
-
 }
 
 .stat-icon.trains {
@@ -874,7 +812,6 @@ input {
     color: var(--orange);
 
     background: #fff4e5;
-
 }
 
 .stat-icon.bookings {
@@ -882,7 +819,6 @@ input {
     color: var(--purple);
 
     background: #f1ecfa;
-
 }
 
 .stat-icon.revenue {
@@ -890,7 +826,6 @@ input {
     color: var(--green);
 
     background: #e9f7f0;
-
 }
 
 .stat-badge {
@@ -905,10 +840,9 @@ input {
 
     background: #eff4f4;
 
-    font-size: 6px;
+    font-size: 8px;
 
     font-weight: 700;
-
 }
 
 .stat-card > p {
@@ -920,10 +854,9 @@ input {
 
     color: var(--muted);
 
-    font-size: 7px;
+    font-size: 9px;
 
     font-weight: 600;
-
 }
 
 .stat-card h3 {
@@ -935,10 +868,9 @@ input {
 
     color: var(--navy);
 
-    font-size: 27px;
+    font-size: 29px;
 
     font-weight: 800;
-
 }
 
 .stat-footer {
@@ -950,8 +882,7 @@ input {
 
     color: #909fa2;
 
-    font-size: 6px;
-
+    font-size: 8px;
 }
 
 .stat-footer i {
@@ -959,7 +890,6 @@ input {
     margin-right: 4px;
 
     color: var(--orange);
-
 }
 
 
@@ -977,7 +907,6 @@ input {
     gap: 15px;
 
     margin-top: 15px;
-
 }
 
 .overview-card {
@@ -1003,7 +932,6 @@ input {
     box-shadow:
         0 5px 18px
         rgba(18, 59, 69, 0.04);
-
 }
 
 .overview-icon {
@@ -1020,8 +948,7 @@ input {
 
     border-radius: 13px;
 
-    font-size: 16px;
-
+    font-size: 18px;
 }
 
 .overview-icon.confirmed {
@@ -1029,7 +956,6 @@ input {
     color: var(--green);
 
     background: #e9f7f0;
-
 }
 
 .overview-icon.administrator {
@@ -1037,7 +963,6 @@ input {
     color: var(--blue);
 
     background: #e5f1f3;
-
 }
 
 .overview-card span {
@@ -1046,12 +971,11 @@ input {
 
     color: var(--orange);
 
-    font-size: 6px;
+    font-size: 8px;
 
     font-weight: 800;
 
     letter-spacing: 1.2px;
-
 }
 
 .overview-card h3 {
@@ -1062,12 +986,11 @@ input {
 
     color: var(--navy);
 
-    font-size: 15px;
+    font-size: 17px;
 
     font-weight: 800;
 
     word-break: break-word;
-
 }
 
 .overview-card p {
@@ -1076,8 +999,7 @@ input {
 
     color: var(--muted);
 
-    font-size: 7px;
-
+    font-size: 9px;
 }
 
 
@@ -1107,12 +1029,11 @@ input {
 
     color: white;
 
-    font-size: 8px;
+    font-size: 10px;
 
     font-weight: 700;
 
     transition: 0.2s;
-
 }
 
 .admin-primary-btn {
@@ -1127,7 +1048,6 @@ input {
     box-shadow:
         0 6px 15px
         rgba(18, 59, 69, 0.16);
-
 }
 
 .admin-primary-btn:hover {
@@ -1137,7 +1057,6 @@ input {
     background: var(--navy-light);
 
     transform: translateY(-1px);
-
 }
 
 .admin-success-btn {
@@ -1152,7 +1071,6 @@ input {
     box-shadow:
         0 6px 15px
         rgba(46, 155, 114, 0.16);
-
 }
 
 .admin-success-btn:hover {
@@ -1162,7 +1080,6 @@ input {
     background: #25815e;
 
     transform: translateY(-1px);
-
 }
 
 
@@ -1184,7 +1101,6 @@ input {
     box-shadow:
         0 6px 22px
         rgba(18, 59, 69, 0.045);
-
 }
 
 .table-card-header {
@@ -1212,10 +1128,9 @@ input {
             #ffffff
         );
 
-    font-size: 9px;
+    font-size: 11px;
 
     font-weight: 800;
-
 }
 
 .table-card-header i {
@@ -1223,17 +1138,15 @@ input {
     margin-right: 5px;
 
     color: var(--orange);
-
 }
 
 .table-card-header > span {
 
     color: var(--muted);
 
-    font-size: 6px;
+    font-size: 8px;
 
     font-weight: 600;
-
 }
 
 
@@ -1246,7 +1159,6 @@ input {
     min-width: 950px;
 
     margin: 0;
-
 }
 
 .admin-table thead th {
@@ -1262,7 +1174,7 @@ input {
 
     background: #f1f6f6;
 
-    font-size: 7px;
+    font-size: 9px;
 
     font-weight: 800;
 
@@ -1271,7 +1183,6 @@ input {
     text-transform: uppercase;
 
     white-space: nowrap;
-
 }
 
 .admin-table tbody td {
@@ -1284,22 +1195,21 @@ input {
 
     color: #4c6266;
 
-    font-size: 7px;
+    font-size: 9px;
+
+    line-height: 1.5;
 
     vertical-align: middle;
-
 }
 
 .admin-table tbody tr {
 
     transition: 0.15s;
-
 }
 
 .admin-table tbody tr:hover {
 
     background: #f7fbfb;
-
 }
 
 .table-loading {
@@ -1309,7 +1219,6 @@ input {
 
     color:
         var(--muted) !important;
-
 }
 
 
@@ -1329,22 +1238,17 @@ input {
 
     border-radius: 6px;
 
-    font-size: 6px;
+    font-size: 8px;
 
     font-weight: 700;
-
 }
 
 .admin-table .btn-primary {
-
     background: var(--blue);
-
 }
 
 .admin-table .btn-success {
-
     background: var(--green);
-
 }
 
 .admin-table .btn-warning {
@@ -1352,19 +1256,14 @@ input {
     color: white;
 
     background: var(--orange);
-
 }
 
 .admin-table .btn-danger {
-
     background: var(--red);
-
 }
 
 .admin-table .btn-secondary {
-
     background: #75888c;
-
 }
 
 
@@ -1388,10 +1287,9 @@ input {
 
     border-radius: 20px;
 
-    font-size: 6px;
+    font-size: 8px;
 
     font-weight: 700;
-
 }
 
 .badge-admin,
@@ -1400,7 +1298,6 @@ input {
     color: var(--purple);
 
     background: #f1ecfa;
-
 }
 
 .badge-user,
@@ -1409,7 +1306,6 @@ input {
     color: var(--blue);
 
     background: #e6f3f5;
-
 }
 
 .badge-confirmed,
@@ -1419,7 +1315,6 @@ input {
     color: var(--green);
 
     background: #e9f7f0;
-
 }
 
 .badge-cancelled,
@@ -1428,7 +1323,6 @@ input {
     color: var(--red);
 
     background: #fdecec;
-
 }
 
 .badge-pending,
@@ -1437,7 +1331,6 @@ input {
     color: #9c701d;
 
     background: #fff5df;
-
 }
 
 
@@ -1456,7 +1349,6 @@ input {
     box-shadow:
         0 28px 75px
         rgba(8, 42, 50, 0.26);
-
 }
 
 .admin-modal .modal-header {
@@ -1474,7 +1366,6 @@ input {
             #f5fafa,
             white
         );
-
 }
 
 .modal-label {
@@ -1485,28 +1376,25 @@ input {
 
     color: var(--orange);
 
-    font-size: 6px;
+    font-size: 8px;
 
     font-weight: 800;
 
     letter-spacing: 1.4px;
-
 }
 
 .admin-modal .modal-title {
 
     color: var(--navy);
 
-    font-size: 18px;
+    font-size: 20px;
 
     font-weight: 800;
-
 }
 
 .admin-modal .modal-body {
 
     padding: 24px;
-
 }
 
 .admin-modal .modal-footer {
@@ -1519,7 +1407,6 @@ input {
         1px solid var(--border);
 
     background: #f7fbfb;
-
 }
 
 
@@ -1539,18 +1426,16 @@ input {
 
     color: var(--navy);
 
-    font-size: 8px;
+    font-size: 10px;
 
     font-weight: 700;
-
 }
 
 .admin-modal .form-label i {
 
     color: var(--orange);
 
-    font-size: 8px;
-
+    font-size: 10px;
 }
 
 .admin-modal .form-control {
@@ -1570,18 +1455,16 @@ input {
 
     background: #f8fbfb;
 
-    font-size: 8px;
+    font-size: 10px;
 
     box-shadow: none !important;
 
     transition: 0.2s;
-
 }
 
 .admin-modal .form-control::placeholder {
 
     color: #9babad;
-
 }
 
 .admin-modal .form-control:focus {
@@ -1593,7 +1476,6 @@ input {
     box-shadow:
         0 0 0 3px
         rgba(47, 130, 146, 0.08) !important;
-
 }
 
 
@@ -1614,10 +1496,9 @@ input {
 
     border-radius: 8px;
 
-    font-size: 8px;
+    font-size: 10px;
 
     font-weight: 700;
-
 }
 
 .modal-cancel-btn {
@@ -1625,7 +1506,6 @@ input {
     color: #556a6e;
 
     background: #eaf0f0;
-
 }
 
 .modal-cancel-btn:hover {
@@ -1633,7 +1513,6 @@ input {
     color: #34484c;
 
     background: #dfe8e8;
-
 }
 
 .modal-save-btn {
@@ -1646,7 +1525,6 @@ input {
             var(--orange),
             #efb657
         );
-
 }
 
 .modal-save-btn:hover {
@@ -1654,7 +1532,6 @@ input {
     color: white;
 
     background: var(--orange-dark);
-
 }
 
 
@@ -1682,8 +1559,7 @@ input {
 
     background: white;
 
-    font-size: 7px;
-
+    font-size: 9px;
 }
 
 
@@ -1694,7 +1570,6 @@ input {
 .admin-sidebar::-webkit-scrollbar {
 
     width: 5px;
-
 }
 
 .admin-sidebar::-webkit-scrollbar-thumb {
@@ -1703,19 +1578,16 @@ input {
 
     background:
         rgba(255, 255, 255, 0.14);
-
 }
 
 .table-responsive::-webkit-scrollbar {
 
     height: 7px;
-
 }
 
 .table-responsive::-webkit-scrollbar-track {
 
     background: #f0f5f5;
-
 }
 
 .table-responsive::-webkit-scrollbar-thumb {
@@ -1723,7 +1595,6 @@ input {
     border-radius: 20px;
 
     background: #b9cccc;
-
 }
 
 
@@ -1737,9 +1608,7 @@ input {
 
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
-
     }
-
 }
 
 
@@ -1748,14 +1617,13 @@ input {
     :root {
 
         --sidebar-width: 210px;
-
     }
 
     .admin-sidebar {
 
         padding-left: 11px;
-        padding-right: 11px;
 
+        padding-right: 11px;
     }
 
     .admin-section {
@@ -1763,7 +1631,6 @@ input {
         padding:
             25px
             20px;
-
     }
 
     .admin-topbar {
@@ -1771,7 +1638,6 @@ input {
         padding:
             23px
             20px;
-
     }
 
     .admin-footer {
@@ -1779,9 +1645,7 @@ input {
         padding:
             18px
             20px;
-
     }
-
 }
 
 
@@ -1790,7 +1654,6 @@ input {
     .admin-layout {
 
         display: block;
-
     }
 
     .admin-sidebar {
@@ -1802,13 +1665,11 @@ input {
         min-height: auto;
 
         padding: 18px;
-
     }
 
     .admin-brand {
 
         margin-bottom: 20px;
-
     }
 
     .admin-menu {
@@ -1817,25 +1678,21 @@ input {
 
         grid-template-columns:
             repeat(2, 1fr);
-
     }
 
     .sidebar-label {
 
         grid-column: 1 / -1;
-
     }
 
     .sidebar-secondary-label {
 
         margin-top: 15px;
-
     }
 
     .sidebar-bottom {
 
         margin-top: 20px;
-
     }
 
     .admin-main {
@@ -1843,7 +1700,6 @@ input {
         width: 100%;
 
         margin-left: 0;
-
     }
 
     .admin-topbar {
@@ -1851,13 +1707,11 @@ input {
         align-items: flex-start;
 
         flex-direction: column;
-
     }
 
     .admin-user {
 
         width: 100%;
-
     }
 
     .admin-section {
@@ -1865,14 +1719,12 @@ input {
         padding:
             23px
             15px;
-
     }
 
     .stats-grid,
     .overview-grid {
 
         grid-template-columns: 1fr;
-
     }
 
     .section-heading-actions {
@@ -1880,14 +1732,12 @@ input {
         align-items: flex-start;
 
         flex-direction: column;
-
     }
 
     .admin-primary-btn,
     .admin-success-btn {
 
         width: 100%;
-
     }
 
     .admin-footer {
@@ -1897,9 +1747,7 @@ input {
         flex-direction: column;
 
         text-align: center;
-
     }
-
 }
 
 
@@ -1908,31 +1756,25 @@ input {
     .admin-menu {
 
         grid-template-columns: 1fr;
-
     }
 
     .admin-topbar h1 {
 
-        font-size: 23px;
-
+        font-size: 25px;
     }
 
     .stats-grid {
 
         grid-template-columns: 1fr;
-
     }
 
     .stat-card {
 
         min-height: 155px;
-
     }
 
     .admin-modal .modal-body {
 
         padding: 18px;
-
     }
-
 }
