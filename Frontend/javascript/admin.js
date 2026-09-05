@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     // API BASE URL
     // =====================================================
 
-    const API_BASE = window.location.origin;
+    const API_BASE =
+    "https://irctc-rho.vercel.app/api/admin";
 
 
     // =====================================================
