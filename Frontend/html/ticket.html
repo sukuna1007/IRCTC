@@ -9,17 +9,39 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>E-Ticket - IRCTC</title>
+    <title>E-Ticket - RailConnect</title>
 
 
-    <!-- BOOTSTRAP -->
+    <!-- ==========================================
+         GOOGLE FONT
+    =========================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+    <!-- ==========================================
+         BOOTSTRAP
+    =========================================== -->
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
 
-    <!-- FONT AWESOME -->
+    <!-- ==========================================
+         FONT AWESOME
+    =========================================== -->
 
     <link
         rel="stylesheet"
@@ -28,729 +50,1325 @@
 
     <style>
 
+        :root {
+
+            --navy: #0d2b52;
+            --navy-dark: #071c38;
+            --navy-light: #17477c;
+
+            --orange: #f58220;
+            --orange-dark: #dc6c0c;
+
+            --background: #f5f7fb;
+            --white: #ffffff;
+
+            --text: #182033;
+            --muted: #6e7788;
+            --border: #e2e7ee;
+
+            --green: #198754;
+            --red: #dc3545;
+            --purple: #6f42c1;
+
+            --shadow:
+                0 22px 60px rgba(7, 28, 56, 0.18);
+
+        }
+
+
         /* ==========================================
-           RESET
-        ========================================== */
+           GLOBAL
+        =========================================== */
 
         * {
+
             box-sizing: border-box;
+
         }
 
-        html,
+        html {
+
+            scroll-behavior: smooth;
+
+        }
+
         body {
-            width: 100%;
-            min-height: 100%;
+
             margin: 0;
-            padding: 0;
-        }
 
-
-        /* ==========================================
-           BODY
-        ========================================== */
-
-        body {
             min-height: 100vh;
 
-            font-family: "Segoe UI", Arial, sans-serif;
+            font-family:
+                "Montserrat",
+                sans-serif;
 
-            background: linear-gradient(
-                135deg,
-                #071a33 0%,
-                #0f3f73 55%,
-                #1d70b7 100%
-            );
+            color: var(--text);
 
-            background-attachment: fixed;
+            background:
+                linear-gradient(
+                    135deg,
+                    #071c38,
+                    #0d2b52 50%,
+                    #17477c
+                );
+
+        }
+
+        a {
+
+            text-decoration: none;
+
         }
 
 
         /* ==========================================
-           TICKET WRAPPER
-        ========================================== */
+           PAGE BACKGROUND
+        =========================================== */
 
-        .ticket-wrapper {
-            width: 100%;
-            max-width: 100%;
+        .ticket-page {
 
-            margin: 0;
+            position: relative;
 
-            padding: 25px 8px;
-        }
+            min-height: 100vh;
 
-
-        /* ==========================================
-           MAIN TICKET CARD
-        ========================================== */
-
-        .ticket-card {
-            width: 100%;
-
-            background: #ffffff;
-
-            border: none;
-
-            border-radius: 18px;
+            padding:
+                40px
+                18px;
 
             overflow: hidden;
 
-            box-shadow:
-                0 20px 50px rgba(0, 0, 0, 0.25) !important;
+        }
+
+        .ticket-page::before {
+
+            content: "";
+
+            position: fixed;
+
+            top: -240px;
+            right: -180px;
+
+            width: 520px;
+            height: 520px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(245, 130, 32, 0.10);
+
+        }
+
+        .ticket-page::after {
+
+            content: "";
+
+            position: fixed;
+
+            left: -180px;
+            bottom: -260px;
+
+            width: 500px;
+            height: 500px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.035);
+
         }
 
 
         /* ==========================================
-           TICKET HEADER
-        ========================================== */
+           WRAPPER
+        =========================================== */
 
-        .ticket-header {
+        .ticket-wrapper {
+
             position: relative;
 
-            padding: 24px 32px;
+            z-index: 5;
 
-            background: linear-gradient(
-                135deg,
-                #0b2f5c,
-                #0d63b7
-            );
+            width: 100%;
+            max-width: 1180px;
 
-            color: #ffffff;
+            margin: auto;
 
-            transition: all 0.25s ease;
         }
 
 
+        /* ==========================================
+           TOP BAR
+        =========================================== */
+
+        .page-topbar {
+
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 18px;
+
+            color: white;
+
+        }
+
+        .top-brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+        .top-brand-icon {
+
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--orange),
+                    #ff9a41
+                );
+
+            font-size: 21px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(245, 130, 32, 0.25);
+
+        }
+
+        .top-brand h1 {
+
+            margin: 0;
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+        }
+
+        .top-brand p {
+
+            margin: 2px 0 0;
+
+            color:
+                rgba(255, 255, 255, 0.62);
+
+            font-size: 9px;
+
+        }
+
+        .back-bookings {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                10px
+                15px;
+
+            border-radius: 9px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.15);
+
+            color: white;
+
+            background:
+                rgba(255, 255, 255, 0.07);
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            transition: 0.2s;
+
+        }
+
+        .back-bookings:hover {
+
+            background:
+                rgba(255, 255, 255, 0.13);
+
+            color: white;
+
+        }
+
+
+        /* ==========================================
+           TICKET CARD
+        =========================================== */
+
+        .ticket-card {
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            background: white;
+
+            box-shadow: var(--shadow);
+
+        }
+
+
+        /* ==========================================
+           HEADER
+        =========================================== */
+
+        .ticket-header {
+
+            position: relative;
+
+            padding:
+                26px
+                30px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--navy-dark),
+                    var(--navy-light)
+                );
+
+        }
+
         .ticket-header::before {
+
             content: "";
 
             position: absolute;
 
             top: 0;
             left: 0;
+            right: 0;
 
-            width: 100%;
-            height: 6px;
+            height: 5px;
 
-            background: linear-gradient(
-                90deg,
-                #ff7900,
-                #ffb000
-            );
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--orange),
+                    #ffb14f
+                );
+
         }
-
-
-        /* ==========================================
-           CANCELLED HEADER
-        ========================================== */
 
         .ticket-header.cancelled {
-            background: linear-gradient(
-                135deg,
-                #9f1f2d,
-                #dc3545
-            );
-        }
 
+            background:
+                linear-gradient(
+                    135deg,
+                    #7d1823,
+                    var(--red)
+                );
+
+        }
 
         .ticket-header.cancelled::before {
-            background: #7d1823;
+
+            background: #65131c;
+
         }
 
+        .ticket-header-content {
 
-        /* ==========================================
-           HEADER TITLE
-        ========================================== */
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+        }
+
+        .ticket-title-area {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+        .ticket-main-icon {
+
+            width: 52px;
+            height: 52px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255, 255, 255, 0.10);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.12);
+
+            color: var(--orange);
+
+            font-size: 22px;
+
+        }
 
         .ticket-header h2 {
+
             margin: 0 0 4px;
 
-            font-size: 28px;
+            font-size: 23px;
 
-            font-weight: 750;
+            font-weight: 800;
+
         }
 
+        .ticket-header p {
 
-        .ticket-header h2 i {
-            margin-right: 7px;
+            margin: 0;
 
-            color: #ffad42;
+            color:
+                rgba(255, 255, 255, 0.65);
+
+            font-size: 10px;
+
         }
 
+        .e-ticket-badge {
 
-        .ticket-header small {
-            color: #dce9f6;
+            display: inline-flex;
 
-            font-size: 14px;
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                9px
+                13px;
+
+            border-radius: 8px;
+
+            background:
+                rgba(255, 255, 255, 0.09);
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
         }
 
 
         /* ==========================================
-           MAIN CONTENT
-        ========================================== */
+           CONTENT
+        =========================================== */
 
-        .ticket-card > .p-4 {
-            background: #ffffff;
+        .ticket-content {
+
+            padding:
+                34px;
+
         }
 
 
         /* ==========================================
-           BOOKING STATUS
-        ========================================== */
+           STATUS AREA
+        =========================================== */
+
+        .ticket-summary {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                minmax(250px, 360px);
+
+            gap: 24px;
+
+            align-items: stretch;
+
+            margin-bottom: 28px;
+
+        }
+
+        .status-box {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            padding:
+                22px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 15px;
+
+            background: #fbfcfe;
+
+        }
+
+        .status-icon-box {
+
+            width: 58px;
+            height: 58px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            color: var(--green);
+
+            background: #eaf8f0;
+
+            font-size: 23px;
+
+        }
 
         #bookingStatusTitle {
-            margin-bottom: 18px;
 
-            font-size: 25px;
+            margin: 0 0 4px;
 
-            font-weight: 750;
+            font-size: 19px;
+
+            font-weight: 800;
+
         }
-
-
-        #bookingStatusTitle i {
-            margin-right: 5px;
-        }
-
 
         #bookingStatusTitle.confirmed {
-            color: #198754;
+
+            color: var(--green);
+
         }
 
-
         #bookingStatusTitle.cancelled {
-            color: #dc3545;
+
+            color: var(--red);
+
+        }
+
+        .status-description {
+
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 10px;
+
         }
 
 
         /* ==========================================
-           PNR BOX
-        ========================================== */
+           PNR
+        =========================================== */
 
         .pnr-box {
-            width: 100%;
 
-            margin-top: 15px;
+            display: flex;
 
-            padding: 18px;
+            flex-direction: column;
 
-            border: 2px dashed #0d63b7;
+            justify-content: center;
+
+            padding:
+                20px
+                22px;
+
+            border:
+                2px dashed #b9c9db;
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f2f7fd,
+                    #f8fbff
+                );
+
+        }
+
+        .pnr-box strong {
+
+            margin-bottom: 6px;
+
+            color: var(--muted);
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+        }
+
+        #pnr {
+
+            margin: 0;
+
+            color: var(--navy);
+
+            font-size: 27px;
+
+            font-weight: 800;
+
+            letter-spacing: 3px;
+
+        }
+
+
+        /* ==========================================
+           CANCEL MESSAGE
+        =========================================== */
+
+        .cancelled-message {
+
+            margin:
+                -10px
+                0
+                25px;
+
+            padding:
+                12px
+                15px;
+
+            border-radius: 9px;
+
+            border:
+                1px solid #f2afb6;
+
+            color: #842029;
+
+            background: #f8d7da;
+
+            text-align: center;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* ==========================================
+           SECTIONS
+        =========================================== */
+
+        .ticket-section {
+
+            padding:
+                27px
+                0;
+
+            border-top:
+                1px solid #edf0f4;
+
+        }
+
+        .ticket-section:first-of-type {
+
+            border-top: 0;
+
+            padding-top: 0;
+
+        }
+
+        .section-heading {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+
+        }
+
+        .section-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            margin: 0;
+
+            color: var(--navy);
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+        }
+
+        .section-title .section-icon {
+
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: #edf4fc;
+
+            color: var(--navy);
+
+            font-size: 13px;
+
+        }
+
+
+        /* ==========================================
+           TRAIN INFO
+        =========================================== */
+
+        .train-info-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+        }
+
+        .info-box {
+
+            padding:
+                17px;
+
+            border:
+                1px solid var(--border);
 
             border-radius: 12px;
 
-            background: linear-gradient(
-                135deg,
-                #f1f7fd,
-                #e9f3fc
-            );
+            background: #fafbfd;
+
+        }
+
+        .info-box span {
+
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: var(--muted);
+
+            font-size: 9px;
+
+            font-weight: 600;
+
+        }
+
+        .info-box strong {
+
+            color: var(--text);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
         }
 
 
-        .pnr-box strong {
+        /* ==========================================
+           ROUTE
+        =========================================== */
+
+        .route-card {
+
+            margin-top: 14px;
+
+            padding:
+                25px
+                20px;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f3f7fc,
+                    #fbfdff
+                );
+
+            border:
+                1px solid var(--border);
+
+        }
+
+        .train-route {
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(120px, 1fr)
+                minmax(180px, 2fr)
+                minmax(120px, 1fr);
+
+            align-items: center;
+
+            gap: 20px;
+
+        }
+
+        .route-station {
+
+            text-align: center;
+
+        }
+
+        .route-station small {
+
             display: block;
 
             margin-bottom: 5px;
 
-            color: #5f7080;
+            color: var(--muted);
 
-            font-size: 13px;
+            font-size: 8px;
 
             text-transform: uppercase;
 
-            letter-spacing: 0.8px;
+            letter-spacing: 1px;
+
         }
 
+        .route-station span {
 
-        #pnr {
-            color: #0d63b7 !important;
+            color: var(--navy);
 
-            font-size: 27px;
+            font-size: 17px;
 
-            letter-spacing: 2px;
+            font-weight: 800;
+
         }
 
-
-        /* ==========================================
-           CANCELLED TICKET
-        ========================================== */
-
-        .cancelled-ticket {
-            border: 2px solid #dc3545;
-        }
-
-
-        .cancelled-message {
-            margin-top: 15px;
-
-            padding: 13px 16px;
-
-            border: 1px solid #f1aeb5;
-
-            border-radius: 9px;
-
-            background: #f8d7da;
-
-            color: #842029;
-
-            text-align: center;
-
-            font-weight: 650;
-        }
-
-
-        /* ==========================================
-           DIVIDERS
-        ========================================== */
-
-        hr {
-            border: none;
-
-            height: 1px;
-
-            background: #dfe5eb;
-
-            opacity: 1;
-        }
-
-
-        /* ==========================================
-           SECTION TITLES
-        ========================================== */
-
-        .section-title {
-            position: relative;
-
-            margin-bottom: 18px;
-
-            padding-left: 13px;
-
-            color: #0d63b7;
-
-            font-size: 18px;
-
-            font-weight: 750;
-        }
-
-
-        .section-title::before {
-            content: "";
-
-            position: absolute;
-
-            top: 2px;
-            bottom: 2px;
-            left: 0;
-
-            width: 4px;
-
-            border-radius: 10px;
-
-            background: #ff7900;
-        }
-
-
-        .section-title i {
-            margin-right: 6px;
-        }
-
-
-        .seat-section-title {
-            color: #6f42c1;
-        }
-
-
-        .refund-section-title {
-            color: #198754;
-        }
-
-
-        /* ==========================================
-           DETAIL BOXES
-        ========================================== */
-
-        .detail-box {
-            width: 100%;
-            height: 100%;
-
-            padding: 20px;
-
-            border: 1px solid #e1e7ed;
-
-            border-radius: 11px;
-
-            background: #f8fafc;
-
-            box-shadow:
-                0 3px 10px rgba(22, 46, 72, 0.04);
-
-            transition: all 0.2s ease;
-        }
-
-
-        .detail-box:hover {
-            border-color: #c5d6e6;
-
-            background: #ffffff;
-
-            box-shadow:
-                0 6px 15px rgba(22, 46, 72, 0.07);
-        }
-
-
-        .detail-box p {
-            margin-bottom: 12px;
-
-            color: #5c6c7b;
-
-            font-size: 15px;
-        }
-
-
-        .detail-box p:last-child {
-            margin-bottom: 0;
-        }
-
-
-        .detail-box p b {
-            display: inline-block;
-
-            min-width: 115px;
-
-            color: #293f55;
-        }
-
-
-        .detail-box small {
-            display: block;
-
-            margin-bottom: 7px;
-
-            color: #7a8998 !important;
-
-            font-size: 13px;
-        }
-
-
-        .detail-box h5,
-        .detail-box h6 {
-            color: #263d54;
-        }
-
-
-        /* ==========================================
-           TRAIN ROUTE
-        ========================================== */
-
-        .train-route {
-            width: 100%;
+        .route-center {
 
             display: flex;
 
             align-items: center;
-            justify-content: center;
 
-            gap: 18px;
+            gap: 12px;
 
-            color: #233f5c;
-
-            font-size: 18px;
-
-            font-weight: 700;
         }
-
-
-        .train-route > span:first-child,
-        .train-route > span:last-child {
-            min-width: 100px;
-
-            text-align: center;
-        }
-
-
-        .train-route i {
-            width: 44px;
-            height: 44px;
-
-            display: flex;
-
-            align-items: center;
-            justify-content: center;
-
-            flex-shrink: 0;
-
-            border-radius: 50%;
-
-            background: #eaf4fd;
-
-            color: #0d63b7 !important;
-
-            font-size: 19px;
-        }
-
 
         .route-line {
+
             position: relative;
 
             flex: 1;
 
-            max-width: 300px;
-
             height: 2px;
 
-            background: #b9c7d4;
+            background: #c9d4df;
+
         }
 
+        .route-line::before {
 
-        /* ==========================================
-           SEAT VALUE
-        ========================================== */
+            content: "";
 
-        .seat-value {
-            color: #6f42c1;
+            position: absolute;
 
-            font-size: 18px;
+            top: 50%;
+            left: 0;
 
-            font-weight: 750;
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--navy);
+
+            transform: translateY(-50%);
+
         }
 
+        .route-line:last-child::after {
 
-        /* ==========================================
-           REFUND STATUS
-        ========================================== */
+            content: "";
 
-        .refund-status {
-            font-weight: 750;
+            position: absolute;
+
+            top: 50%;
+            right: 0;
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--orange);
+
+            transform: translateY(-50%);
+
         }
 
+        .route-train {
 
-        .refund-status.refunded {
-            color: #198754;
-        }
+            width: 43px;
+            height: 43px;
 
-
-        .refund-status.processing {
-            color: #fd7e14;
-        }
-
-
-        .refund-status.failed {
-            color: #dc3545;
-        }
-
-
-        /* ==========================================
-           BUTTON AREA
-        ========================================== */
-
-        .button-area {
-            padding-top: 10px;
-        }
-
-
-        .button-area .btn {
-            min-width: 160px;
-
-            min-height: 48px;
+            flex-shrink: 0;
 
             display: flex;
 
             align-items: center;
             justify-content: center;
 
-            gap: 6px;
+            border-radius: 50%;
 
-            border: none;
+            color: white;
 
-            border-radius: 8px;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--navy),
+                    var(--navy-light)
+                );
 
-            font-size: 14px;
+        }
+
+
+        /* ==========================================
+           DETAIL GRID
+        =========================================== */
+
+        .detail-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+        }
+
+        .detail-box {
+
+            min-height: 100px;
+
+            padding:
+                17px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 12px;
+
+            background: white;
+
+            box-shadow:
+                0 4px 16px
+                rgba(13, 43, 82, 0.04);
+
+        }
+
+        .detail-box small {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: var(--muted);
+
+            font-size: 9px;
+
+        }
+
+        .detail-box h5,
+        .detail-box h6 {
+
+            margin: 0;
+
+            color: var(--text);
+
+            font-size: 13px;
 
             font-weight: 700;
 
-            transition: all 0.25s ease;
         }
 
 
         /* ==========================================
-           HOME BUTTON
-        ========================================== */
+           SEAT
+        =========================================== */
 
-        .button-area .btn-home {
-            background: #ffb000;
+        .seat-grid .detail-box {
 
-            color: #ffffff;
+            text-align: center;
+
+            background: #fbf9ff;
+
+            border-color: #e8def8;
+
         }
 
+        .seat-icon {
 
-        .button-area .btn-home:hover {
-            background: #e69e00;
+            width: 40px;
+            height: 40px;
 
-            color: #ffffff;
+            display: flex;
 
-            transform: translateY(-2px);
+            align-items: center;
+            justify-content: center;
 
-            box-shadow:
-                0 6px 15px rgba(255, 176, 0, 0.25);
+            margin:
+                0 auto
+                10px;
+
+            border-radius: 10px;
+
+            color: var(--purple);
+
+            background: #eee7fa;
+
         }
 
+        .seat-value {
 
-        /* ==========================================
-           MY BOOKINGS BUTTON
-        ========================================== */
+            color: var(--purple);
 
-        .button-area .btn-primary {
-            background: #0d63b7;
-        }
+            font-size: 17px;
 
+            font-weight: 800;
 
-        .button-area .btn-primary:hover {
-            background: #094f92;
-
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 6px 15px rgba(13, 99, 183, 0.22);
-        }
-
-
-        /* ==========================================
-           SEARCH TRAINS BUTTON
-        ========================================== */
-
-        .button-area .btn-secondary {
-            background: #566575;
-        }
-
-
-        .button-area .btn-secondary:hover {
-            background: #414f5d;
-
-            transform: translateY(-2px);
         }
 
 
         /* ==========================================
-           PRINT BUTTON
-        ========================================== */
+           REFUND
+        =========================================== */
 
-        .button-area .btn-success {
-            background: #ff7900;
+        .refund-status {
+
+            font-weight: 800;
+
         }
 
+        .refund-status.refunded {
 
-        .button-area .btn-success:hover {
-            background: #dc6800;
+            color: var(--green);
 
-            transform: translateY(-2px);
+        }
 
-            box-shadow:
-                0 6px 15px rgba(255, 121, 0, 0.22);
+        .refund-status.processing {
+
+            color: var(--orange);
+
+        }
+
+        .refund-status.failed {
+
+            color: var(--red);
+
         }
 
 
         /* ==========================================
-           TABLET / MOBILE
-        ========================================== */
+           ACTIONS
+        =========================================== */
 
-        @media (max-width: 768px) {
+        .ticket-actions {
 
-            .ticket-wrapper {
-                padding: 12px 6px;
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            padding-top: 28px;
+
+            border-top:
+                1px solid #edf0f4;
+
+        }
+
+        .ticket-actions .btn {
+
+            min-width: 145px;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 7px;
+
+            padding:
+                11px
+                16px;
+
+            border-radius: 9px;
+
+            border: none;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+        }
+
+        .btn-home {
+
+            color: white;
+
+            background: var(--navy);
+
+        }
+
+        .btn-home:hover {
+
+            color: white;
+
+            background: var(--navy-light);
+
+        }
+
+        .btn-bookings {
+
+            color: white;
+
+            background: var(--orange);
+
+        }
+
+        .btn-bookings:hover {
+
+            color: white;
+
+            background: var(--orange-dark);
+
+        }
+
+        .btn-search {
+
+            color: var(--navy);
+
+            background: #eef4fb;
+
+        }
+
+        .btn-search:hover {
+
+            color: white;
+
+            background: var(--navy);
+
+        }
+
+        .btn-print {
+
+            color: white;
+
+            background: var(--green);
+
+        }
+
+        .btn-print:hover {
+
+            color: white;
+
+            background: #146c43;
+
+        }
+
+
+        /* ==========================================
+           CANCELLED CARD
+        =========================================== */
+
+        .cancelled-ticket {
+
+            border:
+                2px solid var(--red);
+
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        =========================================== */
+
+        @media
+        (max-width: 900px) {
+
+            .ticket-summary {
+
+                grid-template-columns: 1fr;
+
             }
 
+            .train-info-grid {
 
-            .ticket-card {
-                border-radius: 14px;
+                grid-template-columns:
+                    repeat(2, 1fr);
+
             }
 
+            .detail-grid {
 
-            .ticket-header {
-                padding: 21px 18px;
+                grid-template-columns:
+                    repeat(2, 1fr);
+
             }
 
+        }
 
-            .ticket-header h2 {
-                font-size: 23px;
+
+        @media
+        (max-width: 700px) {
+
+            .ticket-page {
+
+                padding:
+                    20px
+                    10px;
+
             }
 
+            .page-topbar {
 
-            #bookingStatusTitle {
-                font-size: 21px;
-            }
+                align-items: flex-start;
 
-
-            #pnr {
-                font-size: 23px;
-            }
-
-
-            .detail-box {
-                padding: 17px;
-            }
-
-
-            .train-route {
                 flex-direction: column;
 
-                gap: 10px;
             }
 
+            .ticket-header {
 
-            .train-route > span:first-child,
-            .train-route > span:last-child {
-                min-width: auto;
+                padding:
+                    22px
+                    18px;
+
             }
 
+            .ticket-header-content {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+            }
+
+            .ticket-content {
+
+                padding:
+                    22px
+                    16px;
+
+            }
+
+            .train-route {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .route-center {
+
+                flex-direction: column;
+
+            }
 
             .route-line {
+
                 width: 2px;
                 height: 30px;
 
                 flex: none;
+
             }
 
+            .route-line::before,
+            .route-line:last-child::after {
 
-            .button-area {
+                left: 50%;
+                top: 0;
+
+                transform:
+                    translateX(-50%);
+
+            }
+
+            .route-line:last-child::after {
+
+                top: auto;
+                bottom: 0;
+
+            }
+
+            .train-info-grid,
+            .detail-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .ticket-actions {
+
                 flex-direction: column;
+
             }
 
+            .ticket-actions .btn {
 
-            .button-area .btn {
                 width: 100%;
-            }
 
-        }
-
-
-        @media (max-width: 480px) {
-
-            .ticket-wrapper {
-                padding: 5px 4px;
-            }
-
-
-            .ticket-card {
-                border-radius: 11px;
-            }
-
-
-            .ticket-header {
-                padding: 18px 14px;
-            }
-
-
-            .ticket-header h2 {
-                font-size: 20px;
-            }
-
-
-            .ticket-card > .p-4 {
-                padding: 18px 12px !important;
-            }
-
-
-            .detail-box p b {
-                display: block;
-
-                margin-bottom: 3px;
             }
 
         }
@@ -758,56 +1376,76 @@
 
         /* ==========================================
            PRINT
-        ========================================== */
+        =========================================== */
 
         @media print {
 
             body {
-                background: #ffffff;
+
+                background: white;
+
             }
 
+            .ticket-page {
+
+                padding: 0;
+
+            }
+
+            .page-topbar,
+            .no-print {
+
+                display: none !important;
+
+            }
 
             .ticket-wrapper {
-                width: 100%;
+
                 max-width: 100%;
 
-                margin: 0;
-                padding: 0;
             }
 
-
             .ticket-card {
-                width: 100%;
 
-                border: 1px solid #ddd;
+                border:
+                    1px solid #d8d8d8;
 
                 border-radius: 0;
 
-                box-shadow: none !important;
+                box-shadow: none;
+
             }
-
-
-            .no-print {
-                display: none !important;
-            }
-
 
             .ticket-header {
-                background: #0b2f5c !important;
+
+                background:
+                    var(--navy) !important;
 
                 -webkit-print-color-adjust: exact;
 
                 print-color-adjust: exact;
-            }
 
+            }
 
             .ticket-header.cancelled {
-                background: #dc3545 !important;
+
+                background:
+                    var(--red) !important;
+
             }
 
+            .ticket-content {
 
-            .detail-box {
+                padding: 22px;
+
+            }
+
+            .info-box,
+            .detail-box,
+            .route-card {
+
                 box-shadow: none;
+
             }
 
         }
@@ -820,118 +1458,200 @@
 <body>
 
 
-<!-- ========================================== -->
-<!-- MAIN TICKET -->
-<!-- ========================================== -->
-
-<div class="ticket-wrapper">
+<div class="ticket-page">
 
 
-    <div
-        class="ticket-card shadow-lg"
-        id="ticketCard">
+    <div class="ticket-wrapper">
 
 
-        <!-- ========================================== -->
-        <!-- HEADER -->
-        <!-- ========================================== -->
+        <!-- ==========================================
+             TOP BAR
+        =========================================== -->
 
-        <div
-            class="ticket-header"
-            id="ticketHeader">
+        <div class="page-topbar no-print">
 
 
-            <div
-                class="d-flex justify-content-between align-items-center">
+            <a
+                href="index.html"
+                class="top-brand">
+
+                <div class="top-brand-icon">
+
+                    <i class="fa-solid fa-train-subway"></i>
+
+                </div>
 
 
                 <div>
 
-                    <h2>
+                    <h1>
+                        RailConnect
+                    </h1>
 
-                        <i class="fa-solid fa-train"></i>
-
-                        IRCTC Clone
-
-                    </h2>
-
-
-                    <small>
-
-                        Electronic Reservation Ticket
-
-                    </small>
+                    <p>
+                        Railway Reservation System
+                    </p>
 
                 </div>
 
-
-                <div class="text-end">
-
-                    <i class="fa-solid fa-ticket fa-2x"></i>
-
-                </div>
+            </a>
 
 
-            </div>
+
+            <a
+                href="mybooking.html"
+                class="back-bookings">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to My Bookings
+
+            </a>
+
 
         </div>
 
 
-        <!-- ========================================== -->
-        <!-- TICKET CONTENT -->
-        <!-- ========================================== -->
 
-        <div class="p-4 p-md-5">
+        <!-- ==========================================
+             TICKET
+        =========================================== -->
 
-
-            <!-- ========================================== -->
-            <!-- BOOKING STATUS -->
-            <!-- ========================================== -->
-
-            <div class="text-center">
+        <div
+            class="ticket-card"
+            id="ticketCard">
 
 
-                <h3
-                    id="bookingStatusTitle"
-                    class="confirmed">
+            <!-- ==========================================
+                 TICKET HEADER
+            =========================================== -->
+
+            <div
+                class="ticket-header"
+                id="ticketHeader">
 
 
-                    <i
-                        id="bookingStatusIcon"
-                        class="fa-solid fa-circle-check">
-                    </i>
+                <div class="ticket-header-content">
 
 
-                    <span id="bookingStatusText">
-
-                        Booking Confirmed
-
-                    </span>
+                    <div class="ticket-title-area">
 
 
-                </h3>
+                        <div class="ticket-main-icon">
+
+                            <i class="fa-solid fa-train"></i>
+
+                        </div>
 
 
-                <!-- PNR -->
+                        <div>
 
-                <div class="pnr-box">
+                            <h2>
+                                RailConnect E-Ticket
+                            </h2>
+
+                            <p>
+                                Electronic Railway Reservation Ticket
+                            </p>
+
+                        </div>
 
 
-                    <strong>
-                        PNR Number
-                    </strong>
+                    </div>
 
 
-                    <h4
-                        id="pnr"
-                        class="fw-bold mb-0">
 
-                        -
+                    <div class="e-ticket-badge">
 
-                    </h4>
+                        <i class="fa-solid fa-ticket"></i>
+
+                        E-TICKET
+
+                    </div>
 
 
                 </div>
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 CONTENT
+            =========================================== -->
+
+            <div class="ticket-content">
+
+
+                <!-- ==========================================
+                     BOOKING SUMMARY
+                =========================================== -->
+
+                <div class="ticket-summary">
+
+
+                    <!-- STATUS -->
+
+                    <div class="status-box">
+
+
+                        <div class="status-icon-box">
+
+                            <i
+                                id="bookingStatusIcon"
+                                class="fa-solid fa-circle-check">
+                            </i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3
+                                id="bookingStatusTitle"
+                                class="confirmed">
+
+                                <span id="bookingStatusText">
+                                    Booking Confirmed
+                                </span>
+
+                            </h3>
+
+
+                            <p class="status-description">
+
+                                Your railway reservation information
+                                is shown below.
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- PNR -->
+
+                    <div class="pnr-box">
+
+                        <strong>
+                            PNR Number
+                        </strong>
+
+
+                        <h4 id="pnr">
+
+                            -
+
+                        </h4>
+
+                    </div>
+
+
+                </div>
+
 
 
                 <!-- CANCELLED MESSAGE -->
@@ -940,445 +1660,493 @@
                     id="cancelledMessage"
                     class="cancelled-message d-none">
 
-                    <i class="fa-solid fa-circle-xmark"></i>
+                    <i class="fa-solid fa-circle-xmark me-1"></i>
 
-                    This booking has been cancelled.
-
-                </div>
-
-
-            </div>
-
-
-            <hr class="my-4">
-
-
-            <!-- ========================================== -->
-            <!-- TRAIN DETAILS -->
-            <!-- ========================================== -->
-
-            <h5 class="section-title">
-
-                <i class="fa-solid fa-train"></i>
-
-                Train Details
-
-            </h5>
-
-
-            <div class="row g-3">
-
-
-                <div class="col-md-6">
-
-
-                    <div class="detail-box">
-
-
-                        <p>
-
-                            <b>Train No:</b>
-
-                            <span id="trainNo">-</span>
-
-                        </p>
-
-
-                        <p>
-
-                            <b>Train Name:</b>
-
-                            <span id="trainName">-</span>
-
-                        </p>
-
-
-                        <p>
-
-                            <b>Journey Date:</b>
-
-                            <span id="date">-</span>
-
-                        </p>
-
-
-                    </div>
-
+                    This railway booking has been cancelled.
 
                 </div>
 
 
-                <div class="col-md-6">
+
+                <!-- ==========================================
+                     TRAIN DETAILS
+                =========================================== -->
+
+                <section class="ticket-section">
 
 
-                    <div class="detail-box">
+                    <div class="section-heading">
 
+                        <h5 class="section-title">
 
-                        <p>
+                            <span class="section-icon">
 
-                            <b>From:</b>
+                                <i class="fa-solid fa-train"></i>
 
-                            <span id="from">-</span>
+                            </span>
 
-                        </p>
-
-
-                        <p>
-
-                            <b>To:</b>
-
-                            <span id="to">-</span>
-
-                        </p>
-
-
-                        <p>
-
-                            <b>Fare:</b>
-
-                            ₹<span id="fare">-</span>
-
-                        </p>
-
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-            <!-- ========================================== -->
-            <!-- ROUTE -->
-            <!-- ========================================== -->
-
-            <div class="detail-box mt-3">
-
-
-                <div class="train-route">
-
-
-                    <span id="routeFrom">-</span>
-
-
-                    <span class="route-line"></span>
-
-
-                    <i class="fa-solid fa-train"></i>
-
-
-                    <span class="route-line"></span>
-
-
-                    <span id="routeTo">-</span>
-
-
-                </div>
-
-
-            </div>
-
-
-            <hr class="my-4">
-
-
-            <!-- ========================================== -->
-            <!-- PASSENGER DETAILS -->
-            <!-- ========================================== -->
-
-            <h5 class="section-title">
-
-                <i class="fa-solid fa-user"></i>
-
-                Passenger Details
-
-            </h5>
-
-
-            <div class="row g-3">
-
-
-                <div class="col-md-4">
-
-                    <div class="detail-box">
-
-                        <small>
-                            Passenger Name
-                        </small>
-
-                        <h5
-                            id="name"
-                            class="fw-bold mb-0">
-
-                            -
+                            Train & Journey Details
 
                         </h5>
 
                     </div>
 
-                </div>
 
 
-                <div class="col-md-4">
+                    <div class="train-info-grid">
 
-                    <div class="detail-box">
 
-                        <small>
-                            Age
-                        </small>
+                        <div class="info-box">
 
-                        <h5
-                            id="age"
-                            class="fw-bold mb-0">
+                            <span>
+                                TRAIN NUMBER
+                            </span>
 
-                            -
+                            <strong id="trainNo">
+                                -
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="info-box">
+
+                            <span>
+                                TRAIN NAME
+                            </span>
+
+                            <strong id="trainName">
+                                -
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="info-box">
+
+                            <span>
+                                JOURNEY DATE
+                            </span>
+
+                            <strong id="date">
+                                -
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="info-box">
+
+                            <span>
+                                FROM
+                            </span>
+
+                            <strong id="from">
+                                -
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="info-box">
+
+                            <span>
+                                TO
+                            </span>
+
+                            <strong id="to">
+                                -
+                            </strong>
+
+                        </div>
+
+
+
+                        <div class="info-box">
+
+                            <span>
+                                TOTAL FARE
+                            </span>
+
+                            <strong>
+
+                                ₹<span id="fare">-</span>
+
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- ROUTE -->
+
+                    <div class="route-card">
+
+
+                        <div class="train-route">
+
+
+                            <div class="route-station">
+
+                                <small>
+                                    Departure
+                                </small>
+
+                                <span id="routeFrom">
+                                    -
+                                </span>
+
+                            </div>
+
+
+
+                            <div class="route-center">
+
+
+                                <span class="route-line"></span>
+
+
+                                <div class="route-train">
+
+                                    <i class="fa-solid fa-train"></i>
+
+                                </div>
+
+
+                                <span class="route-line"></span>
+
+
+                            </div>
+
+
+
+                            <div class="route-station">
+
+                                <small>
+                                    Destination
+                                </small>
+
+                                <span id="routeTo">
+                                    -
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- ==========================================
+                     PASSENGER
+                =========================================== -->
+
+                <section class="ticket-section">
+
+
+                    <div class="section-heading">
+
+                        <h5 class="section-title">
+
+                            <span class="section-icon">
+
+                                <i class="fa-solid fa-user"></i>
+
+                            </span>
+
+                            Passenger Details
 
                         </h5>
 
                     </div>
 
-                </div>
 
 
-                <div class="col-md-4">
+                    <div class="detail-grid">
 
-                    <div class="detail-box">
 
-                        <small>
-                            Gender
-                        </small>
+                        <div class="detail-box">
 
-                        <h5
-                            id="gender"
-                            class="fw-bold mb-0">
+                            <small>
+                                Passenger Name
+                            </small>
 
-                            -
+                            <h5 id="name">
+                                -
+                            </h5>
+
+                        </div>
+
+
+
+                        <div class="detail-box">
+
+                            <small>
+                                Age
+                            </small>
+
+                            <h5 id="age">
+                                -
+                            </h5>
+
+                        </div>
+
+
+
+                        <div class="detail-box">
+
+                            <small>
+                                Gender
+                            </small>
+
+                            <h5 id="gender">
+                                -
+                            </h5>
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- ==========================================
+                     SEAT
+                =========================================== -->
+
+                <section class="ticket-section">
+
+
+                    <div class="section-heading">
+
+                        <h5 class="section-title">
+
+                            <span class="section-icon">
+
+                                <i class="fa-solid fa-chair"></i>
+
+                            </span>
+
+                            Seat Allocation
 
                         </h5>
 
                     </div>
 
-                </div>
 
 
-            </div>
+                    <div class="detail-grid seat-grid">
 
 
-            <hr class="my-4">
+                        <div class="detail-box">
 
 
-            <!-- ========================================== -->
-            <!-- SEAT DETAILS -->
-            <!-- ========================================== -->
+                            <div class="seat-icon">
 
-            <h5 class="section-title seat-section-title">
+                                <i class="fa-solid fa-train-subway"></i>
 
-                <i class="fa-solid fa-chair"></i>
-
-                Seat Details
-
-            </h5>
+                            </div>
 
 
-            <div class="row g-3">
+                            <small>
+                                Coach
+                            </small>
 
-
-                <div class="col-md-4">
-
-                    <div class="detail-box text-center">
-
-                        <small>
-                            Coach
-                        </small>
-
-                        <div class="mt-2">
-
-                            <i class="fa-solid fa-train-subway me-1"></i>
-
-                            <span
+                            <div
                                 id="coach"
                                 class="seat-value">
 
                                 -
 
-                            </span>
+                            </div>
 
                         </div>
 
-                    </div>
-
-                </div>
 
 
-                <div class="col-md-4">
+                        <div class="detail-box">
 
-                    <div class="detail-box text-center">
 
-                        <small>
-                            Seat Number
-                        </small>
+                            <div class="seat-icon">
 
-                        <div class="mt-2">
+                                <i class="fa-solid fa-chair"></i>
 
-                            <i class="fa-solid fa-chair me-1"></i>
+                            </div>
 
-                            <span
+
+                            <small>
+                                Seat Number
+                            </small>
+
+                            <div
                                 id="seatNumber"
                                 class="seat-value">
 
                                 -
 
-                            </span>
+                            </div>
 
                         </div>
 
-                    </div>
-
-                </div>
 
 
-                <div class="col-md-4">
+                        <div class="detail-box">
 
-                    <div class="detail-box text-center">
 
-                        <small>
-                            Berth Type
-                        </small>
+                            <div class="seat-icon">
 
-                        <div class="mt-2">
+                                <i class="fa-solid fa-bed"></i>
 
-                            <i class="fa-solid fa-bed me-1"></i>
+                            </div>
 
-                            <span
+
+                            <small>
+                                Berth Type
+                            </small>
+
+                            <div
                                 id="berthType"
                                 class="seat-value">
 
                                 -
 
-                            </span>
+                            </div>
 
                         </div>
 
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-            <hr class="my-4">
-
-
-            <!-- ========================================== -->
-            <!-- PAYMENT DETAILS -->
-            <!-- ========================================== -->
-
-            <h5 class="section-title">
-
-                <i class="fa-solid fa-credit-card"></i>
-
-                Payment Details
-
-            </h5>
-
-
-            <div class="row g-3">
-
-
-                <div class="col-md-4">
-
-                    <div class="detail-box">
-
-                        <small>
-                            Payment Method
-                        </small>
-
-                        <h6
-                            id="paymentMethod"
-                            class="fw-bold mb-0">
-
-                            -
-
-                        </h6>
 
                     </div>
 
-                </div>
+
+                </section>
 
 
-                <div class="col-md-4">
 
-                    <div class="detail-box">
+                <!-- ==========================================
+                     PAYMENT
+                =========================================== -->
 
-                        <small>
-                            Payment Status
-                        </small>
-
-                        <h6
-                            id="paymentStatus"
-                            class="fw-bold mb-0">
-
-                            -
-
-                        </h6>
-
-                    </div>
-
-                </div>
+                <section class="ticket-section">
 
 
-                <div class="col-md-4">
+                    <div class="section-heading">
 
-                    <div class="detail-box">
+                        <h5 class="section-title">
 
-                        <small>
-                            Transaction ID
-                        </small>
+                            <span class="section-icon">
 
-                        <h6
-                            id="transactionId"
-                            class="fw-bold text-break mb-0">
+                                <i class="fa-solid fa-credit-card"></i>
 
-                            -
+                            </span>
 
-                        </h6>
+                            Payment Details
+
+                        </h5>
 
                     </div>
 
-                </div>
 
 
-            </div>
+                    <div class="detail-grid">
 
 
-            <!-- ========================================== -->
-            <!-- REFUND DETAILS -->
-            <!-- ========================================== -->
+                        <div class="detail-box">
 
-            <div
-                id="refundSection"
-                class="d-none">
+                            <small>
+                                Payment Method
+                            </small>
 
+                            <h6 id="paymentMethod">
+                                -
+                            </h6>
 
-                <hr class="my-4">
-
-
-                <h5 class="section-title refund-section-title">
-
-                    <i class="fa-solid fa-rotate-left"></i>
-
-                    Refund Details
-
-                </h5>
+                        </div>
 
 
-                <div class="row g-3">
+
+                        <div class="detail-box">
+
+                            <small>
+                                Payment Status
+                            </small>
+
+                            <h6 id="paymentStatus">
+                                -
+                            </h6>
+
+                        </div>
 
 
-                    <div class="col-md-3">
+
+                        <div class="detail-box">
+
+                            <small>
+                                Transaction ID
+                            </small>
+
+                            <h6
+                                id="transactionId"
+                                class="text-break">
+
+                                -
+
+                            </h6>
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- ==========================================
+                     REFUND
+                =========================================== -->
+
+                <section
+                    id="refundSection"
+                    class="ticket-section d-none">
+
+
+                    <div class="section-heading">
+
+                        <h5 class="section-title">
+
+                            <span class="section-icon">
+
+                                <i class="fa-solid fa-rotate-left"></i>
+
+                            </span>
+
+                            Refund Details
+
+                        </h5>
+
+                    </div>
+
+
+
+                    <div class="detail-grid">
+
 
                         <div class="detail-box">
 
@@ -1388,7 +2156,7 @@
 
                             <h6
                                 id="refundStatus"
-                                class="refund-status mb-0">
+                                class="refund-status">
 
                                 -
 
@@ -1396,10 +2164,7 @@
 
                         </div>
 
-                    </div>
 
-
-                    <div class="col-md-3">
 
                         <div class="detail-box">
 
@@ -1407,7 +2172,7 @@
                                 Refund Amount
                             </small>
 
-                            <h6 class="fw-bold mb-0">
+                            <h6>
 
                                 ₹<span id="refundAmount">-</span>
 
@@ -1415,10 +2180,7 @@
 
                         </div>
 
-                    </div>
 
-
-                    <div class="col-md-3">
 
                         <div class="detail-box">
 
@@ -1428,7 +2190,7 @@
 
                             <h6
                                 id="refundId"
-                                class="fw-bold text-break mb-0">
+                                class="text-break">
 
                                 -
 
@@ -1436,10 +2198,7 @@
 
                         </div>
 
-                    </div>
 
-
-                    <div class="col-md-3">
 
                         <div class="detail-box">
 
@@ -1447,84 +2206,76 @@
                                 Refunded On
                             </small>
 
-                            <h6
-                                id="refundedAt"
-                                class="fw-bold mb-0">
-
+                            <h6 id="refundedAt">
                                 -
-
                             </h6>
 
                         </div>
 
+
                     </div>
 
 
+                </section>
+
+
+
+                <!-- ==========================================
+                     BUTTONS
+                =========================================== -->
+
+                <div class="ticket-actions no-print">
+
+
+                    <a
+                        href="index.html"
+                        class="btn btn-home">
+
+                        <i class="fa-solid fa-house"></i>
+
+                        Home
+
+                    </a>
+
+
+
+                    <a
+                        href="mybooking.html"
+                        class="btn btn-bookings">
+
+                        <i class="fa-solid fa-ticket"></i>
+
+                        My Bookings
+
+                    </a>
+
+
+
+                    <a
+                        href="search.html"
+                        class="btn btn-search">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        Search Trains
+
+                    </a>
+
+
+
+                    <button
+                        type="button"
+                        class="btn btn-print"
+                        onclick="window.print()">
+
+                        <i class="fa-solid fa-print"></i>
+
+                        Print Ticket
+
+                    </button>
+
+
                 </div>
-
-
-            </div>
-
-
-            <!-- ========================================== -->
-            <!-- BUTTONS -->
-            <!-- ========================================== -->
-
-            <div
-                class="button-area d-flex justify-content-center gap-3 mt-4 no-print">
-
-
-                <!-- HOME -->
-
-                <a
-                    href="index.html"
-                    class="btn btn-home px-4">
-
-                    <i class="fa-solid fa-house"></i>
-
-                    Home
-
-                </a>
-
-
-                <!-- MY BOOKINGS -->
-
-                <a
-                    href="mybooking.html"
-                    class="btn btn-primary px-4">
-
-                    <i class="fa-solid fa-arrow-left"></i>
-
-                    My Bookings
-
-                </a>
-
-
-                <!-- SEARCH TRAINS -->
-
-                <a
-                    href="search.html"
-                    class="btn btn-secondary px-4">
-
-                    <i class="fa-solid fa-train"></i>
-
-                    Search Trains
-
-                </a>
-
-
-                <!-- PRINT -->
-
-                <button
-                    type="button"
-                    class="btn btn-success px-4"
-                    onclick="window.print()">
-
-                    <i class="fa-solid fa-print"></i>
-
-                    Print Ticket
-
-                </button>
 
 
             </div>
@@ -1539,9 +2290,10 @@
 </div>
 
 
-<!-- ========================================== -->
-<!-- TICKET JAVASCRIPT -->
-<!-- ========================================== -->
+
+<!-- ==========================================
+     TICKET JAVASCRIPT
+=========================================== -->
 
 <script src="../javascript/ticket.js"></script>
 

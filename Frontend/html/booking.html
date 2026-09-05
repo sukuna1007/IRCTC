@@ -9,30 +9,48 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Passenger Booking</title>
+    <title>Passenger Booking - RailConnect</title>
 
 
-    <!-- ========================================= -->
-    <!-- BOOTSTRAP -->
-    <!-- ========================================= -->
+    <!-- ==========================================
+         GOOGLE FONT
+    =========================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+    <!-- ==========================================
+         BOOTSTRAP
+    =========================================== -->
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
 
-    <!-- ========================================= -->
-    <!-- FONT AWESOME -->
-    <!-- ========================================= -->
+    <!-- ==========================================
+         FONT AWESOME
+    =========================================== -->
 
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
 
-    <!-- ========================================= -->
-    <!-- BOOKING CSS -->
-    <!-- ========================================= -->
+    <!-- ==========================================
+         BOOKING CSS
+    =========================================== -->
 
     <link
         rel="stylesheet"
@@ -44,172 +62,384 @@
 <body>
 
 
-<!-- ========================================= -->
-<!-- MAIN BOOKING CONTAINER -->
-<!-- ========================================= -->
+<!-- ==========================================
+     NAVBAR
+=========================================== -->
 
-<div class="container-fluid booking-container py-4">
+<nav class="navbar navbar-expand-lg booking-navbar">
 
-    <div class="row justify-content-center m-0">
-
-        <div class="col-12 p-0">
+    <div class="container">
 
 
-            <!-- ========================================= -->
-            <!-- PASSENGER BOOKING CARD -->
-            <!-- ========================================= -->
+        <a
+            href="index.html"
+            class="navbar-brand booking-brand">
 
-            <div class="card booking-card shadow-lg border-0 rounded-4">
+            <div class="brand-icon">
 
-                <div class="card-body p-4">
+                <i class="fa-solid fa-train-subway"></i>
 
-
-                    <!-- ========================================= -->
-                    <!-- PAGE TITLE -->
-                    <!-- ========================================= -->
-
-                    <h2 class="text-center text-primary mb-4">
-
-                        <i class="fa-solid fa-ticket"></i>
-
-                        Passenger Booking
-
-                    </h2>
+            </div>
 
 
-                    <!-- ========================================= -->
-                    <!-- TRAIN DETAILS -->
-                    <!-- ========================================= -->
+            <div>
 
-                    <div class="train-details mb-4 p-3 bg-light rounded">
+                <span class="brand-title">
+                    RailConnect
+                </span>
 
-                        <h5>
+                <small>
+                    Railway Reservation
+                </small>
 
-                            <i class="fa-solid fa-train me-2"></i>
+            </div>
 
-                            Train Details
+        </a>
 
-                        </h5>
 
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#bookingNavbar">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div
+            class="collapse navbar-collapse"
+            id="bookingNavbar">
+
+            <ul class="navbar-nav ms-auto">
+
+
+                <li class="nav-item">
+
+                    <a
+                        href="index.html"
+                        class="nav-link">
+
+                        Home
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        href="search.html"
+                        class="nav-link">
+
+                        Trains
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        href="mybooking.html"
+                        class="nav-link">
+
+                        My Bookings
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a
+                        href="profile.html"
+                        class="nav-link">
+
+                        Profile
+
+                    </a>
+
+                </li>
+
+
+            </ul>
+
+        </div>
+
+
+    </div>
+
+</nav>
+
+
+
+<!-- ==========================================
+     HERO
+=========================================== -->
+
+<section class="booking-hero">
+
+    <div class="container">
+
+
+        <div class="booking-hero-content">
+
+
+            <div>
+
+
+                <span class="hero-badge">
+
+                    <i class="fa-solid fa-ticket"></i>
+
+                    PASSENGER DETAILS
+
+                </span>
+
+
+                <h1>
+                    Complete Your Booking
+                </h1>
+
+
+                <p>
+
+                    Review your selected train and enter
+                    passenger details before proceeding
+                    to secure online payment.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="hero-icon">
+
+                <i class="fa-solid fa-user-check"></i>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     BOOKING PAGE
+=========================================== -->
+
+<main class="booking-page">
+
+
+    <div class="container">
+
+
+        <!-- ==========================================
+             BOOKING PROGRESS
+        =========================================== -->
+
+        <div class="booking-progress">
+
+
+            <div class="progress-step completed">
+
+                <span>
+                    <i class="fa-solid fa-check"></i>
+                </span>
+
+                <div>
+                    <strong>Search</strong>
+                    <small>Find Train</small>
+                </div>
+
+            </div>
+
+
+            <div class="progress-line completed"></div>
+
+
+            <div class="progress-step completed">
+
+                <span>
+                    <i class="fa-solid fa-check"></i>
+                </span>
+
+                <div>
+                    <strong>Select</strong>
+                    <small>Choose Train</small>
+                </div>
+
+            </div>
+
+
+            <div class="progress-line active"></div>
+
+
+            <div class="progress-step active">
+
+                <span>3</span>
+
+                <div>
+                    <strong>Passenger</strong>
+                    <small>Enter Details</small>
+                </div>
+
+            </div>
+
+
+            <div class="progress-line"></div>
+
+
+            <div class="progress-step">
+
+                <span>4</span>
+
+                <div>
+                    <strong>Payment</strong>
+                    <small>Secure Checkout</small>
+                </div>
+
+            </div>
+
+
+            <div class="progress-line"></div>
+
+
+            <div class="progress-step">
+
+                <span>5</span>
+
+                <div>
+                    <strong>Ticket</strong>
+                    <small>Confirmation</small>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="booking-layout">
+
+
+            <!-- ==========================================
+                 LEFT SIDE
+            =========================================== -->
+
+            <section class="passenger-card">
+
+
+                <div class="section-header">
+
+
+                    <div>
+
+                        <span>
+                            PASSENGER INFORMATION
+                        </span>
+
+                        <h2>
+                            Passenger Details
+                        </h2>
 
                         <p>
-
-                            <b>Train No:</b>
-
-                            <span id="trainNo">
-                                -
-                            </span>
-
-                        </p>
-
-
-                        <p>
-
-                            <b>Train Name:</b>
-
-                            <span id="trainName">
-                                -
-                            </span>
-
-                        </p>
-
-
-                        <p>
-
-                            <b>From:</b>
-
-                            <span id="from">
-                                -
-                            </span>
-
-                        </p>
-
-
-                        <p>
-
-                            <b>To:</b>
-
-                            <span id="to">
-                                -
-                            </span>
-
-                        </p>
-
-
-                        <p>
-
-                            <b>Date:</b>
-
-                            <span id="date">
-                                -
-                            </span>
-
-                        </p>
-
-
-                        <p>
-
-                            <b>Fare:</b>
-
-                            ₹
-
-                            <span id="fare">
-                                0
-                            </span>
-
+                            Enter the passenger information
+                            exactly as required for your booking.
                         </p>
 
                     </div>
 
 
-                    <!-- ========================================= -->
-                    <!-- PASSENGER FORM -->
-                    <!-- ========================================= -->
+                    <div class="section-icon">
 
-                    <form id="passengerForm">
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
 
 
-                        <!-- PASSENGER NAME -->
+                </div>
 
-                        <div class="mb-3">
 
-                            <label
-                                for="name"
-                                class="form-label fw-semibold">
 
-                                Passenger Name
+                <!-- ==========================================
+                     FORM
+                =========================================== -->
 
-                            </label>
+                <form id="passengerForm">
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label
+                            for="name"
+                            class="form-label">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            Passenger Name
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-user input-icon"></i>
 
 
                             <input
                                 type="text"
                                 id="name"
                                 class="form-control"
-                                placeholder="Enter passenger name"
+                                placeholder="Enter passenger full name"
+                                autocomplete="name"
                                 required>
 
                         </div>
 
+                    </div>
 
-                        <!-- AGE -->
 
-                        <div class="mb-3">
 
-                            <label
-                                for="age"
-                                class="form-label fw-semibold">
+                    <!-- AGE -->
 
-                                Age
+                    <div class="form-group">
 
-                            </label>
+                        <label
+                            for="age"
+                            class="form-label">
+
+                            <i class="fa-solid fa-calendar"></i>
+
+                            Age
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-calendar-days input-icon"></i>
 
 
                             <input
                                 type="number"
                                 id="age"
                                 class="form-control"
-                                placeholder="Enter age"
+                                placeholder="Enter passenger age"
                                 min="1"
                                 max="120"
                                 required>
@@ -217,119 +447,395 @@
                         </div>
 
 
-                        <!-- ========================================= -->
-                        <!-- GENDER -->
-                        <!-- ========================================= -->
+                        <small class="input-help">
 
-                        <div class="mb-3">
+                            Passenger age must be between 1 and 120 years.
 
-                            <label class="form-label fw-semibold">
+                        </small>
 
-                                Gender
+                    </div>
+
+
+
+                    <!-- ==========================================
+                         GENDER
+                    =========================================== -->
+
+                    <div class="form-group">
+
+
+                        <label class="form-label">
+
+                            <i class="fa-solid fa-venus-mars"></i>
+
+                            Gender
+
+                        </label>
+
+
+                        <div class="gender-buttons">
+
+
+                            <!-- MALE -->
+
+                            <input
+                                type="radio"
+                                name="gender"
+                                id="male"
+                                value="Male"
+                                checked>
+
+
+                            <label
+                                for="male"
+                                class="gender-option">
+
+                                <span class="gender-icon">
+
+                                    <i class="fa-solid fa-person"></i>
+
+                                </span>
+
+                                <strong>
+                                    Male
+                                </strong>
+
+                                <small>
+                                    Select male
+                                </small>
 
                             </label>
 
 
-                            <div class="d-flex gap-2 gender-buttons">
+
+                            <!-- FEMALE -->
+
+                            <input
+                                type="radio"
+                                name="gender"
+                                id="female"
+                                value="Female">
 
 
-                                <!-- MALE -->
+                            <label
+                                for="female"
+                                class="gender-option">
 
-                                <input
-                                    type="radio"
-                                    name="gender"
-                                    id="male"
-                                    value="Male"
-                                    checked
-                                    hidden>
+                                <span class="gender-icon">
 
+                                    <i class="fa-solid fa-person-dress"></i>
 
-                                <label
-                                    for="male"
-                                    class="btn btn-outline-primary w-100">
+                                </span>
 
-                                    <i class="fa-solid fa-person me-1"></i>
-
-                                    Male
-
-                                </label>
-
-
-                                <!-- FEMALE -->
-
-                                <input
-                                    type="radio"
-                                    name="gender"
-                                    id="female"
-                                    value="Female"
-                                    hidden>
-
-
-                                <label
-                                    for="female"
-                                    class="btn btn-outline-danger w-100">
-
-                                    <i class="fa-solid fa-person-dress me-1"></i>
-
+                                <strong>
                                     Female
+                                </strong>
 
-                                </label>
+                                <small>
+                                    Select female
+                                </small>
 
-
-                                <!-- OTHER -->
-
-                                <input
-                                    type="radio"
-                                    name="gender"
-                                    id="other"
-                                    value="Other"
-                                    hidden>
+                            </label>
 
 
-                                <label
-                                    for="other"
-                                    class="btn btn-outline-secondary w-100">
 
+                            <!-- OTHER -->
+
+                            <input
+                                type="radio"
+                                name="gender"
+                                id="other"
+                                value="Other">
+
+
+                            <label
+                                for="other"
+                                class="gender-option">
+
+                                <span class="gender-icon">
+
+                                    <i class="fa-solid fa-user"></i>
+
+                                </span>
+
+                                <strong>
                                     Other
+                                </strong>
 
-                                </label>
+                                <small>
+                                    Select other
+                                </small>
 
-                            </div>
+                            </label>
+
 
                         </div>
 
 
-                    </form>
+                    </div>
 
 
-                    <!-- ========================================= -->
-                    <!-- PAYMENT BUTTON -->
-                    <!-- ========================================= -->
+                </form>
 
-                    <button
-                        type="button"
-                        class="btn btn-primary w-100 mt-3"
-                        id="paymentBtn">
 
-                        <i class="fa-solid fa-credit-card"></i>
+
+                <!-- ==========================================
+                     NOTICE
+                =========================================== -->
+
+                <div class="passenger-notice">
+
+
+                    <div class="notice-icon">
+
+                        <i class="fa-solid fa-circle-info"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Check passenger information
+                        </strong>
+
+                        <p>
+
+                            Make sure the passenger name,
+                            age and gender are correct before payment.
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ==========================================
+                 RIGHT BOOKING SUMMARY
+            =========================================== -->
+
+            <aside class="booking-summary-card">
+
+
+                <div class="summary-header">
+
+
+                    <span>
+                        BOOKING SUMMARY
+                    </span>
+
+
+                    <h3>
+
+                        <i class="fa-solid fa-train"></i>
+
+                        Train Details
+
+                    </h3>
+
+
+                </div>
+
+
+
+                <!-- TRAIN NUMBER -->
+
+                <div class="train-summary-main">
+
+
+                    <div class="train-summary-icon">
+
+                        <i class="fa-solid fa-train-subway"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <small>
+                            TRAIN NUMBER
+                        </small>
+
+
+                        <h4 id="trainNo">
+
+                            -
+
+                        </h4>
+
+
+                        <p id="trainName">
+
+                            -
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- ROUTE -->
+
+                <div class="summary-route">
+
+
+                    <div class="route-station">
+
+
+                        <small>
+                            FROM
+                        </small>
+
+
+                        <strong id="from">
+
+                            -
+
+                        </strong>
+
+
+                    </div>
+
+
+                    <div class="route-middle">
+
+
+                        <span></span>
+
+                        <i class="fa-solid fa-train"></i>
+
+                        <span></span>
+
+
+                    </div>
+
+
+                    <div class="route-station text-end">
+
+
+                        <small>
+                            TO
+                        </small>
+
+
+                        <strong id="to">
+
+                            -
+
+                        </strong>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- DATE -->
+
+                <div class="summary-row">
+
+
+                    <div class="summary-row-icon">
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <small>
+                            Journey Date
+                        </small>
+
+                        <strong id="date">
+
+                            -
+
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- FARE -->
+
+                <div class="fare-box">
+
+
+                    <div>
+
+                        <small>
+                            TOTAL FARE
+                        </small>
+
+                        <p>
+                            Passenger Ticket
+                        </p>
+
+                    </div>
+
+
+                    <strong>
+
+                        ₹<span id="fare">0</span>
+
+                    </strong>
+
+
+                </div>
+
+
+
+                <!-- PAYMENT BUTTON -->
+
+                <button
+                    type="button"
+                    id="paymentBtn"
+                    class="payment-btn">
+
+                    <span>
 
                         Proceed to Payment
 
-                    </button>
+                    </span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
 
 
-                    <!-- ========================================= -->
-                    <!-- PAYMENT SECURITY -->
-                    <!-- ========================================= -->
 
-                    <div class="text-center mt-3">
+                <!-- PAYMENT SECURITY -->
 
-                        <small class="text-muted">
+                <div class="payment-security">
 
-                            <i class="fa-solid fa-shield-halved"></i>
 
-                            Secure payment powered by Razorpay
+                    <i class="fa-solid fa-shield-halved"></i>
 
+
+                    <div>
+
+                        <strong>
+                            Secure Checkout
+                        </strong>
+
+                        <small>
+                            Payment powered by Razorpay
                         </small>
 
                     </div>
@@ -337,40 +843,101 @@
 
                 </div>
 
-            </div>
+
+            </aside>
+
 
         </div>
 
+
     </div>
 
-</div>
+
+</main>
 
 
-<!-- ========================================= -->
-<!-- BOOTSTRAP JAVASCRIPT -->
-<!-- ========================================= -->
+
+<!-- ==========================================
+     FOOTER
+=========================================== -->
+
+<footer class="booking-footer">
+
+
+    <div class="container">
+
+
+        <div class="footer-content">
+
+
+            <div class="footer-brand">
+
+
+                <div class="footer-icon">
+
+                    <i class="fa-solid fa-train-subway"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        RailConnect
+                    </strong>
+
+                    <small>
+                        Railway Reservation System
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+            <p>
+
+                <i class="fa-solid fa-lock me-1"></i>
+
+                Secure railway reservation and payment
+
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+</footer>
+
+
+
+<!-- ==========================================
+     BOOTSTRAP
+=========================================== -->
 
 <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js">
 </script>
 
 
-<!-- ========================================= -->
-<!-- RAZORPAY CHECKOUT -->
-<!-- ========================================= -->
+<!-- ==========================================
+     RAZORPAY
+=========================================== -->
 
 <script
     src="https://checkout.razorpay.com/v1/checkout.js">
 </script>
 
 
-<!-- ========================================= -->
-<!-- BOOKING JAVASCRIPT -->
-<!-- ========================================= -->
+<!-- ==========================================
+     BOOKING JAVASCRIPT
+=========================================== -->
 
-<script
-    src="../javascript/booking.js">
-</script>
+<script src="../javascript/booking.js"></script>
 
 
 </body>

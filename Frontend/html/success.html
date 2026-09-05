@@ -9,157 +9,369 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Payment Successful - IRCTC</title>
+    <title>Payment Successful - RailConnect</title>
 
 
-    <!-- ========================================= -->
-    <!-- BOOTSTRAP -->
-    <!-- ========================================= -->
+    <!-- ==========================================
+         GOOGLE FONT
+    =========================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+
+    <!-- ==========================================
+         BOOTSTRAP
+    =========================================== -->
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
 
-    <!-- ========================================= -->
-    <!-- FONT AWESOME -->
-    <!-- ========================================= -->
+    <!-- ==========================================
+         FONT AWESOME
+    =========================================== -->
 
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
 
-    <!-- ========================================= -->
-    <!-- PAGE CSS -->
-    <!-- ========================================= -->
+    <!-- ==========================================
+         PAGE CSS
+    =========================================== -->
 
     <style>
 
-        /* ==========================================
-           RESET
-        ========================================== */
+        :root {
 
-        * {
-            box-sizing: border-box;
+            --navy: #0d2b52;
+            --navy-dark: #071c38;
+            --navy-light: #17477c;
+
+            --orange: #f58220;
+            --orange-dark: #dc6c0c;
+
+            --green: #198754;
+            --green-light: #eaf8f0;
+
+            --white: #ffffff;
+            --background: #f5f7fb;
+
+            --text: #172033;
+            --muted: #6f7888;
+            --border: #e1e6ee;
+
+            --shadow:
+                0 25px 70px rgba(4, 20, 41, 0.25);
+
         }
 
 
+        /* ==========================================
+           RESET
+        =========================================== */
+
+        * {
+
+            box-sizing: border-box;
+
+        }
+
         html,
         body {
+
             width: 100%;
             min-height: 100%;
 
             margin: 0;
             padding: 0;
+
+        }
+
+        body {
+
+            min-height: 100vh;
+
+            font-family:
+                "Montserrat",
+                sans-serif;
+
+            color: var(--text);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--navy-dark),
+                    var(--navy) 55%,
+                    var(--navy-light)
+                );
+
+        }
+
+        a {
+
+            text-decoration: none;
+
         }
 
 
         /* ==========================================
-           BODY
-        ========================================== */
+           PAGE
+        =========================================== */
 
-        body {
-            width: 100%;
+        .success-page {
+
+            position: relative;
+
             min-height: 100vh;
-
-            margin: 0;
-            padding: 0;
-
-            font-family: "Segoe UI", Arial, sans-serif;
-
-            background: linear-gradient(
-                135deg,
-                #071a33 0%,
-                #0f3f73 55%,
-                #1d70b7 100%
-            );
 
             display: flex;
 
             align-items: center;
             justify-content: center;
+
+            overflow: hidden;
+
+            padding:
+                35px
+                18px;
+
+        }
+
+        .success-page::before {
+
+            content: "";
+
+            position: absolute;
+
+            top: -220px;
+            right: -170px;
+
+            width: 520px;
+            height: 520px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(245, 130, 32, 0.12);
+
+        }
+
+        .success-page::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: -200px;
+            bottom: -260px;
+
+            width: 520px;
+            height: 520px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.035);
+
         }
 
 
         /* ==========================================
-           MAIN SUCCESS CONTAINER
-           ONLY SMALL LEFT / RIGHT GAP
-        ========================================== */
+           WRAPPER
+        =========================================== */
 
-        .success-container {
+        .success-wrapper {
+
+            position: relative;
+
+            z-index: 5;
+
             width: 100%;
-            max-width: 100%;
+            max-width: 900px;
+
+        }
+
+
+        /* ==========================================
+           BRAND
+        =========================================== */
+
+        .success-brand {
+
+            display: flex;
+
+            justify-content: center;
+
+            margin-bottom: 18px;
+
+        }
+
+        .brand-link {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            color: white;
+
+        }
+
+        .brand-icon {
+
+            width: 47px;
+            height: 47px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--orange),
+                    #ff9a40
+                );
+
+            font-size: 20px;
+
+            box-shadow:
+                0 8px 22px
+                rgba(245, 130, 32, 0.28);
+
+        }
+
+        .brand-link h1 {
 
             margin: 0;
 
-            padding: 25px 8px;
+            font-size: 19px;
+
+            font-weight: 800;
+
+        }
+
+        .brand-link p {
+
+            margin: 2px 0 0;
+
+            color:
+                rgba(255, 255, 255, 0.58);
+
+            font-size: 9px;
+
         }
 
 
         /* ==========================================
            SUCCESS CARD
-           FULL WIDTH
-        ========================================== */
+        =========================================== */
 
         .success-card {
+
             position: relative;
-
-            width: 100%;
-            max-width: 100%;
-
-            margin: 0;
-
-            padding: 38px !important;
-
-            border: none;
-
-            border-radius: 18px;
-
-            text-align: center;
 
             overflow: hidden;
 
-            background: #ffffff;
+            padding:
+                40px !important;
 
-            box-shadow:
-                0 20px 50px rgba(0, 0, 0, 0.25) !important;
+            border: none;
+
+            border-radius: 21px;
+
+            background: white;
+
+            box-shadow: var(--shadow);
+
         }
 
-
-        /* ==========================================
-           TOP ACCENT LINE
-        ========================================== */
-
         .success-card::before {
+
             content: "";
 
             position: absolute;
 
             top: 0;
             left: 0;
+            right: 0;
 
-            width: 100%;
-            height: 6px;
+            height: 5px;
 
-            background: linear-gradient(
-                90deg,
-                #0d63b7,
-                #ff7900,
-                #ffb000
-            );
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--navy),
+                    var(--green),
+                    var(--orange)
+                );
+
         }
 
 
         /* ==========================================
            SUCCESS ICON
-        ========================================== */
+        =========================================== */
+
+        .check-wrapper {
+
+            position: relative;
+
+            width: 105px;
+            height: 105px;
+
+            margin:
+                3px auto
+                21px;
+
+        }
+
+        .check-ring {
+
+            position: absolute;
+
+            inset: 0;
+
+            border-radius: 50%;
+
+            background:
+                rgba(25, 135, 84, 0.07);
+
+            animation:
+                pulseRing
+                1.8s
+                infinite;
+
+        }
 
         .check-icon {
-            width: 90px;
-            height: 90px;
 
-            margin: 5px auto 18px;
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: 82px;
+            height: 82px;
 
             display: flex;
 
@@ -168,216 +380,492 @@
 
             border-radius: 50%;
 
-            background: #e9f8ef;
+            background: var(--green-light);
 
-            color: #198754;
+            color: var(--green);
 
-            font-size: 50px;
+            font-size: 38px;
+
+            transform:
+                translate(-50%, -50%);
 
             box-shadow:
-                0 8px 20px rgba(25, 135, 84, 0.15);
+                0 10px 30px
+                rgba(25, 135, 84, 0.15);
+
+        }
+
+        @keyframes pulseRing {
+
+            0%,
+            100% {
+
+                transform: scale(0.9);
+
+                opacity: 0.4;
+
+            }
+
+            50% {
+
+                transform: scale(1.05);
+
+                opacity: 1;
+
+            }
+
         }
 
 
         /* ==========================================
-           SUCCESS TITLE
-        ========================================== */
+           HEADING
+        =========================================== */
 
-        .success-card h3 {
-            margin-top: 0 !important;
+        .success-heading {
+
+            text-align: center;
+
+        }
+
+        .success-heading .status-label {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 5px;
+
             margin-bottom: 8px;
 
-            color: #198754 !important;
+            padding:
+                6px
+                11px;
 
-            font-size: 30px;
+            border-radius: 20px;
 
-            font-weight: 750;
+            background: #ecf8f1;
+
+            color: var(--green);
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
         }
 
+        .success-heading h2 {
 
-        /* ==========================================
-           SUCCESS MESSAGE
-        ========================================== */
+            margin:
+                0
+                0
+                9px;
+
+            color: var(--navy);
+
+            font-size: 29px;
+
+            font-weight: 800;
+
+        }
 
         .success-message {
-            margin-bottom: 25px;
 
-            color: #718096;
+            max-width: 580px;
 
-            font-size: 15px;
+            margin:
+                0 auto
+                28px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.7;
+
         }
 
 
         /* ==========================================
            PNR BOX
-        ========================================== */
+        =========================================== */
 
         .pnr-box {
-            width: 100%;
 
-            margin-top: 10px;
+            position: relative;
 
-            padding: 20px;
+            max-width: 600px;
 
-            border: 2px dashed #198754;
+            margin:
+                0 auto
+                26px;
 
-            border-radius: 12px;
+            padding:
+                22px
+                25px;
 
-            background: linear-gradient(
-                135deg,
-                #effaf3,
-                #e6f6ec
-            );
+            text-align: center;
+
+            border:
+                2px dashed
+                #8fc8a8;
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f0faf4,
+                    #f8fffb
+                );
+
         }
 
+        .pnr-box::before,
+        .pnr-box::after {
 
-        /* ==========================================
-           PNR LABEL
-        ========================================== */
+            content: "";
+
+            position: absolute;
+
+            top: 50%;
+
+            width: 15px;
+            height: 30px;
+
+            background: white;
+
+            transform:
+                translateY(-50%);
+
+        }
+
+        .pnr-box::before {
+
+            left: -3px;
+
+            border-radius:
+                0
+                20px
+                20px
+                0;
+
+        }
+
+        .pnr-box::after {
+
+            right: -3px;
+
+            border-radius:
+                20px
+                0
+                0
+                20px;
+
+        }
 
         .pnr-label {
+
             margin-bottom: 6px;
 
-            color: #5f6d78;
+            color: var(--muted);
 
-            font-size: 14px;
+            font-size: 9px;
 
-            font-weight: 600;
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
 
             text-transform: uppercase;
 
-            letter-spacing: 0.7px;
         }
 
-
-        /* ==========================================
-           PNR NUMBER
-        ========================================== */
-
         .pnr-number {
-            color: #198754;
 
-            font-size: 30px;
+            color: var(--green);
+
+            font-size: 28px;
 
             font-weight: 800;
 
             letter-spacing: 3px;
 
             word-break: break-word;
+
+        }
+
+        .pnr-note {
+
+            margin-top: 7px;
+
+            color: #8993a2;
+
+            font-size: 8px;
+
         }
 
 
         /* ==========================================
-           PAYMENT INFORMATION
-        ========================================== */
+           INFO HEADING
+        =========================================== */
 
-        .info {
-            width: 100%;
+        .details-title {
 
-            margin-top: 24px;
-
-            padding: 22px;
-
-            text-align: left;
-
-            border: 1px solid #dde6ee;
-
-            border-left: 5px solid #0d63b7;
-
-            border-radius: 12px;
-
-            background: #f7fafc;
-        }
-
-
-        /* ==========================================
-           INFORMATION ROW
-        ========================================== */
-
-        .info p {
             display: flex;
 
             align-items: center;
+
             justify-content: space-between;
 
-            gap: 20px;
+            gap: 15px;
+
+            margin-bottom: 14px;
+
+        }
+
+        .details-title h3 {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
 
             margin: 0;
 
-            padding: 14px 5px;
+            color: var(--navy);
 
-            border-bottom: 1px solid #e5ebf0;
+            font-size: 14px;
 
-            color: #5a6978;
+            font-weight: 800;
 
-            font-size: 15px;
         }
 
+        .details-title h3 span {
 
-        .info p:last-child {
-            border-bottom: none;
+            width: 32px;
+            height: 32px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 8px;
+
+            background: #edf4fc;
+
+            color: var(--navy);
+
+            font-size: 12px;
+
         }
 
+        .secure-payment {
 
-        /* ==========================================
-           INFORMATION LABEL
-        ========================================== */
+            display: inline-flex;
 
-        .info b {
-            color: #263d54;
+            align-items: center;
+
+            gap: 6px;
+
+            padding:
+                7px
+                10px;
+
+            border-radius: 7px;
+
+            color: var(--green);
+
+            background: #edf8f2;
+
+            font-size: 8px;
 
             font-weight: 700;
-        }
 
-
-        .info b i {
-            width: 22px;
-
-            color: #ff7900;
-
-            text-align: center;
         }
 
 
         /* ==========================================
-           INFORMATION VALUE
-        ========================================== */
+           PAYMENT INFO GRID
+        =========================================== */
 
-        .info span {
-            color: #0d4f8b;
+        .info {
 
-            font-weight: 650;
+            display: grid;
 
-            text-align: right;
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+            margin-bottom: 26px;
+
+            padding: 0;
+
+            background: transparent;
+
+        }
+
+        .info-item {
+
+            padding:
+                16px
+                17px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 11px;
+
+            background: #fafbfd;
+
+        }
+
+        .info-label {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            margin-bottom: 7px;
+
+            color: var(--muted);
+
+            font-size: 9px;
+
+            font-weight: 600;
+
+        }
+
+        .info-label i {
+
+            width: 22px;
+            height: 22px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 6px;
+
+            color: var(--orange);
+
+            background: #fff4e9;
+
+            font-size: 9px;
+
+        }
+
+        .info-value {
+
+            display: block;
+
+            color: var(--navy);
+
+            font-size: 12px;
+
+            font-weight: 700;
 
             word-break: break-word;
+
         }
 
 
         /* ==========================================
-           BUTTON CONTAINER
-        ========================================== */
+           NEXT STEP
+        =========================================== */
+
+        .next-step {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 27px;
+
+            padding:
+                13px
+                15px;
+
+            border-radius: 10px;
+
+            background: #f3f7fc;
+
+            border:
+                1px solid #e2e9f2;
+
+        }
+
+        .next-step-icon {
+
+            width: 38px;
+            height: 38px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            color: var(--navy);
+
+            background: white;
+
+        }
+
+        .next-step strong {
+
+            display: block;
+
+            margin-bottom: 2px;
+
+            color: var(--navy);
+
+            font-size: 10px;
+
+        }
+
+        .next-step p {
+
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 8px;
+
+        }
+
+
+        /* ==========================================
+           ACTION BUTTONS
+        =========================================== */
 
         .action-buttons {
-            width: 100%;
-
-            margin-top: 26px;
 
             display: grid;
 
             grid-template-columns:
                 repeat(3, 1fr);
 
-            gap: 12px;
+            gap: 10px;
+
         }
 
-
-        /* ==========================================
-           COMMON BUTTON STYLE
-        ========================================== */
-
         .action-buttons .btn {
-            min-height: 50px;
+
+            min-height: 48px;
 
             display: flex;
 
@@ -386,190 +874,244 @@
 
             gap: 7px;
 
+            border: none;
+
             border-radius: 9px;
 
-            font-size: 14px;
+            font-family: inherit;
+
+            font-size: 10px;
 
             font-weight: 700;
 
-            transition: all 0.25s ease;
+            transition: 0.25s ease;
+
         }
 
+        .print-btn {
 
-        /* ==========================================
-           PRINT BUTTON
-        ========================================== */
+            color: white;
 
-        .action-buttons .btn-primary {
-            border: none;
+            background: var(--navy);
 
-            background: #0d63b7;
         }
 
+        .print-btn:hover {
 
-        .action-buttons .btn-primary:hover {
-            background: #094f92;
+            color: white;
+
+            background: var(--navy-light);
 
             transform: translateY(-2px);
+
+        }
+
+        .ticket-btn {
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--orange),
+                    #ff9940
+                );
 
             box-shadow:
-                0 6px 15px rgba(13, 99, 183, 0.25);
+                0 8px 20px
+                rgba(245, 130, 32, 0.20);
+
         }
 
+        .ticket-btn:hover {
 
-        /* ==========================================
-           VIEW TICKET BUTTON
-        ========================================== */
+            color: white;
 
-        .action-buttons .btn-warning {
-            border: none;
-
-            background: #ff7900;
-
-            color: #ffffff;
-        }
-
-
-        .action-buttons .btn-warning:hover {
-            background: #dc6800;
-
-            color: #ffffff;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--orange-dark),
+                    var(--orange)
+                );
 
             transform: translateY(-2px);
 
-            box-shadow:
-                0 6px 15px rgba(255, 121, 0, 0.25);
         }
 
+        .home-btn {
 
-        /* ==========================================
-           HOME BUTTON
-        ========================================== */
+            border:
+                1px solid
+                var(--border) !important;
 
-        .action-buttons .btn-outline-secondary {
-            border: 2px solid #aab5c0;
+            color: var(--navy);
 
-            background: #ffffff;
+            background: white;
 
-            color: #536273;
         }
 
+        .home-btn:hover {
 
-        .action-buttons .btn-outline-secondary:hover {
-            background: #536273;
+            color: white;
 
-            border-color: #536273;
-
-            color: #ffffff;
+            background: var(--navy);
 
             transform: translateY(-2px);
+
         }
 
 
         /* ==========================================
-           TABLET
-        ========================================== */
+           BOTTOM MESSAGE
+        =========================================== */
 
-        @media (max-width: 768px) {
+        .bottom-message {
 
-            .success-container {
-                padding: 15px 6px;
+            margin:
+                22px
+                0
+                0;
+
+            text-align: center;
+
+            color: #9099a7;
+
+            font-size: 8px;
+
+        }
+
+        .bottom-message i {
+
+            margin-right: 4px;
+
+            color: var(--green);
+
+        }
+
+
+        /* ==========================================
+           RESPONSIVE
+        =========================================== */
+
+        @media
+        (max-width: 768px) {
+
+            .success-page {
+
+                padding:
+                    22px
+                    10px;
+
             }
-
 
             .success-card {
-                padding: 28px 20px !important;
 
-                border-radius: 15px;
+                padding:
+                    28px
+                    20px !important;
+
+                border-radius: 17px;
+
             }
 
+            .success-heading h2 {
 
-            .success-card h3 {
-                font-size: 25px;
+                font-size: 24px;
+
             }
 
+            .info {
 
-            .check-icon {
-                width: 78px;
-                height: 78px;
+                grid-template-columns: 1fr;
 
-                font-size: 43px;
             }
-
-
-            .pnr-number {
-                font-size: 25px;
-            }
-
 
             .action-buttons {
+
                 grid-template-columns: 1fr;
+
             }
 
         }
 
 
-        /* ==========================================
-           SMALL MOBILE
-        ========================================== */
+        @media
+        (max-width: 480px) {
 
-        @media (max-width: 480px) {
+            .success-page {
 
-            .success-container {
-                padding: 8px 4px;
+                padding:
+                    14px
+                    7px;
+
             }
 
+            .brand-link h1 {
+
+                font-size: 16px;
+
+            }
+
+            .brand-link p {
+
+                display: none;
+
+            }
 
             .success-card {
-                padding: 22px 15px !important;
 
-                border-radius: 12px;
+                padding:
+                    23px
+                    14px !important;
+
+                border-radius: 14px;
+
             }
 
+            .check-wrapper {
 
-            .success-card h3 {
-                font-size: 22px;
+                width: 88px;
+                height: 88px;
+
             }
-
 
             .check-icon {
-                width: 70px;
-                height: 70px;
 
-                font-size: 38px;
+                width: 68px;
+                height: 68px;
+
+                font-size: 31px;
+
             }
 
+            .success-heading h2 {
+
+                font-size: 21px;
+
+            }
 
             .pnr-box {
-                padding: 16px 10px;
+
+                padding:
+                    18px
+                    12px;
+
             }
 
-
             .pnr-number {
+
                 font-size: 22px;
 
                 letter-spacing: 2px;
+
             }
 
+            .details-title {
 
-            .info {
-                padding: 15px;
-            }
-
-
-            .info p {
                 align-items: flex-start;
 
                 flex-direction: column;
 
-                gap: 4px;
-
-                padding: 12px 3px;
-            }
-
-
-            .info span {
-                text-align: left;
             }
 
         }
@@ -577,46 +1119,68 @@
 
         /* ==========================================
            PRINT
-        ========================================== */
+        =========================================== */
 
         @media print {
 
             body {
+
+                background: white;
+
+            }
+
+            .success-page {
+
                 display: block;
 
-                background: #ffffff;
-            }
-
-
-            .success-container {
-                width: 100%;
-
                 padding: 0;
+
             }
 
+            .success-brand,
+            .no-print {
+
+                display: none !important;
+
+            }
+
+            .success-wrapper {
+
+                max-width: 100%;
+
+            }
 
             .success-card {
+
                 width: 100%;
 
-                padding: 20px !important;
+                padding:
+                    25px !important;
+
+                border:
+                    1px solid #ddd;
 
                 border-radius: 0;
 
-                box-shadow: none !important;
+                box-shadow: none;
+
             }
-
-
-            .no-print {
-                display: none !important;
-            }
-
 
             .success-card::before {
-                background: #198754 !important;
+
+                background:
+                    var(--green) !important;
 
                 -webkit-print-color-adjust: exact;
 
                 print-color-adjust: exact;
+
+            }
+
+            .check-ring {
+
+                display: none;
+
             }
 
         }
@@ -629,224 +1193,396 @@
 <body>
 
 
-<!-- ========================================= -->
-<!-- MAIN SUCCESS CONTAINER -->
-<!-- ========================================= -->
+<!-- ==========================================
+     SUCCESS PAGE
+=========================================== -->
 
-<div class="success-container">
-
-
-    <!-- ========================================= -->
-    <!-- SUCCESS CARD -->
-    <!-- ========================================= -->
-
-    <div class="card success-card">
+<div class="success-page">
 
 
-        <!-- ========================================= -->
-        <!-- SUCCESS ICON -->
-        <!-- ========================================= -->
+    <div class="success-wrapper">
 
-        <div class="check-icon">
 
-            <i class="fa-solid fa-check"></i>
+        <!-- ==========================================
+             BRAND
+        =========================================== -->
+
+        <div class="success-brand no-print">
+
+            <a
+                href="index.html"
+                class="brand-link">
+
+                <div class="brand-icon">
+
+                    <i class="fa-solid fa-train-subway"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h1>
+                        RailConnect
+                    </h1>
+
+                    <p>
+                        Railway Reservation System
+                    </p>
+
+                </div>
+
+            </a>
 
         </div>
 
 
-        <!-- ========================================= -->
-        <!-- TITLE -->
-        <!-- ========================================= -->
 
-        <h3>
+        <!-- ==========================================
+             SUCCESS CARD
+        =========================================== -->
 
-            Payment Successful
-
-        </h3>
+        <div class="card success-card">
 
 
-        <!-- ========================================= -->
-        <!-- MESSAGE -->
-        <!-- ========================================= -->
+            <!-- ==========================================
+                 SUCCESS ICON
+            =========================================== -->
 
-        <p class="success-message">
+            <div class="check-wrapper">
 
-            Your payment has been completed successfully and your ticket is confirmed.
-
-        </p>
+                <div class="check-ring"></div>
 
 
-        <!-- ========================================= -->
-        <!-- PNR -->
-        <!-- ========================================= -->
+                <div class="check-icon">
 
-        <div class="pnr-box">
+                    <i class="fa-solid fa-check"></i>
 
-
-            <div class="pnr-label">
-
-                Your Booking PNR
+                </div>
 
             </div>
 
 
-            <div
-                id="pnr"
-                class="pnr-number">
 
-                -
+            <!-- ==========================================
+                 HEADING
+            =========================================== -->
+
+            <div class="success-heading">
+
+
+                <span class="status-label">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Booking Confirmed
+
+                </span>
+
+
+                <h2>
+                    Payment Successful
+                </h2>
+
+
+                <p class="success-message">
+
+                    Your payment has been completed successfully
+                    and your railway ticket has been confirmed.
+
+                </p>
+
 
             </div>
 
 
-        </div>
+
+            <!-- ==========================================
+                 PNR
+            =========================================== -->
+
+            <div class="pnr-box">
 
 
-        <!-- ========================================= -->
-        <!-- PAYMENT INFORMATION -->
-        <!-- ========================================= -->
+                <div class="pnr-label">
 
-        <div class="info">
+                    Booking PNR
 
-
-            <!-- TRANSACTION ID -->
-
-            <p>
-
-                <b>
-
-                    <i class="fa-solid fa-receipt"></i>
-
-                    Transaction ID
-
-                </b>
+                </div>
 
 
-                <span id="txnId">
+                <div
+                    id="pnr"
+                    class="pnr-number">
 
                     -
 
-                </span>
+                </div>
+
+
+                <div class="pnr-note">
+
+                    Keep this PNR for booking and journey reference.
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 PAYMENT DETAILS HEADING
+            =========================================== -->
+
+            <div class="details-title">
+
+
+                <h3>
+
+                    <span>
+
+                        <i class="fa-solid fa-receipt"></i>
+
+                    </span>
+
+                    Payment Details
+
+                </h3>
+
+
+                <div class="secure-payment">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    Secure Payment
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 PAYMENT INFORMATION
+            =========================================== -->
+
+            <div class="info">
+
+
+                <!-- TRANSACTION -->
+
+                <div class="info-item">
+
+
+                    <div class="info-label">
+
+                        <i class="fa-solid fa-receipt"></i>
+
+                        Transaction ID
+
+                    </div>
+
+
+                    <span
+                        id="txnId"
+                        class="info-value">
+
+                        -
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- AMOUNT -->
+
+                <div class="info-item">
+
+
+                    <div class="info-label">
+
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                        Amount Paid
+
+                    </div>
+
+
+                    <span
+                        id="amount"
+                        class="info-value">
+
+                        -
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- DATE -->
+
+                <div class="info-item">
+
+
+                    <div class="info-label">
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                        Payment Date
+
+                    </div>
+
+
+                    <span
+                        id="date"
+                        class="info-value">
+
+                        -
+
+                    </span>
+
+
+                </div>
+
+
+
+                <!-- TIME -->
+
+                <div class="info-item">
+
+
+                    <div class="info-label">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        Payment Time
+
+                    </div>
+
+
+                    <span
+                        id="time"
+                        class="info-value">
+
+                        -
+
+                    </span>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 NEXT STEP
+            =========================================== -->
+
+            <div class="next-step">
+
+
+                <div class="next-step-icon">
+
+                    <i class="fa-solid fa-ticket"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Your E-Ticket is ready
+                    </strong>
+
+
+                    <p>
+
+                        Open your ticket to view train,
+                        passenger, seat and payment details.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 ACTION BUTTONS
+            =========================================== -->
+
+            <div class="action-buttons no-print">
+
+
+                <!-- PRINT -->
+
+                <button
+                    type="button"
+                    class="btn print-btn"
+                    onclick="printReceipt()">
+
+                    <i class="fa-solid fa-print"></i>
+
+                    Print Receipt
+
+                </button>
+
+
+
+                <!-- VIEW TICKET -->
+
+                <button
+                    type="button"
+                    class="btn ticket-btn"
+                    onclick="goTicket()">
+
+                    <i class="fa-solid fa-ticket"></i>
+
+                    View E-Ticket
+
+                </button>
+
+
+
+                <!-- HOME -->
+
+                <button
+                    type="button"
+                    class="btn home-btn"
+                    onclick="goHome()">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Back to Home
+
+                </button>
+
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 BOTTOM MESSAGE
+            =========================================== -->
+
+            <p class="bottom-message">
+
+                <i class="fa-solid fa-lock"></i>
+
+                Your booking and payment information is securely processed.
 
             </p>
-
-
-            <!-- AMOUNT -->
-
-            <p>
-
-                <b>
-
-                    <i class="fa-solid fa-indian-rupee-sign"></i>
-
-                    Amount
-
-                </b>
-
-
-                <span id="amount">
-
-                    -
-
-                </span>
-
-            </p>
-
-
-            <!-- DATE -->
-
-            <p>
-
-                <b>
-
-                    <i class="fa-solid fa-calendar-days"></i>
-
-                    Date
-
-                </b>
-
-
-                <span id="date">
-
-                    -
-
-                </span>
-
-            </p>
-
-
-            <!-- TIME -->
-
-            <p>
-
-                <b>
-
-                    <i class="fa-solid fa-clock"></i>
-
-                    Time
-
-                </b>
-
-
-                <span id="time">
-
-                    -
-
-                </span>
-
-            </p>
-
-
-        </div>
-
-
-        <!-- ========================================= -->
-        <!-- BUTTONS -->
-        <!-- ========================================= -->
-
-        <div class="action-buttons no-print">
-
-
-            <!-- PRINT RECEIPT -->
-
-            <button
-                type="button"
-                class="btn btn-primary"
-                onclick="printReceipt()">
-
-                <i class="fa-solid fa-print"></i>
-
-                Print Receipt
-
-            </button>
-
-
-            <!-- VIEW TICKET -->
-
-            <button
-                type="button"
-                class="btn btn-warning"
-                onclick="goTicket()">
-
-                <i class="fa-solid fa-ticket"></i>
-
-                View Ticket
-
-            </button>
-
-
-            <!-- HOME -->
-
-            <button
-                type="button"
-                class="btn btn-outline-secondary"
-                onclick="goHome()">
-
-                <i class="fa-solid fa-house"></i>
-
-                Back to Home
-
-            </button>
 
 
         </div>
@@ -858,9 +1594,10 @@
 </div>
 
 
-<!-- ========================================= -->
-<!-- SUCCESS JAVASCRIPT -->
-<!-- ========================================= -->
+
+<!-- ==========================================
+     SUCCESS JAVASCRIPT
+=========================================== -->
 
 <script src="../javascript/success.js"></script>
 

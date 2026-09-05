@@ -9,21 +9,21 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>IRCTC Clone</title>
+    <title>RailConnect - Railway Reservation System</title>
 
 
-    <!-- =========================
-         Flatpickr
-    ========================== -->
+    <!-- ==========================================
+         FLATPICKR
+    =========================================== -->
 
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 
-    <!-- =========================
-         Google Font
-    ========================== -->
+    <!-- ==========================================
+         GOOGLE FONT
+    =========================================== -->
 
     <link
         rel="preconnect"
@@ -35,31 +35,31 @@
         crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
 
-    <!-- =========================
-         Font Awesome
-    ========================== -->
+    <!-- ==========================================
+         FONT AWESOME
+    =========================================== -->
 
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
 
-    <!-- =========================
-         Bootstrap
-    ========================== -->
+    <!-- ==========================================
+         BOOTSTRAP
+    =========================================== -->
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
 
-    <!-- =========================
-         CSS
-    ========================== -->
+    <!-- ==========================================
+         CUSTOM CSS
+    =========================================== -->
 
     <link
         rel="stylesheet"
@@ -68,489 +68,976 @@
 </head>
 
 
-
 <body>
 
 
-    <!-- =========================
-         BACKDROP
-    ========================== -->
 
-    <div class="backdrop"></div>
+<!-- ==========================================
+     BACKDROP
+=========================================== -->
 
-
-
-    <!-- =========================
-         NAVBAR
-    ========================== -->
-
-    <nav class="navbar navbar-expand-lg">
-
-        <div class="container">
-
-
-            <!-- LOGO -->
-
-            <a
-                class="navbar-brand"
-                href="index.html">
-
-                <img
-                    src="../images/logo_second.png"
-                    class="img-fluid"
-                    alt="IRCTC">
-
-            </a>
+<div class="backdrop"></div>
 
 
 
-            <!-- MOBILE BUTTON -->
+<!-- ==========================================
+     NAVBAR
+=========================================== -->
+
+<nav class="navbar navbar-expand-lg custom-navbar sticky-top">
+
+    <div class="container">
+
+
+        <!-- BRAND -->
+
+        <a
+            class="navbar-brand brand-area"
+            href="index.html">
+
+            <div class="brand-icon">
+
+                <i class="fa-solid fa-train-subway"></i>
+
+            </div>
+
+            <div>
+
+                <span class="brand-name">
+                    RailConnect
+                </span>
+
+                <small>
+                    Railway Reservation
+                </small>
+
+            </div>
+
+        </a>
+
+
+
+        <!-- MOBILE BUTTON -->
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+
+        <!-- NAVIGATION -->
+
+        <div
+            class="collapse navbar-collapse"
+            id="navbarSupportedContent">
+
+
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+
+
+                <!-- HOME -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link active"
+                        href="index.html">
+
+                        <i class="fa-solid fa-house me-1"></i>
+
+                        Home
+
+                    </a>
+
+                </li>
+
+
+
+                <!-- TRAINS -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="search.html">
+
+                        <i class="fa-solid fa-train me-1"></i>
+
+                        Trains
+
+                    </a>
+
+                </li>
+
+
+
+                <!-- MY BOOKINGS -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="mybooking.html">
+
+                        <i class="fa-solid fa-ticket me-1"></i>
+
+                        My Bookings
+
+                    </a>
+
+                </li>
+
+
+
+                <!-- LIVE TRAIN -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="livetrains.html">
+
+                        <i class="fa-solid fa-location-dot me-1"></i>
+
+                        Live Train
+
+                    </a>
+
+                </li>
+
+
+
+                <!-- CONTACT -->
+
+                <li class="nav-item">
+
+                    <a
+                        class="nav-link"
+                        href="#footer">
+
+                        <i class="fa-solid fa-headset me-1"></i>
+
+                        Contact
+
+                    </a>
+
+                </li>
+
+
+
+                <!-- LOGIN -->
+
+                <li class="nav-item ms-lg-2">
+
+                    <a
+                        class="nav-link login-nav-btn btnlogin-popup"
+                        id="loginBtn"
+                        href="#">
+
+                        <i class="fa-solid fa-right-to-bracket me-1"></i>
+
+                        Login / Register
+
+                    </a>
+
+                </li>
+
+
+
+                <!-- PROFILE -->
+
+                <li
+                    class="nav-item dropdown ms-lg-2"
+                    id="profileMenu"
+                    style="display: none;">
+
+
+                    <a
+                        class="nav-link dropdown-toggle profile-nav"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false">
+
+                        <img
+                            id="navProfileImage"
+                            src="../images/default-profile.png"
+                            width="42"
+                            height="42"
+                            alt="Profile">
+
+                    </a>
+
+
+
+                    <ul class="dropdown-menu dropdown-menu-end profile-dropdown">
+
+
+                        <!-- ADMIN -->
+
+                        <li
+                            id="adminDashboardMenu"
+                            style="display: none;">
+
+                            <a
+                                class="dropdown-item"
+                                href="admin.html">
+
+                                <i class="fa-solid fa-gauge-high me-2"></i>
+
+                                Admin Dashboard
+
+                            </a>
+
+                        </li>
+
+
+
+                        <!-- PROFILE -->
+
+                        <li>
+
+                            <a
+                                class="dropdown-item"
+                                href="profile.html">
+
+                                <i class="fa-solid fa-user me-2"></i>
+
+                                My Profile
+
+                            </a>
+
+                        </li>
+
+
+
+                        <!-- BOOKINGS -->
+
+                        <li>
+
+                            <a
+                                class="dropdown-item"
+                                href="mybooking.html">
+
+                                <i class="fa-solid fa-ticket me-2"></i>
+
+                                My Bookings
+
+                            </a>
+
+                        </li>
+
+
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+
+
+                        <!-- LOGOUT -->
+
+                        <li>
+
+                            <a
+                                class="dropdown-item text-danger"
+                                href="#"
+                                id="logout">
+
+                                <i class="fa-solid fa-right-from-bracket me-2"></i>
+
+                                Logout
+
+                            </a>
+
+                        </li>
+
+
+                    </ul>
+
+                </li>
+
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ==========================================
+     LOGIN / REGISTER POPUP
+=========================================== -->
+
+<div class="wrapper">
+
+
+    <!-- CLOSE -->
+
+    <span class="icon-close">
+
+        <i class="fa-solid fa-xmark"></i>
+
+    </span>
+
+
+
+    <!-- LOGIN -->
+
+    <div
+        class="form-box login"
+        id="loginFormBox">
+
+
+        <div class="form-heading-icon">
+
+            <i class="fa-solid fa-user-lock"></i>
+
+        </div>
+
+
+        <h2>
+            Welcome Back
+        </h2>
+
+
+        <p class="form-subtitle">
+            Login to manage your railway bookings
+        </p>
+
+
+        <form id="loginForm">
+
+
+            <!-- EMAIL -->
+
+            <div class="input-box">
+
+                <span class="icon">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                </span>
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    autocomplete="email"
+                    required>
+
+                <label>
+                    Email Address
+                </label>
+
+            </div>
+
+
+
+            <!-- PASSWORD -->
+
+            <div class="input-box">
+
+                <span class="icon">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                </span>
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    autocomplete="current-password"
+                    required>
+
+                <label>
+                    Password
+                </label>
+
+            </div>
+
+
+
+            <!-- REMEMBER -->
+
+            <div class="remembar-forgot">
+
+                <label>
+
+                    <input
+                        type="checkbox"
+                        id="rememberMe">
+
+                    Remember Me
+
+                </label>
+
+            </div>
+
+
+
+            <!-- LOGIN BUTTON -->
 
             <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
+                type="submit"
+                class="btn login-btn"
+                id="loginSubmitBtn">
 
-                <span class="navbar-toggler-icon"></span>
+                <i class="fa-solid fa-right-to-bracket me-2"></i>
+
+                Login
 
             </button>
 
 
 
-            <div
-                class="collapse navbar-collapse"
-                id="navbarSupportedContent">
+            <div class="login-register">
 
-                <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                <p>
 
+                    Don't have an account?
 
-                    <!-- HOME -->
+                    <a
+                        href="#"
+                        class="register-link">
 
-                    <li class="nav-item">
+                        Create Account
 
-                        <a
-                            class="nav-link active"
-                            href="index.html">
+                    </a>
 
-                            <i class="fa-solid fa-house-chimney"></i>
+                </p>
 
-                        </a>
+            </div>
 
-                    </li>
 
+        </form>
 
+    </div>
 
-                    <!-- LOGIN -->
 
-                    <li class="nav-item">
 
-                        <a
-                            class="nav-link btnlogin-popup"
-                            id="loginBtn"
-                            href="#">
+    <!-- ==========================================
+         REGISTER
+    =========================================== -->
 
-                            LOGIN / REGISTER
+    <div
+        class="form-box register"
+        id="registerFormBox">
 
-                        </a>
 
-                    </li>
+        <div class="form-heading-icon">
 
+            <i class="fa-solid fa-user-plus"></i>
 
+        </div>
 
-                    <!-- PROFILE -->
 
-                    <li
-                        class="nav-item dropdown"
-                        id="profileMenu"
-                        style="display: none;">
+        <h2>
+            Create Account
+        </h2>
 
-                        <a
-                            class="nav-link dropdown-toggle d-flex align-items-center"
-                            href="#"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
 
-                            <img
-                                id="navProfileImage"
-                                src="../images/default-profile.png"
-                                width="40"
-                                height="40"
-                                class="rounded-circle border border-2 border-primary"
-                                alt="Profile">
+        <p class="form-subtitle">
+            Register to start booking train tickets
+        </p>
 
-                        </a>
 
+        <form id="registerForm">
 
 
-                        <ul class="dropdown-menu dropdown-menu-end">
+            <!-- NAME -->
 
+            <div class="input-box">
 
-                            <!-- ADMIN DASHBOARD -->
+                <span class="icon">
 
-                            <li
-                                id="adminDashboardMenu"
-                                style="display: none;">
+                    <i class="fa-solid fa-user"></i>
 
-                                <a
-                                    class="dropdown-item"
-                                    href="admin.html">
+                </span>
 
-                                    <i class="fa-solid fa-gauge-high me-2"></i>
+                <input
+                    type="text"
+                    id="regUsername"
+                    autocomplete="name"
+                    required>
 
-                                    Admin Dashboard
+                <label>
+                    Full Name
+                </label>
 
-                                </a>
+            </div>
 
-                            </li>
 
 
+            <!-- EMAIL -->
 
-                            <!-- PROFILE -->
+            <div class="input-box">
 
-                            <li>
+                <span class="icon">
 
-                                <a
-                                    class="dropdown-item"
-                                    href="profile.html">
+                    <i class="fa-solid fa-envelope"></i>
 
-                                    <i class="fa-solid fa-user me-2"></i>
+                </span>
 
-                                    My Profile
+                <input
+                    type="email"
+                    id="regEmail"
+                    autocomplete="email"
+                    required>
 
-                                </a>
+                <label>
+                    Email Address
+                </label>
 
-                            </li>
+            </div>
 
 
 
-                            <!-- BOOKINGS -->
+            <!-- PHONE -->
 
-                            <li>
+            <div class="input-box">
 
-                                <a
-                                    class="dropdown-item"
-                                    href="mybooking.html">
+                <span class="icon">
 
-                                    <i class="fa-solid fa-ticket me-2"></i>
+                    <i class="fa-solid fa-phone"></i>
 
-                                    My Bookings
+                </span>
 
-                                </a>
+                <input
+                    type="tel"
+                    id="regPhone"
+                    autocomplete="tel"
+                    inputmode="numeric"
+                    maxlength="10"
+                    pattern="[0-9]{10}"
+                    required>
 
-                            </li>
+                <label>
+                    Phone Number
+                </label>
 
+            </div>
 
 
-                            <li>
 
-                                <hr class="dropdown-divider">
+            <!-- PASSWORD -->
 
-                            </li>
+            <div class="input-box">
 
+                <span class="icon">
 
+                    <i class="fa-solid fa-lock"></i>
 
-                            <!-- LOGOUT -->
+                </span>
 
-                            <li>
+                <input
+                    type="password"
+                    id="regPassword"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required>
 
-                                <a
-                                    class="dropdown-item text-danger"
-                                    href="#"
-                                    id="logout">
+                <label>
+                    Password
+                </label>
 
-                                    <i class="fa-solid fa-right-from-bracket me-2"></i>
+            </div>
 
-                                    Logout
 
-                                </a>
 
-                            </li>
+            <!-- TERMS -->
 
-                        </ul>
+            <div class="remembar-forgot">
 
-                    </li>
+                <label>
 
+                    <input
+                        type="checkbox"
+                        id="termsCheckbox"
+                        required>
 
+                    I agree to the terms & conditions
 
-                    <!-- TRAINS -->
+                </label>
 
-                    <li class="nav-item dropdown">
+            </div>
 
-                        <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
 
-                            TRAINS
 
-                        </a>
+            <!-- REGISTER BUTTON -->
 
+            <button
+                type="submit"
+                class="btn register-btn"
+                id="registerSubmitBtn">
 
-                        <ul class="dropdown-menu">
+                <i class="fa-solid fa-user-plus me-2"></i>
 
-                            <li>
+                Register
 
-                                <a
-                                    class="dropdown-item"
-                                    href="search.html">
+            </button>
 
-                                    Book Ticket
 
-                                </a>
 
-                            </li>
+            <div class="login-register">
 
+                <p>
 
-                            <li>
+                    Already have an account?
 
-                                <a
-                                    class="dropdown-item"
-                                    href="mybooking.html">
+                    <a
+                        href="#"
+                        class="login-link">
 
-                                    Cancel E-Ticket
+                        Login
 
-                                </a>
+                    </a>
 
-                            </li>
+                </p>
 
+            </div>
 
-                            <li>
 
-                                <a
-                                    class="dropdown-item"
-                                    href="#">
+        </form>
 
-                                    Link Your Aadhaar
+    </div>
 
-                                </a>
+</div>
 
-                            </li>
 
-                        </ul>
 
-                    </li>
+<!-- ==========================================
+     HERO SECTION
+=========================================== -->
 
+<section class="hero-section">
 
 
-                    <!-- MEALS -->
+    <div class="hero-overlay"></div>
 
-                    <li class="nav-item dropdown">
 
-                        <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
+    <div class="container hero-container">
 
-                            MEALS
 
-                        </a>
+        <div class="row align-items-center">
 
 
-                        <ul class="dropdown-menu">
+            <!-- HERO CONTENT -->
 
-                            <li>
+            <div class="col-lg-6 hero-content">
 
-                                <a
-                                    class="dropdown-item"
-                                    href="#">
 
-                                    Book Food - E-Pantry
+                <span class="hero-badge">
 
-                                </a>
+                    <i class="fa-solid fa-train"></i>
 
-                            </li>
+                    Smart Railway Reservation
 
+                </span>
 
-                            <li>
 
-                                <a
-                                    class="dropdown-item"
-                                    href="#">
+                <h1>
 
-                                    Order Food - E-Catering
+                    Travel Across India
 
-                                </a>
+                    <span>
+                        With Confidence
+                    </span>
 
-                            </li>
+                </h1>
 
 
-                            <li>
+                <p>
 
-                                <a
-                                    class="dropdown-item"
-                                    href="#">
+                    Search trains, reserve your seat,
+                    manage bookings and track your journey
+                    from one convenient platform.
 
-                                    Cooked Food Menu
+                </p>
 
-                                </a>
 
-                            </li>
 
-                        </ul>
+                <div class="hero-features">
 
-                    </li>
 
+                    <div>
 
+                        <i class="fa-solid fa-shield-halved"></i>
 
-                    <!-- E-WALLET -->
-
-                    <li class="nav-item dropdown">
-
-                        <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
-
-                            E-WALLET
-
-                        </a>
-
-
-                        <ul class="dropdown-menu">
-
-                            <li>
-
-                                <a
-                                    class="dropdown-item"
-                                    href="#">
-
-                                    About IRCTC eWallet
-
-                                </a>
-
-                            </li>
-
-
-                            <li>
-
-                                <a
-                                    class="dropdown-item"
-                                    href="#">
-
-                                    IRCTC eWallet User Guide
-
-                                </a>
-
-                            </li>
-
-                        </ul>
-
-                    </li>
-
-
-
-                    <!-- ALERTS -->
-
-                    <li class="nav-item">
-
-                        <a
-                            class="nav-link"
-                            href="#">
-
-                            ALERTS
-
-                        </a>
-
-                    </li>
-
-
-
-                    <!-- OTHER SERVICES -->
-
-                    <li class="nav-item dropdown">
-
-                        <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false">
-
-                            OTHER SERVICES
-
-                        </a>
-
-
-                        <ul class="dropdown-menu">
-
-                            <li>
-
-                                <a
-                                    class="dropdown-item"
-                                    href="#">
-
-                                    IRCTC-iPAY
-
-                                </a>
-
-                            </li>
-
-
-                            <li>
-
-                                <a
-                                    class="dropdown-item"
-                                    href="#">
-
-                                    Flights
-
-                                </a>
-
-                            </li>
-
-                        </ul>
-
-                    </li>
-
-
-
-                    <!-- CONTACT -->
-
-                    <li class="nav-item">
-
-                        <a
-                            class="nav-link"
-                            href="#">
-
-                            CONTACT US
-
-                        </a>
-
-                    </li>
-
-                </ul>
-
-
-
-                <!-- SECOND LOGO -->
-
-                <div class="navbar-logo">
-
-                    <div class="logo">
-
-                        <a
-                            class="navbar-brand"
-                            href="index.html">
-
-                            <img
-                                src="../images/logo_second.png"
-                                class="img-fluid"
-                                alt="IRCTC">
-
-                        </a>
+                        Secure Booking
 
                     </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-bolt"></i>
+
+                        Fast Search
+
+                    </div>
+
+
+                    <div>
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                        Live Tracking
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ==========================================
+                 SEARCH CARD
+            =========================================== -->
+
+            <div class="col-lg-6">
+
+
+                <div class="ticket-box">
+
+
+                    <div class="ticket-heading">
+
+
+                        <div class="ticket-heading-icon">
+
+                            <i class="fa-solid fa-ticket"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h2>
+                                Book Your Journey
+                            </h2>
+
+                            <p>
+                                Find trains and reserve your seat
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <form id="bookingForm">
+
+
+                        <!-- FROM / TO -->
+
+                        <div class="station-row">
+
+
+                            <!-- FROM -->
+
+                            <div class="field station-field">
+
+                                <span class="icon">
+
+                                    <i class="fa-solid fa-train-subway"></i>
+
+                                </span>
+
+                                <label for="from">
+                                    From
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="from"
+                                    placeholder="Enter departure station"
+                                    autocomplete="off"
+                                    required>
+
+                            </div>
+
+
+
+                            <!-- SWAP -->
+
+                            <button
+                                type="button"
+                                class="reverse-btn"
+                                id="swapBtn"
+                                title="Swap Stations">
+
+                                <i class="fa-solid fa-arrow-right-arrow-left"></i>
+
+                            </button>
+
+
+
+                            <!-- TO -->
+
+                            <div class="field station-field">
+
+                                <span class="icon">
+
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                </span>
+
+                                <label for="to">
+                                    To
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="to"
+                                    placeholder="Enter destination station"
+                                    autocomplete="off"
+                                    required>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <!-- DATE -->
+
+                        <div class="field">
+
+                            <span class="icon">
+
+                                <i class="fa-solid fa-calendar-days"></i>
+
+                            </span>
+
+                            <label for="date">
+                                Journey Date
+                            </label>
+
+                            <input
+                                type="text"
+                                id="date"
+                                placeholder="Select journey date"
+                                autocomplete="off"
+                                required>
+
+                        </div>
+
+
+
+                        <!-- CLASS -->
+
+                        <div class="field">
+
+                            <span class="icon">
+
+                                <i class="fa-solid fa-chair"></i>
+
+                            </span>
+
+                            <label for="all-classes">
+                                Travel Class
+                            </label>
+
+                            <select id="all-classes">
+
+                                <option value="ALL CLASSES">
+                                    All Classes
+                                </option>
+
+                                <option value="1A">
+                                    AC First Class (1A)
+                                </option>
+
+                                <option value="2A">
+                                    AC 2 Tier (2A)
+                                </option>
+
+                                <option value="3A">
+                                    AC 3 Tier (3A)
+                                </option>
+
+                                <option value="SL">
+                                    Sleeper (SL)
+                                </option>
+
+                                <option value="CC">
+                                    AC Chair Car (CC)
+                                </option>
+
+                                <option value="2S">
+                                    Second Sitting (2S)
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- OPTIONS -->
+
+                        <div class="booking-options">
+
+                            <label>
+
+                                <input
+                                    type="checkbox"
+                                    id="flexibleDate">
+
+                                <span>
+                                    Flexible with Date
+                                </span>
+
+                            </label>
+
+
+                            <span class="secure-text">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                                Secure Booking
+
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- SEARCH -->
+
+                        <button
+                            type="submit"
+                            class="search-btn"
+                            id="searchTrainBtn">
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                            Search Trains
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </button>
+
+
+                    </form>
 
                 </div>
 
@@ -558,715 +1045,691 @@
 
         </div>
 
-    </nav>
+    </div>
+
+</section>
 
 
 
-    <!-- =========================
-         MAIN SECTION
-    ========================== -->
+<!-- ==========================================
+     QUICK SERVICES
+=========================================== -->
 
-    <section class="main">
+<section class="quick-services">
 
-
-        <!-- =========================
-             LOGIN / REGISTER POPUP
-        ========================== -->
-
-        <div class="wrapper">
+    <div class="container">
 
 
-            <!-- CLOSE -->
+        <div class="section-heading">
 
-            <span class="icon-close">
-
-                <i class="fa-solid fa-xmark"></i>
-
+            <span>
+                QUICK ACCESS
             </span>
 
-
-
-            <!-- =========================
-                 LOGIN FORM
-            ========================== -->
-
-            <div
-                class="form-box login"
-                id="loginFormBox">
-
-                <h2>Login</h2>
-
-
-                <form id="loginForm">
-
-
-                    <!-- EMAIL -->
-
-                    <div class="input-box">
-
-                        <span class="icon">
-
-                            <i class="fa-solid fa-envelope"></i>
-
-                        </span>
-
-
-                        <input
-                            type="email"
-                            id="loginEmail"
-                            autocomplete="email"
-                            required>
-
-
-                        <label>
-                            Email
-                        </label>
-
-                    </div>
-
-
-
-                    <!-- PASSWORD -->
-
-                    <div class="input-box">
-
-                        <span class="icon">
-
-                            <i class="fa-solid fa-lock"></i>
-
-                        </span>
-
-
-                        <input
-                            type="password"
-                            id="loginPassword"
-                            autocomplete="current-password"
-                            required>
-
-
-                        <label>
-                            Password
-                        </label>
-
-                    </div>
-
-
-
-                    <!-- REMEMBER -->
-
-                    <div class="remembar-forgot">
-
-                        <label>
-
-                            <input
-                                type="checkbox"
-                                id="rememberMe">
-
-                            Remember Me
-
-                        </label>
-
-                    </div>
-
-
-
-                    <!-- LOGIN BUTTON -->
-
-                    <button
-                        type="submit"
-                        class="btn login-btn"
-                        id="loginSubmitBtn">
-
-                        Login
-
-                    </button>
-
-
-
-                    <div class="login-register">
-
-                        <p>
-
-                            Don't have an account?
-
-                            <a
-                                href="#"
-                                class="register-link">
-
-                                Register
-
-                            </a>
-
-                        </p>
-
-                    </div>
-
-                </form>
-
-            </div>
-
-
-
-            <!-- =========================
-                 REGISTER FORM
-            ========================== -->
-
-            <div
-                class="form-box register"
-                id="registerFormBox">
-
-                <h2>Register</h2>
-
-
-                <form id="registerForm">
-
-
-                    <!-- FULL NAME -->
-
-                    <div class="input-box">
-
-                        <span class="icon">
-
-                            <i class="fa-solid fa-user"></i>
-
-                        </span>
-
-
-                        <input
-                            type="text"
-                            id="regUsername"
-                            autocomplete="name"
-                            required>
-
-
-                        <label>
-                            Full Name
-                        </label>
-
-                    </div>
-
-
-
-                    <!-- EMAIL -->
-
-                    <div class="input-box">
-
-                        <span class="icon">
-
-                            <i class="fa-solid fa-envelope"></i>
-
-                        </span>
-
-
-                        <input
-                            type="email"
-                            id="regEmail"
-                            autocomplete="email"
-                            required>
-
-
-                        <label>
-                            Email
-                        </label>
-
-                    </div>
-
-
-
-                    <!-- PHONE -->
-
-                    <div class="input-box">
-
-                        <span class="icon">
-
-                            <i class="fa-solid fa-phone"></i>
-
-                        </span>
-
-
-                        <input
-                            type="tel"
-                            id="regPhone"
-                            autocomplete="tel"
-                            inputmode="numeric"
-                            maxlength="10"
-                            pattern="[0-9]{10}"
-                            required>
-
-
-                        <label>
-                            Phone
-                        </label>
-
-                    </div>
-
-
-
-                    <!-- PASSWORD -->
-
-                    <div class="input-box">
-
-                        <span class="icon">
-
-                            <i class="fa-solid fa-lock"></i>
-
-                        </span>
-
-
-                        <input
-                            type="password"
-                            id="regPassword"
-                            autocomplete="new-password"
-                            minlength="6"
-                            required>
-
-
-                        <label>
-                            Password
-                        </label>
-
-                    </div>
-
-
-
-                    <!-- TERMS -->
-
-                    <div class="remembar-forgot">
-
-                        <label>
-
-                            <input
-                                type="checkbox"
-                                id="termsCheckbox"
-                                required>
-
-                            I agree to the terms & conditions
-
-                        </label>
-
-                    </div>
-
-
-
-                    <!-- REGISTER BUTTON -->
-
-                    <button
-                        type="submit"
-                        class="btn register-btn"
-                        id="registerSubmitBtn">
-
-                        Register
-
-                    </button>
-
-
-
-                    <div class="login-register">
-
-                        <p>
-
-                            Already have an account?
-
-                            <a
-                                href="#"
-                                class="login-link">
-
-                                Login
-
-                            </a>
-
-                        </p>
-
-                    </div>
-
-                </form>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- =========================
-             HERO
-        ========================== -->
-
-        <div class="hero-msg">
-
-            <h1>
-                INDIAN RAILWAY
-            </h1>
+            <h2>
+                Everything You Need For Your Journey
+            </h2>
 
             <p>
-                Safety | Security | Punctuality
+                Manage your railway journey from booking
+                to destination.
             </p>
 
         </div>
 
 
 
-        <!-- =========================
-             BOOK TICKET
-        ========================== -->
+        <div class="row g-4">
 
-        <div class="ticket-box">
+
+            <!-- SEARCH TRAINS -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <a
+                    href="search.html"
+                    class="service-card">
+
+                    <div class="service-icon">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                    </div>
+
+                    <h3>
+                        Search Trains
+                    </h3>
+
+                    <p>
+                        Find trains between your selected stations.
+                    </p>
+
+                    <span>
+                        Search Now
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </span>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- BOOKINGS -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <a
+                    href="mybooking.html"
+                    class="service-card">
+
+                    <div class="service-icon">
+
+                        <i class="fa-solid fa-ticket"></i>
+
+                    </div>
+
+                    <h3>
+                        My Bookings
+                    </h3>
+
+                    <p>
+                        View, manage and cancel your booked tickets.
+                    </p>
+
+                    <span>
+
+                        View Bookings
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </span>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- LIVE TRAIN -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <a
+                    href="livetrains.html"
+                    class="service-card">
+
+                    <div class="service-icon">
+
+                        <i class="fa-solid fa-location-crosshairs"></i>
+
+                    </div>
+
+                    <h3>
+                        Live Train
+                    </h3>
+
+                    <p>
+                        Track your train and journey information.
+                    </p>
+
+                    <span>
+
+                        Track Train
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </span>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- PROFILE -->
+
+            <div class="col-lg-3 col-md-6">
+
+                <a
+                    href="profile.html"
+                    class="service-card">
+
+                    <div class="service-icon">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+                    <h3>
+                        My Profile
+                    </h3>
+
+                    <p>
+                        Manage account and personal information.
+                    </p>
+
+                    <span>
+
+                        View Profile
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </span>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     HOW IT WORKS
+=========================================== -->
+
+<section class="booking-process">
+
+    <div class="container">
+
+
+        <div class="section-heading">
+
+            <span>
+                EASY BOOKING
+            </span>
 
             <h2>
-                BOOK TICKET
+                Book Your Ticket In 4 Simple Steps
             </h2>
 
-
-            <form id="bookingForm">
-
-
-                <!-- =========================
-                     FROM / TO ROW
-                ========================== -->
-
-                <div class="row">
-
-
-                    <!-- FROM -->
-
-                    <div
-                        class="field station-field">
-
-                        <span class="icon">
-
-                            <i class="fa-solid fa-paper-plane"></i>
-
-                        </span>
-
-
-                        <label for="from">
-
-                            From
-
-                        </label>
-
-
-                        <input
-                            type="text"
-                            id="from"
-                            placeholder="From Station"
-                            autocomplete="off"
-                            required>
-
-                    </div>
+        </div>
 
 
 
-                    <!-- SWAP -->
-
-                    <button
-                        type="button"
-                        class="btn reverse-btn"
-                        id="swapBtn"
-                        title="Swap Stations">
-
-                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
-
-                    </button>
+        <div class="process-wrapper">
 
 
+            <!-- STEP 1 -->
 
-                    <!-- TO -->
+            <div class="process-step">
 
-                    <div
-                        class="field station-field">
-
-                        <span class="icon">
-
-                            <i class="fa-solid fa-location-crosshairs"></i>
-
-                        </span>
-
-
-                        <label for="to">
-
-                            To
-
-                        </label>
-
-
-                        <input
-                            type="text"
-                            id="to"
-                            placeholder="To Station"
-                            autocomplete="off"
-                            required>
-
-                    </div>
-
+                <div class="process-number">
+                    01
                 </div>
 
-
-
-                <!-- =========================
-                     DATE
-                ========================== -->
-
-                <div class="field">
-
-                    <span class="icon">
-
-                        <i class="fa-solid fa-calendar-days"></i>
-
-                    </span>
-
-
-                    <label for="date">
-
-                        Journey Date
-
-                    </label>
-
-
-                    <input
-                        type="text"
-                        id="date"
-                        placeholder="Select Journey Date"
-                        autocomplete="off"
-                        required>
-
-                </div>
-
-
-
-                <!-- =========================
-                     CLASS
-                ========================== -->
-
-                <div class="field">
-
-                    <span class="icon">
-
-                        <i class="fa-solid fa-briefcase"></i>
-
-                    </span>
-
-
-                    <label for="all-classes">
-
-                        Class
-
-                    </label>
-
-
-                    <select id="all-classes">
-
-                        <option value="ALL CLASSES">
-                            ALL CLASSES
-                        </option>
-
-                        <option value="1A">
-                            AC First Class (1A)
-                        </option>
-
-                        <option value="2A">
-                            AC 2 Tier (2A)
-                        </option>
-
-                        <option value="3A">
-                            AC 3 Tier (3A)
-                        </option>
-
-                        <option value="SL">
-                            Sleeper (SL)
-                        </option>
-
-                        <option value="CC">
-                            AC Chair Car (CC)
-                        </option>
-
-                        <option value="2S">
-                            Second Sitting (2S)
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-
-                <!-- =========================
-                     FLEXIBLE DATE
-                ========================== -->
-
-                <div class="flexible">
-
-                    <label>
-
-                        <input
-                            type="checkbox"
-                            id="flexibleDate">
-
-                        Flexible with Date
-
-                    </label>
-
-                </div>
-
-
-
-                <!-- =========================
-                     SEARCH BUTTON
-                ========================== -->
-
-                <button
-                    type="submit"
-                    class="btn search-btn"
-                    id="searchTrainBtn">
+                <div class="process-icon">
 
                     <i class="fa-solid fa-magnifying-glass"></i>
 
-                    Search Train
+                </div>
 
-                </button>
+                <h4>
+                    Search
+                </h4>
 
+                <p>
+                    Select departure, destination and journey date.
+                </p>
 
-            </form>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
-    <div class="footerpanal">
-
-        <h1>
-            Get Connected with us on social networks
-        </h1>
-
-
-        <span class="icon">
-
-            <i class="fa-brands fa-facebook"></i>
-
-            <i class="fa-brands fa-youtube"></i>
-
-            <i class="fa-brands fa-instagram"></i>
-
-        </span>
-
-    </div>
+            </div>
 
 
 
-    <div class="footer-panal1">
-
-        <div class="panal">
-
-
-            <ul>
-
-                <li>IRCTC Trains</li>
-
-                <li>Information</li>
-
-                <li>Important Information</li>
-
-                <li>Agents</li>
-
-                <li>Enquiries</li>
-
-            </ul>
+            <div class="process-line"></div>
 
 
 
-            <ul>
+            <!-- STEP 2 -->
 
-                <li>How To</li>
+            <div class="process-step">
 
-                <li>IRCTC Official App</li>
+                <div class="process-number">
+                    02
+                </div>
 
-                <li>Advertise with us</li>
+                <div class="process-icon">
 
-                <li>Refund Rules</li>
+                    <i class="fa-solid fa-train"></i>
 
-                <li>
-                    Person With Disability Facilities
-                </li>
+                </div>
 
-            </ul>
+                <h4>
+                    Select Train
+                </h4>
 
+                <p>
+                    Compare trains and select your preferred journey.
+                </p>
 
-
-            <ul>
-
-                <li>E-Wallet</li>
-
-                <li>
-                    IRCTC Co-branded Card Benefits
-                </li>
-
-                <li>
-                    IRCTC-iPAY Payment Gateway
-                </li>
-
-                <li>IRCTC Zone</li>
-
-                <li>
-                    DMRC Ticket Booking at IRCTC
-                </li>
-
-            </ul>
+            </div>
 
 
 
-            <ul>
-
-                <li>For Newly Migrated</li>
-
-                <li>Mobile Zone</li>
-
-                <li>Policies</li>
-
-                <li>Ask Disha ChatBot</li>
-
-                <li>About us</li>
-
-            </ul>
+            <div class="process-line"></div>
 
 
 
-            <ul>
+            <!-- STEP 3 -->
 
-                <li>Help & Support</li>
+            <div class="process-step">
 
-                <li>E-Pantry</li>
+                <div class="process-number">
+                    03
+                </div>
 
-            </ul>
+                <div class="process-icon">
+
+                    <i class="fa-solid fa-credit-card"></i>
+
+                </div>
+
+                <h4>
+                    Pay Securely
+                </h4>
+
+                <p>
+                    Complete your booking through secure payment.
+                </p>
+
+            </div>
+
+
+
+            <div class="process-line"></div>
+
+
+
+            <!-- STEP 4 -->
+
+            <div class="process-step">
+
+                <div class="process-number">
+                    04
+                </div>
+
+                <div class="process-icon">
+
+                    <i class="fa-solid fa-ticket"></i>
+
+                </div>
+
+                <h4>
+                    Get Ticket
+                </h4>
+
+                <p>
+                    Receive your PNR and electronic railway ticket.
+                </p>
+
+            </div>
 
 
         </div>
 
     </div>
 
+</section>
 
 
-    <!-- =========================
-         SCRIPTS
-    ========================== -->
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/flatpickr">
-    </script>
+<!-- ==========================================
+     STATS
+=========================================== -->
 
+<section class="stats-section">
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
-    </script>
+    <div class="container">
 
 
-    <script
-        src="../javascript/script.js">
-    </script>
+        <div class="row text-center g-4">
+
+
+            <div class="col-md-3 col-6">
+
+                <div class="stat-item">
+
+                    <i class="fa-solid fa-train"></i>
+
+                    <h3>
+                        100+
+                    </h3>
+
+                    <p>
+                        Trains
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-md-3 col-6">
+
+                <div class="stat-item">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <h3>
+                        25+
+                    </h3>
+
+                    <p>
+                        Stations
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-md-3 col-6">
+
+                <div class="stat-item">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <h3>
+                        100%
+                    </h3>
+
+                    <p>
+                        Secure Payment
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="col-md-3 col-6">
+
+                <div class="stat-item">
+
+                    <i class="fa-solid fa-headset"></i>
+
+                    <h3>
+                        24/7
+                    </h3>
+
+                    <p>
+                        Access
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ==========================================
+     FOOTER
+=========================================== -->
+
+<footer
+    class="main-footer"
+    id="footer">
+
+
+    <div class="container">
+
+
+        <div class="row g-5">
+
+
+            <!-- ABOUT -->
+
+            <div class="col-lg-4">
+
+
+                <div class="footer-brand">
+
+                    <div class="brand-icon">
+
+                        <i class="fa-solid fa-train-subway"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            RailConnect
+                        </h3>
+
+                        <span>
+                            Railway Reservation System
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <p class="footer-about">
+
+                    A modern railway reservation platform
+                    designed for searching trains, booking tickets,
+                    secure payments and journey management.
+
+                </p>
+
+
+
+                <div class="social-icons">
+
+                    <a href="#">
+
+                        <i class="fa-brands fa-facebook-f"></i>
+
+                    </a>
+
+
+                    <a href="#">
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+
+                    <a href="#">
+
+                        <i class="fa-brands fa-youtube"></i>
+
+                    </a>
+
+
+                    <a href="#">
+
+                        <i class="fa-brands fa-x-twitter"></i>
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- QUICK LINKS -->
+
+            <div class="col-lg-2 col-md-4">
+
+                <h4>
+                    Quick Links
+                </h4>
+
+                <ul>
+
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="search.html">
+                            Search Trains
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="mybooking.html">
+                            My Bookings
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="livetrains.html">
+                            Live Train
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- SERVICES -->
+
+            <div class="col-lg-3 col-md-4">
+
+                <h4>
+                    Services
+                </h4>
+
+                <ul>
+
+                    <li>
+                        Train Reservation
+                    </li>
+
+                    <li>
+                        E-Ticket
+                    </li>
+
+                    <li>
+                        Online Payment
+                    </li>
+
+                    <li>
+                        Cancellation & Refund
+                    </li>
+
+                    <li>
+                        Live Train Location
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- SUPPORT -->
+
+            <div class="col-lg-3 col-md-4">
+
+                <h4>
+                    Help & Support
+                </h4>
+
+                <ul class="contact-list">
+
+                    <li>
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        support@railconnect.com
+
+                    </li>
+
+                    <li>
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        +91 12345 67890
+
+                    </li>
+
+                    <li>
+
+                        <i class="fa-solid fa-clock"></i>
+
+                        Available 24/7
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <p>
+
+                © 2026 RailConnect Railway Reservation System.
+                All Rights Reserved.
+
+            </p>
+
+
+            <p>
+
+                Academic Project
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- ==========================================
+     SCRIPTS
+=========================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/flatpickr">
+</script>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script
+    src="../javascript/script.js">
+</script>
 
 
 </body>
