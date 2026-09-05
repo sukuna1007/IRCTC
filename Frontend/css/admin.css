@@ -1113,8 +1113,8 @@ input {
     gap: 15px;
 
     padding:
-        15px
-        18px;
+        18px
+        20px;
 
     border-bottom:
         1px solid var(--border);
@@ -1128,23 +1128,25 @@ input {
             #ffffff
         );
 
-    font-size: 11px;
+    font-size: 14px;
 
     font-weight: 800;
 }
 
 .table-card-header i {
 
-    margin-right: 5px;
+    margin-right: 7px;
 
     color: var(--orange);
+
+    font-size: 14px;
 }
 
 .table-card-header > span {
 
     color: var(--muted);
 
-    font-size: 8px;
+    font-size: 10px;
 
     font-weight: 600;
 }
@@ -1156,6 +1158,8 @@ input {
 
 .admin-table {
 
+    width: 100%;
+
     min-width: 950px;
 
     margin: 0;
@@ -1164,21 +1168,21 @@ input {
 .admin-table thead th {
 
     padding:
-        12px
-        13px;
+        15px
+        14px;
 
     border-bottom:
         1px solid #dce7e8;
 
-    color: #667d81;
+    color: #587075;
 
     background: #f1f6f6;
 
-    font-size: 9px;
+    font-size: 11px;
 
     font-weight: 800;
 
-    letter-spacing: 0.3px;
+    letter-spacing: 0.4px;
 
     text-transform: uppercase;
 
@@ -1188,21 +1192,30 @@ input {
 .admin-table tbody td {
 
     padding:
-        12px
-        13px;
+        16px
+        14px;
 
     border-color: #edf2f2;
 
     color: #4c6266;
 
-    font-size: 9px;
+    font-size: 11px;
 
-    line-height: 1.5;
+    line-height: 1.6;
 
     vertical-align: middle;
 }
 
+.admin-table tbody td:nth-child(2) {
+
+    color: var(--navy);
+
+    font-weight: 800;
+}
+
 .admin-table tbody tr {
+
+    min-height: 58px;
 
     transition: 0.15s;
 }
@@ -1215,10 +1228,12 @@ input {
 .table-loading {
 
     padding:
-        40px !important;
+        45px !important;
 
     color:
         var(--muted) !important;
+
+    font-size: 12px !important;
 }
 
 
@@ -1228,26 +1243,47 @@ input {
 
 .admin-table .btn {
 
-    margin: 2px;
+    min-width: 34px;
+    min-height: 34px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 3px;
 
     padding:
-        5px
-        8px;
+        8px
+        10px;
 
     border: none;
 
-    border-radius: 6px;
+    border-radius: 8px;
 
-    font-size: 8px;
+    font-size: 10px;
 
     font-weight: 700;
+
+    transition: 0.2s;
+}
+
+.admin-table .btn:hover {
+
+    transform: translateY(-1px);
 }
 
 .admin-table .btn-primary {
+
+    color: white;
+
     background: var(--blue);
 }
 
 .admin-table .btn-success {
+
+    color: white;
+
     background: var(--green);
 }
 
@@ -1259,10 +1295,16 @@ input {
 }
 
 .admin-table .btn-danger {
+
+    color: white;
+
     background: var(--red);
 }
 
 .admin-table .btn-secondary {
+
+    color: white;
+
     background: #75888c;
 }
 
@@ -1646,6 +1688,16 @@ input {
             18px
             20px;
     }
+
+    .admin-table thead th {
+
+        font-size: 10px;
+    }
+
+    .admin-table tbody td {
+
+        font-size: 10px;
+    }
 }
 
 
@@ -1747,6 +1799,15 @@ input {
         flex-direction: column;
 
         text-align: center;
+    }
+
+    .table-card-header {
+
+        padding:
+            15px
+            16px;
+
+        font-size: 12px;
     }
 }
 
