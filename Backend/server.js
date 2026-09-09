@@ -345,11 +345,10 @@ app.get(
 
 
 // ==========================================
-// LIVE TRAIN PAGE
+// LIVE TRAIN PAGE FUNCTION
 // ==========================================
 
-app.get(
-    "/livetrain.html",
+const serveLiveTrainPage =
     (req, res) => {
 
         const liveTrainFile =
@@ -367,7 +366,7 @@ app.get(
 
         return res.sendFile(
             liveTrainFile,
-            error => {
+            (error) => {
 
                 if (error) {
 
@@ -405,19 +404,28 @@ app.get(
             }
         );
 
-    }
+    };
+
+
+// ==========================================
+// MAIN LIVE TRAIN PAGE
+// ==========================================
+
+app.get(
+    "/livetrain.html",
+    serveLiveTrainPage
 );
 
 
 // ==========================================
-// OLD LIVE TRAIN URL REDIRECT
+// FIX livetrains.html
 // ==========================================
 
 app.get(
-    "/live-train.html",
+    "/livetrains.html",
     (req, res) => {
 
-        const query =
+        const queryString =
             req.originalUrl.includes("?")
                 ?
                 req.originalUrl.substring(
@@ -428,7 +436,33 @@ app.get(
 
 
         return res.redirect(
-            `/livetrain.html${query}`
+            `/livetrain.html${queryString}`
+        );
+
+    }
+);
+
+
+// ==========================================
+// SUPPORT live-train.html
+// ==========================================
+
+app.get(
+    "/live-train.html",
+    (req, res) => {
+
+        const queryString =
+            req.originalUrl.includes("?")
+                ?
+                req.originalUrl.substring(
+                    req.originalUrl.indexOf("?")
+                )
+                :
+                "";
+
+
+        return res.redirect(
+            `/livetrain.html${queryString}`
         );
 
     }
