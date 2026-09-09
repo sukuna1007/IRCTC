@@ -177,7 +177,11 @@ document.addEventListener("DOMContentLoaded", () => {
         Number.isFinite(sourceLatitude) &&
         Number.isFinite(sourceLongitude) &&
         Number.isFinite(destinationLatitude) &&
-        Number.isFinite(destinationLongitude);
+        Number.isFinite(destinationLongitude) &&
+        sourceLatitude !== 0 &&
+        sourceLongitude !== 0 &&
+        destinationLatitude !== 0 &&
+        destinationLongitude !== 0;
 
 
     // =========================================================
@@ -252,8 +256,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (runningStatusEl) {
 
-        runningStatusEl.textContent =
-            "Running";
+        runningStatusEl.innerHTML = `
+
+            <span class="status-dot"></span>
+
+            Running
+
+        `;
 
     }
 
@@ -278,7 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 else {
 
                     window.location.href =
-                        "search.html";
+                        "/search.html";
 
                 }
 
@@ -305,30 +314,9 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-        if (mapLoading) {
-
-            mapLoading.innerHTML = `
-
-                <div class="text-center p-4">
-
-                    <i
-                        class="fa-solid fa-triangle-exclamation fa-2x mb-3">
-                    </i>
-
-                    <h5>
-                        Location unavailable
-                    </h5>
-
-                    <p>
-                        Coordinates are not available
-                        for this train.
-                    </p>
-
-                </div>
-
-            `;
-
-        }
+        showMapError(
+            "Coordinates are not available for this train."
+        );
 
 
         if (runningStatusEl) {
@@ -396,7 +384,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =========================================================
-    // MAP
+    // INITIALIZE MAP
     // =========================================================
 
     function initializeMap() {
@@ -409,11 +397,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Leaflet library is not loaded."
             );
 
-
             showMapError(
                 "Leaflet map library could not be loaded."
             );
-
 
             return;
 
@@ -438,20 +424,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         // =====================================================
-        // CREATE LEAFLET MAP
+        // REMOVE OLD LEAFLET INSTANCE
+        // =====================================================
+
+        if (
+            mapElement._leaflet_id
+        ) {
+
+            mapElement._leaflet_id =
+                null;
+
+        }
+
+
+        // =====================================================
+        // CREATE MAP
         // =====================================================
 
         map =
             L.map(
                 "map",
                 {
-                    zoomControl: true
+                    zoomControl: true,
+                    scrollWheelZoom: true
                 }
             );
 
 
         // =====================================================
-        // MAP PROVIDERS
+        // OPENSTREETMAP
+        // IMPORTANT: THIS URL MUST BE PLAIN TEXT
         // =====================================================
 
         const osmLayer =
@@ -460,11 +462,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 {
                     maxZoom: 19,
 
+                    subdomains:
+                        ["a", "b", "c"],
+
                     attribution:
                         "&copy; OpenStreetMap contributors"
                 }
             );
 
+
+        // =====================================================
+        // CARTO FALLBACK
+        // =====================================================
 
         const cartoLayer =
             L.tileLayer(
@@ -472,11 +481,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 {
                     maxZoom: 20,
 
+                    subdomains:
+                        "abcd",
+
                     attribution:
                         "&copy; OpenStreetMap contributors &copy; CARTO"
                 }
             );
 
+
+        // =====================================================
+        // ESRI FALLBACK
+        // =====================================================
 
         const esriLayer =
             L.tileLayer(
@@ -491,7 +507,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         // =====================================================
-        // TILE FALLBACK
+        // PROVIDERS
         // =====================================================
 
         const mapProviders = [
@@ -520,9 +536,16 @@ document.addEventListener("DOMContentLoaded", () => {
         let activeLayer =
             null;
 
-        let providerChanging =
+        let tileLoaded =
             false;
 
+        let fallbackTimer =
+            null;
+
+
+        // =====================================================
+        // LOAD PROVIDER
+        // =====================================================
 
         function loadProvider(index) {
 
@@ -535,11 +558,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     "All map providers failed."
                 );
 
-
                 showMapError(
-                    "Unable to load map tiles. Check your internet connection or browser network settings."
+                    "Unable to load map tiles. Please check your internet connection."
                 );
-
 
                 return;
 
@@ -562,6 +583,10 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
+            tileLoaded =
+                false;
+
+
             if (
                 activeLayer &&
                 map.hasLayer(
@@ -580,18 +605,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 provider.layer;
 
 
-            providerChanging =
-                false;
-
-
             activeLayer.addTo(
                 map
             );
 
 
+            // =================================================
+            // SUCCESS
+            // =================================================
+
             activeLayer.once(
                 "tileload",
                 () => {
+
+                    tileLoaded =
+                        true;
+
 
                     console.log(
                         "Map provider loaded:",
@@ -599,56 +628,62 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
-                    providerChanging =
-                        false;
+                    if (fallbackTimer) {
 
-
-                    if (mapLoading) {
-
-                        mapLoading.style.display =
-                            "none";
+                        clearTimeout(
+                            fallbackTimer
+                        );
 
                     }
+
+
+                    hideMapLoading();
 
                 }
             );
 
 
+            // =================================================
+            // TILE ERROR
+            // =================================================
+
             activeLayer.once(
                 "tileerror",
-                () => {
-
-                    if (
-                        providerChanging
-                    ) {
-
-                        return;
-
-                    }
-
-
-                    providerChanging =
-                        true;
-
+                (error) => {
 
                     console.warn(
-                        `${provider.name} tiles failed. Trying another provider...`
+                        `${provider.name} tile error:`,
+                        error
                     );
 
+                }
+            );
 
-                    setTimeout(
-                        () => {
+
+            // =================================================
+            // FALLBACK AFTER 6 SECONDS
+            // =================================================
+
+            fallbackTimer =
+                setTimeout(
+                    () => {
+
+                        if (!tileLoaded) {
+
+                            console.warn(
+                                `${provider.name} did not load. Trying fallback...`
+                            );
+
 
                             loadProvider(
                                 providerIndex + 1
                             );
 
-                        },
-                        500
-                    );
+                        }
 
-                }
-            );
+                    },
+                    6000
+                );
 
         }
 
@@ -663,7 +698,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         // =====================================================
-        // ROUTE
+        // ROUTE COORDINATES
         // =====================================================
 
         const routeCoordinates =
@@ -695,7 +730,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         // =====================================================
-        // STATION MARKERS
+        // SOURCE MARKER
         // =====================================================
 
         createStationMarker(
@@ -703,6 +738,10 @@ document.addEventListener("DOMContentLoaded", () => {
             "Source Station"
         );
 
+
+        // =====================================================
+        // DESTINATION MARKER
+        // =====================================================
 
         createStationMarker(
             routeStations[1],
@@ -717,17 +756,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const trainIcon =
             L.divIcon(
                 {
-
                     className:
-                        "",
+                        "custom-train-icon",
 
                     html: `
 
                         <div class="live-train-marker">
 
-                            <i
-                                class="fa-solid fa-train">
-                            </i>
+                            <i class="fa-solid fa-train"></i>
 
                         </div>
 
@@ -741,21 +777,29 @@ document.addEventListener("DOMContentLoaded", () => {
                     iconAnchor: [
                         22,
                         22
-                    ]
+                    ],
 
+                    popupAnchor: [
+                        0,
+                        -22
+                    ]
                 }
             );
 
 
         // =====================================================
-        // TRAIN POSITION
+        // TRAIN MARKER
         // =====================================================
 
         trainMarker =
             L.marker(
                 calculateTrainPosition(),
                 {
-                    icon: trainIcon
+                    icon:
+                        trainIcon,
+
+                    zIndexOffset:
+                        1000
                 }
             ).addTo(
                 map
@@ -819,25 +863,69 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(
             () => {
 
+                if (!map) {
+                    return;
+                }
+
+
+                map.invalidateSize();
+
+
+                map.fitBounds(
+                    bounds,
+                    {
+                        padding: [
+                            60,
+                            60
+                        ]
+                    }
+                );
+
+            },
+            500
+        );
+
+
+        setTimeout(
+            () => {
+
                 if (map) {
 
                     map.invalidateSize();
 
-
-                    map.fitBounds(
-                        bounds,
-                        {
-                            padding: [
-                                60,
-                                60
-                            ]
-                        }
-                    );
-
                 }
 
             },
-            500
+            1200
+        );
+
+    }
+
+
+    // =========================================================
+    // HIDE MAP LOADING
+    // =========================================================
+
+    function hideMapLoading() {
+
+        if (!mapLoading) {
+            return;
+        }
+
+
+        mapLoading.classList.add(
+            "hidden"
+        );
+
+
+        setTimeout(
+            () => {
+
+                mapLoading.style.display =
+                    "none";
+
+            },
+            350
         );
 
     }
@@ -858,6 +946,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         mapLoading.style.display =
             "flex";
+
+
+        mapLoading.classList.remove(
+            "hidden"
+        );
 
 
         mapLoading.innerHTML = `
@@ -947,7 +1040,8 @@ document.addEventListener("DOMContentLoaded", () => {
         marker.bindTooltip(
             station.name,
             {
-                direction: "top",
+                direction:
+                    "top",
 
                 offset: [
                     0,
@@ -1165,8 +1259,11 @@ document.addEventListener("DOMContentLoaded", () => {
         return eta.toLocaleTimeString(
             [],
             {
-                hour: "2-digit",
-                minute: "2-digit"
+                hour:
+                    "2-digit",
+
+                minute:
+                    "2-digit"
             }
         );
 
@@ -1174,7 +1271,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =========================================================
-    // DASHBOARD
+    // UPDATE DASHBOARD
     // =========================================================
 
     function updateDashboard() {
@@ -1200,21 +1297,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (currentStationEl) {
 
-            if (
-                percentage >=
-                100
-            ) {
-
-                currentStationEl.textContent =
-                    destination;
-
-            }
-            else {
-
-                currentStationEl.textContent =
-                    `Between ${source} and ${destination}`;
-
-            }
+            currentStationEl.textContent =
+                percentage >= 100
+                    ? destination
+                    : `Between ${source} and ${destination}`;
 
         }
 
@@ -1332,10 +1418,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (runningStatusEl) {
 
-            runningStatusEl.textContent =
+            runningStatusEl.innerHTML =
                 percentage >= 100
-                    ? "Arrived"
-                    : "Running";
+                    ? `
+
+                        <span class="status-dot"></span>
+
+                        Arrived
+
+                    `
+                    : `
+
+                        <span class="status-dot"></span>
+
+                        Running
+
+                    `;
 
         }
 
@@ -1349,9 +1447,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     .toLocaleTimeString(
                         [],
                         {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                            second: "2-digit"
+                            hour:
+                                "2-digit",
+
+                            minute:
+                                "2-digit",
+
+                            second:
+                                "2-digit"
                         }
                     );
 
@@ -1519,8 +1622,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        // 1% every 3 seconds
-
         journeyProgress +=
             0.01;
 
@@ -1535,8 +1636,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
-
-        // Demo speed
 
         speed =
             65 +
@@ -1609,7 +1708,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =========================================================
-    // FINISH
+    // FINISH JOURNEY
     // =========================================================
 
     function finishJourney() {
@@ -1786,7 +1885,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!match) {
 
-            return String(value);
+            return String(
+                value
+            );
 
         }
 
