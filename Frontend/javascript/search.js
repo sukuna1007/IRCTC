@@ -17,6 +17,17 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
+        // ==========================================
+        // PAGE MODE
+        // ==========================================
+
+        const pageMode =
+            params.get("mode") || "booking";
+
+        const isLiveMode =
+            pageMode === "live";
+
+
     // ==========================================
     // ELEMENTS
     // ==========================================
@@ -1333,20 +1344,25 @@ document.addEventListener("DOMContentLoaded", () => {
                     // ==================================
 
                     const newUrl =
-                        `search.html?from=${encodeURIComponent(fromDisplay)}` +
-                        `&to=${encodeURIComponent(toDisplay)}` +
-                        `&fromCode=${encodeURIComponent(fromCode)}` +
-                        `&toCode=${encodeURIComponent(toCode)}` +
-                        `&fromCity=${encodeURIComponent(fromSearch)}` +
-                        `&toCity=${encodeURIComponent(toSearch)}` +
-                        `&date=${encodeURIComponent(date)}` +
-                        `&class=${encodeURIComponent(trainClass)}`;
+                    `search.html?from=${encodeURIComponent(fromDisplay)}` +
+                    `&to=${encodeURIComponent(toDisplay)}` +
+                    `&fromCode=${encodeURIComponent(fromCode)}` +
+                    `&toCode=${encodeURIComponent(toCode)}` +
+                    `&fromCity=${encodeURIComponent(fromSearch)}` +
+                    `&toCity=${encodeURIComponent(toSearch)}` +
+                    `&date=${encodeURIComponent(date)}` +
+                    `&class=${encodeURIComponent(trainClass)}` +
+                (
+                    isLiveMode
+                    ? "&mode=live"
+                    : ""
+                );
 
 
-                    window.history.replaceState(
-                        {},
-                        "",
-                        newUrl
+                window.history.replaceState(
+                {},
+                "",
+                newUrl
                     );
 
                 }
@@ -1864,29 +1880,37 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
-                if (
-                    bookButton &&
-                    seats > 0
-                ) {
+                if (bookButton) {
+
+                if (isLiveMode) {
+
+                // Live Train mode:
+                // hide booking button
+                bookButton.style.display =
+                    "none";
+
+                }
+                else if (seats > 0) {
 
                     bookButton.addEventListener(
-                        "click",
-                        () => {
+                    "click",
+                    () => {
 
-                            bookTrain(
-                                trainNo,
-                                trainName,
-                                fromStation,
-                                toStation,
-                                journeyDate,
-                                fare
-                            );
+                bookTrain(
+                    trainNo,
+                    trainName,
+                    fromStation,
+                    toStation,
+                    journeyDate,
+                    fare
+                    );
 
-                        }
+                    }
                     );
 
                 }
 
+                }   
 
                 // ==================================
                 // LIVE LOCATION BUTTON
@@ -2032,7 +2056,7 @@ function openLiveLocation(
     // ==========================================
 
     const url =
-        `live-train.html?` +
+    `livetrains.html?` +
 
         `trainNo=${encodeURIComponent(trainNo)}` +
 

@@ -35,33 +35,49 @@ document.addEventListener("DOMContentLoaded", () => {
     // =========================================================
     // DATABASE COORDINATES
     // =========================================================
+        const sourceCode =
+    params.get("sourceCode") || "";
 
-    const sourceCode =
-        params.get("sourceCode") || "";
+    const sourceLatParam =
+    params.get("sourceLat");
+
+    const sourceLngParam =
+    params.get("sourceLng");
+
 
     const sourceLatitude =
-        Number(
-            params.get("sourceLat")
-        );
+    sourceLatParam !== null
+        ? Number(sourceLatParam)
+        : NaN;
+
 
     const sourceLongitude =
-        Number(
-            params.get("sourceLng")
-        );
+    sourceLngParam !== null
+        ? Number(sourceLngParam)
+        : NaN;
+
 
     const destinationCode =
-        params.get("destinationCode") || "";
+    params.get("destinationCode") || "";
+
+
+    const destinationLatParam =
+    params.get("destinationLat");
+
+    const destinationLngParam =
+    params.get("destinationLng");
+
 
     const destinationLatitude =
-        Number(
-            params.get("destinationLat")
-        );
+    destinationLatParam !== null
+        ? Number(destinationLatParam)
+        : NaN;
+
 
     const destinationLongitude =
-        Number(
-            params.get("destinationLng")
-        );
-
+    destinationLngParam !== null
+        ? Number(destinationLngParam)
+        : NaN;
 
     // =========================================================
     // ELEMENTS
