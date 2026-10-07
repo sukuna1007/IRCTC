@@ -33,30 +33,30 @@ exports.searchTrains = async (from, to) => {
         FROM trains
 
         WHERE LOWER(TRIM(source)) =
-              LOWER(TRIM(?))
+              LOWER(TRIM($1))
 
         AND LOWER(TRIM(destination)) =
-            LOWER(TRIM(?))
+            LOWER(TRIM($2))
 
         ORDER BY train_number ASC
 
     `;
 
 
-    const [rows] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             sql,
 
             [
-                from,
-                to
+                String(from).trim(),
+                String(to).trim()
             ]
 
         );
 
 
-    return rows;
+    return result.rows;
 
 };
 
@@ -95,16 +95,16 @@ exports.getTrainByNumber = async (
         FROM trains
 
         WHERE TRIM(
-            CAST(train_number AS CHAR)
-        ) = ?
+            train_number::text
+        ) = $1
 
         LIMIT 1
 
     `;
 
 
-    const [rows] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             sql,
 
@@ -117,6 +117,6 @@ exports.getTrainByNumber = async (
         );
 
 
-    return rows[0] || null;
+    return result.rows[0] || null;
 
 };

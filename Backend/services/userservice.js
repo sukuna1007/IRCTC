@@ -7,7 +7,7 @@ const db = require("../config/db");
 
 exports.findUserByEmail = async (email) => {
 
-    const [rows] = await db.promise().query(
+    const result = await db.query(
 
         `SELECT
             id,
@@ -21,15 +21,14 @@ exports.findUserByEmail = async (email) => {
             profile_image,
             created_at
          FROM users
-         WHERE email = ?
+         WHERE email = $1
          LIMIT 1`,
 
         [email]
 
     );
 
-
-    return rows[0] || null;
+    return result.rows[0] || null;
 };
 
 
@@ -39,7 +38,7 @@ exports.findUserByEmail = async (email) => {
 
 exports.findUserByPhone = async (phone) => {
 
-    const [rows] = await db.promise().query(
+    const result = await db.query(
 
         `SELECT
             id,
@@ -47,15 +46,14 @@ exports.findUserByPhone = async (phone) => {
             email,
             phone
          FROM users
-         WHERE phone = ?
+         WHERE phone = $1
          LIMIT 1`,
 
         [phone]
 
     );
 
-
-    return rows[0] || null;
+    return result.rows[0] || null;
 };
 
 
@@ -65,7 +63,7 @@ exports.findUserByPhone = async (phone) => {
 
 exports.findUserById = async (userId) => {
 
-    const [rows] = await db.promise().query(
+    const result = await db.query(
 
         `SELECT
             id,
@@ -79,15 +77,14 @@ exports.findUserById = async (userId) => {
             profile_image,
             created_at
          FROM users
-         WHERE id = ?
+         WHERE id = $1
          LIMIT 1`,
 
         [userId]
 
     );
 
-
-    return rows[0] || null;
+    return result.rows[0] || null;
 };
 
 
@@ -97,7 +94,7 @@ exports.findUserById = async (userId) => {
 
 exports.getUserProfile = async (userId) => {
 
-    const [rows] = await db.promise().query(
+    const result = await db.query(
 
         `SELECT
             id,
@@ -110,15 +107,14 @@ exports.getUserProfile = async (userId) => {
             profile_image,
             created_at
          FROM users
-         WHERE id = ?
+         WHERE id = $1
          LIMIT 1`,
 
         [userId]
 
     );
 
-
-    return rows[0] || null;
+    return result.rows[0] || null;
 };
 
 
@@ -135,8 +131,7 @@ exports.createUser = async (userData) => {
         password
     } = userData;
 
-
-    const [result] = await db.promise().query(
+    const result = await db.query(
 
         `INSERT INTO users
         (
@@ -145,8 +140,8 @@ exports.createUser = async (userData) => {
             phone,
             password
         )
-        VALUES (?, ?, ?, ?)`,
-
+        VALUES ($1, $2, $3, $4)
+        RETURNING id`,
 
         [
             fullName,
@@ -157,8 +152,10 @@ exports.createUser = async (userData) => {
 
     );
 
-
-    return result;
+    // Keep compatibility with existing authcontroller.js
+    return {
+        insertId: result.rows[0].id
+    };
 };
 
 
@@ -171,11 +168,12 @@ exports.updatePassword = async (
     hashedPassword
 ) => {
 
-    const [result] = await db.promise().query(
+    const result = await db.query(
 
         `UPDATE users
-         SET password = ?
-         WHERE id = ?`,
+         SET password = $1
+         WHERE id = $2
+         RETURNING id`,
 
         [
             hashedPassword,
@@ -184,8 +182,10 @@ exports.updatePassword = async (
 
     );
 
-
-    return result;
+    // Keep compatibility with existing controller
+    return {
+        affectedRows: result.rowCount
+    };
 };
 
 
@@ -206,17 +206,17 @@ exports.updateUserProfile = async (
         profileImage
     } = profileData;
 
-
-    const [result] = await db.promise().query(
+    const result = await db.query(
 
         `UPDATE users
          SET
-            full_name = ?,
-            phone = ?,
-            address = ?,
-            dob = ?,
-            profile_image = ?
-         WHERE id = ?`,
+            full_name = $1,
+            phone = $2,
+            address = $3,
+            dob = $4,
+            profile_image = $5
+         WHERE id = $6
+         RETURNING id`,
 
         [
             fullName,
@@ -229,6 +229,7 @@ exports.updateUserProfile = async (
 
     );
 
-
-    return result;
+    return {
+        affectedRows: result.rowCount
+    };
 };

@@ -1,67 +1,45 @@
 require("dotenv").config();
 
-const mysql = require("mysql2");
+const { Pool } = require("pg");
 
 
 // ==========================================================
-// MYSQL CONNECTION POOL
+// CHECK DATABASE URL
 // ==========================================================
 
-const db = mysql.createPool({
+if (!process.env.DATABASE_URL) {
 
-    host: process.env.DB_HOST,
+    console.error(
+        "❌ DATABASE_URL is missing from environment variables"
+    );
 
-    user: process.env.DB_USER,
-
-    password: process.env.DB_PASSWORD,
-
-    database: process.env.DB_NAME,
-
-    port: Number(process.env.DB_PORT) || 3306,
+}
 
 
-    // ======================================================
-    // POOL SETTINGS
-    // ======================================================
+// ==========================================================
+// SUPABASE POSTGRESQL CONNECTION POOL
+// ==========================================================
 
-    waitForConnections: true,
+const db = new Pool({
 
-    connectionLimit: 5,
+    connectionString:
+        process.env.DATABASE_URL,
 
-    maxIdle: 5,
+    ssl: {
+        rejectUnauthorized: false
+    },
 
-    idleTimeout: 60000,
+    max: 5,
 
-    queueLimit: 0,
+    idleTimeoutMillis: 30000,
 
-    enableKeepAlive: true,
-
-    keepAliveInitialDelay: 10000,
-
-    connectTimeout: 20000
+    connectionTimeoutMillis: 20000
 
 });
 
 
 // ==========================================================
-// NEW CONNECTION LOG
-// ==========================================================
-
-db.on(
-    "connection",
-    (connection) => {
-
-        console.log(
-            "✅ MySQL connection created:",
-            connection.threadId
-        );
-
-    }
-);
-
-
-// ==========================================================
-// POOL ERROR LOG
+// DATABASE ERROR HANDLER
 // ==========================================================
 
 db.on(
@@ -69,8 +47,7 @@ db.on(
     (error) => {
 
         console.error(
-            "❌ MySQL Pool Error:",
-            error.code,
+            "❌ PostgreSQL Pool Error:",
             error.message
         );
 
@@ -82,28 +59,42 @@ db.on(
 // TEST DATABASE CONNECTION
 // ==========================================================
 
-db.promise()
-    .query("SELECT 1")
-    .then(() => {
+async function testDatabaseConnection() {
+
+    try {
+
+        const result =
+            await db.query(
+                "SELECT NOW() AS current_time"
+            );
 
         console.log(
-            "✅ MySQL database connected successfully"
+            "✅ Supabase PostgreSQL connected successfully"
         );
 
-    })
-    .catch((error) => {
+        console.log(
+            "Database Time:",
+            result.rows[0].current_time
+        );
+
+    }
+    catch (error) {
 
         console.error(
-            "❌ MySQL connection failed:",
-            error.code,
+            "❌ Supabase PostgreSQL connection failed:",
             error.message
         );
 
-    });
+    }
+
+}
+
+
+testDatabaseConnection();
 
 
 // ==========================================================
-// EXPORT POOL
+// EXPORT DATABASE POOL
 // ==========================================================
 
 module.exports = db;

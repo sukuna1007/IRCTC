@@ -2,46 +2,59 @@ const db = require("../config/db");
 
 
 // =====================================================
+// HELPER: MYSQL-LIKE RESULT
+// =====================================================
+
+function updateResult(result) {
+
+    return {
+        affectedRows: result.rowCount
+    };
+
+}
+
+
+// =====================================================
 // GET ADMIN DASHBOARD DATA
 // =====================================================
 
 exports.getDashboardData = async () => {
 
     const [
-        [userResult],
-        [trainResult],
-        [bookingResult],
-        [revenueResult],
-        [confirmedResult]
+        userResult,
+        trainResult,
+        bookingResult,
+        revenueResult,
+        confirmedResult
     ] = await Promise.all([
 
-        db.promise().query(
-            `SELECT COUNT(*) AS totalUsers
+        db.query(
+            `SELECT COUNT(*) AS "totalUsers"
              FROM users`
         ),
 
-        db.promise().query(
-            `SELECT COUNT(*) AS totalTrains
+        db.query(
+            `SELECT COUNT(*) AS "totalTrains"
              FROM trains`
         ),
 
-        db.promise().query(
-            `SELECT COUNT(*) AS totalBookings
+        db.query(
+            `SELECT COUNT(*) AS "totalBookings"
              FROM bookings`
         ),
 
-        db.promise().query(
+        db.query(
             `SELECT
-                COALESCE(SUM(fare), 0) AS totalRevenue
+                COALESCE(SUM(fare), 0) AS "totalRevenue"
              FROM bookings
-             WHERE payment_status = 'Paid'`
+             WHERE LOWER(payment_status) = 'paid'`
         ),
 
-        db.promise().query(
+        db.query(
             `SELECT
-                COUNT(*) AS confirmedBookings
+                COUNT(*) AS "confirmedBookings"
              FROM bookings
-             WHERE booking_status = 'Confirmed'`
+             WHERE LOWER(booking_status) = 'confirmed'`
         )
 
     ]);
@@ -51,27 +64,27 @@ exports.getDashboardData = async () => {
 
         totalUsers:
             Number(
-                userResult[0].totalUsers
+                userResult.rows[0].totalUsers
             ),
 
         totalTrains:
             Number(
-                trainResult[0].totalTrains
+                trainResult.rows[0].totalTrains
             ),
 
         totalBookings:
             Number(
-                bookingResult[0].totalBookings
+                bookingResult.rows[0].totalBookings
             ),
 
         confirmedBookings:
             Number(
-                confirmedResult[0].confirmedBookings
+                confirmedResult.rows[0].confirmedBookings
             ),
 
         totalRevenue:
             Number(
-                revenueResult[0].totalRevenue
+                revenueResult.rows[0].totalRevenue
             )
 
     };
@@ -85,8 +98,8 @@ exports.getDashboardData = async () => {
 
 exports.getAllUsers = async () => {
 
-    const [rows] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             `SELECT
                 id,
@@ -98,13 +111,16 @@ exports.getAllUsers = async () => {
                 dob,
                 profile_image,
                 created_at
+
              FROM users
+
              ORDER BY id DESC`
 
         );
 
 
-    return rows;
+    return result.rows;
+
 };
 
 
@@ -114,8 +130,8 @@ exports.getAllUsers = async () => {
 
 exports.getUserById = async (userId) => {
 
-    const [rows] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             `SELECT
                 id,
@@ -127,8 +143,11 @@ exports.getUserById = async (userId) => {
                 dob,
                 profile_image,
                 created_at
+
              FROM users
-             WHERE id = ?
+
+             WHERE id = $1
+
              LIMIT 1`,
 
             [userId]
@@ -136,7 +155,8 @@ exports.getUserById = async (userId) => {
         );
 
 
-    return rows[0] || null;
+    return result.rows[0] || null;
+
 };
 
 
@@ -149,12 +169,14 @@ exports.updateUserRole = async (
     role
 ) => {
 
-    const [result] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             `UPDATE users
-             SET role = ?
-             WHERE id = ?`,
+
+             SET role = $1
+
+             WHERE id = $2`,
 
             [
                 role,
@@ -164,7 +186,8 @@ exports.updateUserRole = async (
         );
 
 
-    return result;
+    return updateResult(result);
+
 };
 
 
@@ -174,18 +197,20 @@ exports.updateUserRole = async (
 
 exports.deleteUser = async (userId) => {
 
-    const [result] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             `DELETE FROM users
-             WHERE id = ?`,
+
+             WHERE id = $1`,
 
             [userId]
 
         );
 
 
-    return result;
+    return updateResult(result);
+
 };
 
 
@@ -195,41 +220,55 @@ exports.deleteUser = async (userId) => {
 
 exports.getAllBookings = async () => {
 
-    const [rows] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             `SELECT
                 b.id,
                 b.user_id,
+
                 u.full_name AS user_name,
                 u.email AS user_email,
+
                 b.pnr,
+
                 b.train_no,
                 b.train_name,
+
                 b.source,
                 b.destination,
+
                 b.journey_date,
+
                 b.passenger_name,
                 b.passenger_age,
                 b.passenger_gender,
+
                 b.fare,
+
                 b.payment_id,
                 b.payment_status,
                 b.booking_status,
+
                 b.refund_id,
                 b.refund_amount,
                 b.refund_status,
                 b.refunded_at,
+
                 b.created_at
+
              FROM bookings b
+
              LEFT JOIN users u
                 ON b.user_id = u.id
+
              ORDER BY b.id DESC`
 
         );
 
 
-    return rows;
+    return result.rows;
+
 };
 
 
@@ -237,34 +276,47 @@ exports.getAllBookings = async () => {
 // GET BOOKING BY ID
 // =====================================================
 
-exports.getBookingById = async (bookingId) => {
+exports.getBookingById = async (
+    bookingId
+) => {
 
-    const [rows] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             `SELECT
                 id,
                 user_id,
                 pnr,
+
                 train_no,
                 train_name,
+
                 source,
                 destination,
+
                 journey_date,
+
                 passenger_name,
                 passenger_age,
                 passenger_gender,
+
                 fare,
+
                 payment_id,
                 payment_status,
                 booking_status,
+
                 refund_id,
                 refund_amount,
                 refund_status,
                 refunded_at,
+
                 created_at
+
              FROM bookings
-             WHERE id = ?
+
+             WHERE id = $1
+
              LIMIT 1`,
 
             [bookingId]
@@ -272,7 +324,8 @@ exports.getBookingById = async (bookingId) => {
         );
 
 
-    return rows[0] || null;
+    return result.rows[0] || null;
+
 };
 
 
@@ -285,12 +338,14 @@ exports.updateBookingStatus = async (
     bookingStatus
 ) => {
 
-    const [result] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             `UPDATE bookings
-             SET booking_status = ?
-             WHERE id = ?`,
+
+             SET booking_status = $1
+
+             WHERE id = $2`,
 
             [
                 bookingStatus,
@@ -300,7 +355,8 @@ exports.updateBookingStatus = async (
         );
 
 
-    return result;
+    return updateResult(result);
+
 };
 
 
@@ -310,27 +366,40 @@ exports.updateBookingStatus = async (
 
 exports.getAllTrains = async () => {
 
-    const [rows] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             `SELECT
                 id,
                 train_number,
                 train_name,
+
                 source,
+                source_code,
+                source_latitude,
+                source_longitude,
+
                 destination,
+                destination_code,
+                destination_latitude,
+                destination_longitude,
+
                 departure_time,
                 arrival_time,
+
                 duration,
                 available_seats,
                 fare
+
              FROM trains
+
              ORDER BY id DESC`
 
         );
 
 
-    return rows;
+    return result.rows;
+
 };
 
 
@@ -340,22 +409,35 @@ exports.getAllTrains = async () => {
 
 exports.getTrainById = async (trainId) => {
 
-    const [rows] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             `SELECT
                 id,
                 train_number,
                 train_name,
+
                 source,
+                source_code,
+                source_latitude,
+                source_longitude,
+
                 destination,
+                destination_code,
+                destination_latitude,
+                destination_longitude,
+
                 departure_time,
                 arrival_time,
+
                 duration,
                 available_seats,
                 fare
+
              FROM trains
-             WHERE id = ?
+
+             WHERE id = $1
+
              LIMIT 1`,
 
             [trainId]
@@ -363,7 +445,8 @@ exports.getTrainById = async (trainId) => {
         );
 
 
-    return rows[0] || null;
+    return result.rows[0] || null;
+
 };
 
 
@@ -375,24 +458,35 @@ exports.getTrainByNumber = async (
     trainNumber
 ) => {
 
-    const [rows] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             `SELECT
                 id,
                 train_number,
                 train_name,
+
                 source,
+                source_code,
+                source_latitude,
+                source_longitude,
+
                 destination,
+                destination_code,
+                destination_latitude,
+                destination_longitude,
+
                 departure_time,
                 arrival_time,
+
                 duration,
                 available_seats,
                 fare
+
              FROM trains
-             WHERE TRIM(
-                CAST(train_number AS CHAR)
-             ) = ?
+
+             WHERE TRIM(train_number::text) = $1
+
              LIMIT 1`,
 
             [
@@ -404,7 +498,8 @@ exports.getTrainByNumber = async (
         );
 
 
-    return rows[0] || null;
+    return result.rows[0] || null;
+
 };
 
 
@@ -425,9 +520,7 @@ exports.findDuplicateTrainNumber = async (
 
         FROM trains
 
-        WHERE TRIM(
-            CAST(train_number AS CHAR)
-        ) = ?
+        WHERE TRIM(train_number::text) = $1
 
     `;
 
@@ -447,7 +540,7 @@ exports.findDuplicateTrainNumber = async (
 
         sql += `
 
-            AND id != ?
+            AND id != $2
 
         `;
 
@@ -465,17 +558,15 @@ exports.findDuplicateTrainNumber = async (
     `;
 
 
-    const [rows] =
-        await db.promise().query(
-
+    const result =
+        await db.query(
             sql,
-
             values
-
         );
 
 
-    return rows[0] || null;
+    return result.rows[0] || null;
+
 };
 
 
@@ -489,10 +580,20 @@ exports.addTrain = async (trainData) => {
 
         trainNumber,
         trainName,
+
         source,
+        sourceCode,
+        sourceLatitude,
+        sourceLongitude,
+
         destination,
+        destinationCode,
+        destinationLatitude,
+        destinationLongitude,
+
         departureTime,
         arrivalTime,
+
         duration,
         availableSeats,
         fare
@@ -500,33 +601,66 @@ exports.addTrain = async (trainData) => {
     } = trainData;
 
 
-    const [result] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             `INSERT INTO trains (
+
                 train_number,
                 train_name,
+
                 source,
+                source_code,
+                source_latitude,
+                source_longitude,
+
                 destination,
+                destination_code,
+                destination_latitude,
+                destination_longitude,
+
                 departure_time,
                 arrival_time,
+
                 duration,
                 available_seats,
                 fare
+
              )
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+
+             VALUES (
+                $1, $2,
+                $3, $4, $5, $6,
+                $7, $8, $9, $10,
+                $11, $12,
+                $13, $14, $15
+             )
+
+             RETURNING id`,
 
             [
                 trainNumber,
                 trainName,
+
                 source,
+                sourceCode || null,
+                sourceLatitude || null,
+                sourceLongitude || null,
+
                 destination,
+                destinationCode || null,
+                destinationLatitude || null,
+                destinationLongitude || null,
+
                 departureTime,
                 arrivalTime,
+
                 duration,
+
                 Number(
                     availableSeats
                 ),
+
                 Number(
                     fare
                 )
@@ -535,7 +669,14 @@ exports.addTrain = async (trainData) => {
         );
 
 
-    return result;
+    return {
+        insertId:
+            result.rows[0].id,
+
+        affectedRows:
+            result.rowCount
+    };
+
 };
 
 
@@ -552,10 +693,20 @@ exports.updateTrain = async (
 
         trainNumber,
         trainName,
+
         source,
+        sourceCode,
+        sourceLatitude,
+        sourceLongitude,
+
         destination,
+        destinationCode,
+        destinationLatitude,
+        destinationLongitude,
+
         departureTime,
         arrivalTime,
+
         duration,
         availableSeats,
         fare
@@ -563,43 +714,69 @@ exports.updateTrain = async (
     } = trainData;
 
 
-    const [result] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             `UPDATE trains
+
              SET
-                train_number = ?,
-                train_name = ?,
-                source = ?,
-                destination = ?,
-                departure_time = ?,
-                arrival_time = ?,
-                duration = ?,
-                available_seats = ?,
-                fare = ?
-             WHERE id = ?`,
+                train_number = $1,
+                train_name = $2,
+
+                source = $3,
+                source_code = $4,
+                source_latitude = $5,
+                source_longitude = $6,
+
+                destination = $7,
+                destination_code = $8,
+                destination_latitude = $9,
+                destination_longitude = $10,
+
+                departure_time = $11,
+                arrival_time = $12,
+
+                duration = $13,
+                available_seats = $14,
+                fare = $15
+
+             WHERE id = $16`,
 
             [
                 trainNumber,
                 trainName,
+
                 source,
+                sourceCode || null,
+                sourceLatitude || null,
+                sourceLongitude || null,
+
                 destination,
+                destinationCode || null,
+                destinationLatitude || null,
+                destinationLongitude || null,
+
                 departureTime,
                 arrivalTime,
+
                 duration,
+
                 Number(
                     availableSeats
                 ),
+
                 Number(
                     fare
                 ),
+
                 trainId
             ]
 
         );
 
 
-    return result;
+    return updateResult(result);
+
 };
 
 
@@ -609,16 +786,18 @@ exports.updateTrain = async (
 
 exports.deleteTrain = async (trainId) => {
 
-    const [result] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             `DELETE FROM trains
-             WHERE id = ?`,
+
+             WHERE id = $1`,
 
             [trainId]
 
         );
 
 
-    return result;
+    return updateResult(result);
+
 };

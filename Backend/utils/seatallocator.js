@@ -34,8 +34,8 @@ exports.allocateSeat = async (
     // GET ALL CURRENTLY ALLOCATED SEATS
     // ==========================================
 
-    const [rows] =
-        await db.promise().query(
+    const result =
+        await db.query(
 
             `SELECT
                 coach,
@@ -43,18 +43,22 @@ exports.allocateSeat = async (
 
              FROM bookings
 
-             WHERE train_no = ?
-             AND journey_date = ?
-             AND booking_status = 'Confirmed'
+             WHERE train_no = $1
+             AND journey_date = $2
+             AND LOWER(booking_status) = 'confirmed'
              AND coach IS NOT NULL
              AND seat_number IS NOT NULL`,
 
             [
-                trainNo,
+                String(trainNo).trim(),
                 journeyDate
             ]
 
         );
+
+
+    const rows =
+        result.rows;
 
 
     // ==========================================

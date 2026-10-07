@@ -2,58 +2,70 @@ const db = require("../config/db");
 
 
 // ==========================================
+// HELPER: MYSQL-LIKE UPDATE RESULT
+// ==========================================
+
+function updateResult(result) {
+
+    return {
+        affectedRows: result.rowCount
+    };
+
+}
+
+
+// ==========================================
 // GET BOOKINGS BY USER ID
 // ==========================================
 
 exports.getBookingsByUserId = async (userId) => {
 
-    const [rows] =
-        await db.promise().query(
+    const result = await db.query(
 
-            `SELECT
-                id,
-                user_id,
-                pnr,
+        `SELECT
+            id,
+            user_id,
+            pnr,
 
-                train_no,
-                train_name,
-                source,
-                destination,
-                journey_date,
+            train_no,
+            train_name,
+            source,
+            destination,
+            journey_date,
 
-                passenger_name,
-                passenger_age,
-                passenger_gender,
+            passenger_name,
+            passenger_age,
+            passenger_gender,
 
-                coach,
-                seat_number,
-                berth_type,
+            coach,
+            seat_number,
+            berth_type,
 
-                fare,
+            fare,
 
-                payment_id,
-                payment_status,
-                booking_status,
+            payment_id,
+            payment_status,
+            booking_status,
 
-                refund_id,
-                refund_amount,
-                refund_status,
-                refunded_at,
+            refund_id,
+            refund_amount,
+            refund_status,
+            refunded_at,
 
-                created_at
+            created_at
 
-             FROM bookings
+         FROM bookings
 
-             WHERE user_id = ?
+         WHERE user_id = $1
 
-             ORDER BY id DESC`,
+         ORDER BY id DESC`,
 
-            [userId]
+        [userId]
 
-        );
+    );
 
 
-    return rows;
+    return result.rows;
 
 };
 
@@ -71,58 +83,57 @@ exports.getBookingByPNR = async (
         String(pnr || "").trim();
 
 
-    const [rows] =
-        await db.promise().query(
+    const result = await db.query(
 
-            `SELECT
-                id,
-                user_id,
-                pnr,
+        `SELECT
+            id,
+            user_id,
+            pnr,
 
-                train_no,
-                train_name,
-                source,
-                destination,
-                journey_date,
+            train_no,
+            train_name,
+            source,
+            destination,
+            journey_date,
 
-                passenger_name,
-                passenger_age,
-                passenger_gender,
+            passenger_name,
+            passenger_age,
+            passenger_gender,
 
-                coach,
-                seat_number,
-                berth_type,
+            coach,
+            seat_number,
+            berth_type,
 
-                fare,
+            fare,
 
-                payment_id,
-                payment_status,
-                booking_status,
+            payment_id,
+            payment_status,
+            booking_status,
 
-                refund_id,
-                refund_amount,
-                refund_status,
-                refunded_at,
+            refund_id,
+            refund_amount,
+            refund_status,
+            refunded_at,
 
-                created_at
+            created_at
 
-             FROM bookings
+         FROM bookings
 
-             WHERE TRIM(CAST(pnr AS CHAR)) = ?
+         WHERE TRIM(pnr::text) = $1
 
-             AND user_id = ?
+         AND user_id = $2
 
-             LIMIT 1`,
+         LIMIT 1`,
 
-            [
-                cleanPNR,
-                userId
-            ]
+        [
+            cleanPNR,
+            userId
+        ]
 
-        );
+    );
 
 
-    return rows[0] || null;
+    return result.rows[0] || null;
 
 };
 
@@ -135,53 +146,52 @@ exports.getBookingByPaymentId = async (
     paymentId
 ) => {
 
-    const [rows] =
-        await db.promise().query(
+    const result = await db.query(
 
-            `SELECT
-                id,
-                user_id,
-                pnr,
+        `SELECT
+            id,
+            user_id,
+            pnr,
 
-                train_no,
-                train_name,
-                source,
-                destination,
-                journey_date,
+            train_no,
+            train_name,
+            source,
+            destination,
+            journey_date,
 
-                passenger_name,
-                passenger_age,
-                passenger_gender,
+            passenger_name,
+            passenger_age,
+            passenger_gender,
 
-                coach,
-                seat_number,
-                berth_type,
+            coach,
+            seat_number,
+            berth_type,
 
-                fare,
+            fare,
 
-                payment_id,
-                payment_status,
-                booking_status,
+            payment_id,
+            payment_status,
+            booking_status,
 
-                refund_id,
-                refund_amount,
-                refund_status,
-                refunded_at,
+            refund_id,
+            refund_amount,
+            refund_status,
+            refunded_at,
 
-                created_at
+            created_at
 
-             FROM bookings
+         FROM bookings
 
-             WHERE payment_id = ?
+         WHERE payment_id = $1
 
-             LIMIT 1`,
+         LIMIT 1`,
 
-            [paymentId]
+        [paymentId]
 
-        );
+    );
 
 
-    return rows[0] || null;
+    return result.rows[0] || null;
 
 };
 
@@ -196,20 +206,22 @@ exports.pnrExists = async (pnr) => {
         String(pnr || "").trim();
 
 
-    const [rows] =
-        await db.promise().query(
+    const result = await db.query(
 
-            `SELECT id
-             FROM bookings
-             WHERE TRIM(CAST(pnr AS CHAR)) = ?
-             LIMIT 1`,
+        `SELECT id
 
-            [cleanPNR]
+         FROM bookings
 
-        );
+         WHERE TRIM(pnr::text) = $1
+
+         LIMIT 1`,
+
+        [cleanPNR]
+
+    );
 
 
-    return rows.length > 0;
+    return result.rows.length > 0;
 
 };
 
@@ -286,19 +298,19 @@ exports.createBooking = async (
 
         VALUES (
 
-            ?, ?,
+            $1, $2,
 
-            ?, ?,
+            $3, $4,
 
-            ?, ?, ?,
+            $5, $6, $7,
 
-            ?, ?, ?,
+            $8, $9, $10,
 
-            ?, ?, ?,
+            $11, $12, $13,
 
-            ?,
+            $14,
 
-            ?,
+            $15,
             'Paid',
             'Confirmed',
 
@@ -309,73 +321,77 @@ exports.createBooking = async (
 
         )
 
+        RETURNING id
+
     `;
 
 
-    const [result] =
-        await db.promise().query(
+    const result = await db.query(
 
-            insertQuery,
+        insertQuery,
 
-            [
-                userId,
+        [
+            userId,
 
-                String(
-                    pnr
-                ).trim(),
+            String(
+                pnr
+            ).trim(),
 
-                String(
-                    trainNo
-                ).trim(),
+            String(
+                trainNo
+            ).trim(),
 
-                String(
-                    trainName
-                ).trim(),
+            String(
+                trainName
+            ).trim(),
 
-                String(
-                    from
-                ).trim(),
+            String(
+                from
+            ).trim(),
 
-                String(
-                    to
-                ).trim(),
+            String(
+                to
+            ).trim(),
 
-                date,
+            date,
 
-                String(
-                    name
-                ).trim(),
+            String(
+                name
+            ).trim(),
 
-                Number(age),
+            Number(age),
 
-                String(
-                    gender
-                ).trim(),
+            String(
+                gender
+            ).trim(),
 
-                coach
-                    ? String(coach).trim()
-                    : null,
+            coach
+                ? String(coach).trim()
+                : null,
 
-                seatNumber !== undefined &&
-                seatNumber !== null
-                    ? Number(seatNumber)
-                    : null,
+            seatNumber !== undefined &&
+            seatNumber !== null
+                ? String(seatNumber).trim()
+                : null,
 
-                berthType
-                    ? String(berthType).trim()
-                    : null,
+            berthType
+                ? String(berthType).trim()
+                : null,
 
-                Number(fare),
+            Number(fare),
 
-                String(
-                    paymentId
-                ).trim()
-            ]
+            String(
+                paymentId
+            ).trim()
+        ]
 
-        );
+    );
 
 
-    return result;
+    return {
+        insertId: result.rows[0].id,
+        affectedRows: result.rowCount
+    };
 
 };
 
@@ -393,29 +409,28 @@ exports.cancelBooking = async (
         String(pnr || "").trim();
 
 
-    const [result] =
-        await db.promise().query(
+    const result = await db.query(
 
-            `UPDATE bookings
+        `UPDATE bookings
 
-             SET
-                booking_status = 'Cancelled'
+         SET
+            booking_status = 'Cancelled'
 
-             WHERE TRIM(CAST(pnr AS CHAR)) = ?
+         WHERE TRIM(pnr::text) = $1
 
-             AND user_id = ?
+         AND user_id = $2
 
-             AND booking_status = 'Confirmed'`,
+         AND booking_status = 'Confirmed'`,
 
-            [
-                cleanPNR,
-                userId
-            ]
+        [
+            cleanPNR,
+            userId
+        ]
 
-        );
+    );
 
 
-    return result;
+    return updateResult(result);
 
 };
 
@@ -433,35 +448,34 @@ exports.markRefundProcessing = async (
         String(pnr || "").trim();
 
 
-    const [result] =
-        await db.promise().query(
+    const result = await db.query(
 
-            `UPDATE bookings
+        `UPDATE bookings
 
-             SET
-                refund_status = 'Processing'
+         SET
+            refund_status = 'Processing'
 
-             WHERE TRIM(CAST(pnr AS CHAR)) = ?
+         WHERE TRIM(pnr::text) = $1
 
-             AND user_id = ?
+         AND user_id = $2
 
-             AND booking_status = 'Cancelled'
+         AND booking_status = 'Cancelled'
 
-             AND (
-                    refund_status = 'Not Requested'
-                    OR refund_status = 'Failed'
-                    OR refund_status IS NULL
-                 )`,
+         AND (
+            refund_status = 'Not Requested'
+            OR refund_status = 'Failed'
+            OR refund_status IS NULL
+         )`,
 
-            [
-                cleanPNR,
-                userId
-            ]
+        [
+            cleanPNR,
+            userId
+        ]
 
-        );
+    );
 
 
-    return result;
+    return updateResult(result);
 
 };
 
@@ -486,40 +500,39 @@ exports.saveRefund = async (
     } = refundData;
 
 
-    const [result] =
-        await db.promise().query(
+    const result = await db.query(
 
-            `UPDATE bookings
+        `UPDATE bookings
 
-             SET
-                refund_id = ?,
-                refund_amount = ?,
-                refund_status = 'Refunded',
-                payment_status = 'Refunded',
-                refunded_at = NOW()
+         SET
+            refund_id = $1,
+            refund_amount = $2,
+            refund_status = 'Refunded',
+            payment_status = 'Refunded',
+            refunded_at = NOW()
 
-             WHERE TRIM(CAST(pnr AS CHAR)) = ?
+         WHERE TRIM(pnr::text) = $3
 
-             AND user_id = ?
+         AND user_id = $4
 
-             AND booking_status = 'Cancelled'`,
+         AND booking_status = 'Cancelled'`,
 
-            [
-                refundId,
+        [
+            refundId,
 
-                Number(
-                    refundAmount
-                ),
+            Number(
+                refundAmount
+            ),
 
-                cleanPNR,
+            cleanPNR,
 
-                userId
-            ]
+            userId
+        ]
 
-        );
+    );
 
 
-    return result;
+    return updateResult(result);
 
 };
 
@@ -537,29 +550,28 @@ exports.markRefundFailed = async (
         String(pnr || "").trim();
 
 
-    const [result] =
-        await db.promise().query(
+    const result = await db.query(
 
-            `UPDATE bookings
+        `UPDATE bookings
 
-             SET
-                refund_status = 'Failed'
+         SET
+            refund_status = 'Failed'
 
-             WHERE TRIM(CAST(pnr AS CHAR)) = ?
+         WHERE TRIM(pnr::text) = $1
 
-             AND user_id = ?
+         AND user_id = $2
 
-             AND booking_status = 'Cancelled'`,
+         AND booking_status = 'Cancelled'`,
 
-            [
-                cleanPNR,
-                userId
-            ]
+        [
+            cleanPNR,
+            userId
+        ]
 
-        );
+    );
 
 
-    return result;
+    return updateResult(result);
 
 };
 
@@ -577,38 +589,37 @@ exports.getRefundByPNR = async (
         String(pnr || "").trim();
 
 
-    const [rows] =
-        await db.promise().query(
+    const result = await db.query(
 
-            `SELECT
-                id,
-                pnr,
+        `SELECT
+            id,
+            pnr,
 
-                payment_id,
-                payment_status,
-                booking_status,
+            payment_id,
+            payment_status,
+            booking_status,
 
-                refund_id,
-                refund_amount,
-                refund_status,
-                refunded_at
+            refund_id,
+            refund_amount,
+            refund_status,
+            refunded_at
 
-             FROM bookings
+         FROM bookings
 
-             WHERE TRIM(CAST(pnr AS CHAR)) = ?
+         WHERE TRIM(pnr::text) = $1
 
-             AND user_id = ?
+         AND user_id = $2
 
-             LIMIT 1`,
+         LIMIT 1`,
 
-            [
-                cleanPNR,
-                userId
-            ]
+        [
+            cleanPNR,
+            userId
+        ]
 
-        );
+    );
 
 
-    return rows[0] || null;
+    return result.rows[0] || null;
 
 };

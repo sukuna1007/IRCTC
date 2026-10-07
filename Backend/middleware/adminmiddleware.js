@@ -35,17 +35,20 @@ const adminMiddleware = async (req, res, next) => {
 
 
         // ==========================================
-        // GET USER ROLE FROM MYSQL
+        // GET USER ROLE FROM POSTGRESQL
         // ==========================================
 
-        const [rows] =
-            await db.promise().query(
+        const result =
+            await db.query(
 
                 `SELECT
                     id,
                     role
+
                  FROM users
-                 WHERE id = ?
+
+                 WHERE id = $1
+
                  LIMIT 1`,
 
                 [userId]
@@ -58,7 +61,7 @@ const adminMiddleware = async (req, res, next) => {
         // ==========================================
 
         if (
-            rows.length === 0
+            result.rows.length === 0
         ) {
 
             return res.status(404).json({
@@ -74,7 +77,7 @@ const adminMiddleware = async (req, res, next) => {
 
 
         const user =
-            rows[0];
+            result.rows[0];
 
 
         // ==========================================
