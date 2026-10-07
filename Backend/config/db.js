@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const mysql = require("mysql2");
 
+
 // ==========================================================
 // MYSQL CONNECTION POOL
 // ==========================================================
@@ -16,7 +17,7 @@ const db = mysql.createPool({
 
     database: process.env.DB_NAME,
 
-    port: process.env.DB_PORT || 3306,
+    port: Number(process.env.DB_PORT) || 3306,
 
 
     // ======================================================
@@ -25,42 +26,80 @@ const db = mysql.createPool({
 
     waitForConnections: true,
 
-    connectionLimit: 10,
+    connectionLimit: 5,
+
+    maxIdle: 5,
+
+    idleTimeout: 60000,
 
     queueLimit: 0,
 
     enableKeepAlive: true,
 
-    keepAliveInitialDelay: 0
+    keepAliveInitialDelay: 10000,
+
+    connectTimeout: 20000
 
 });
+
+
+// ==========================================================
+// NEW CONNECTION LOG
+// ==========================================================
+
+db.on(
+    "connection",
+    (connection) => {
+
+        console.log(
+            "✅ MySQL connection created:",
+            connection.threadId
+        );
+
+    }
+);
+
+
+// ==========================================================
+// POOL ERROR LOG
+// ==========================================================
+
+db.on(
+    "error",
+    (error) => {
+
+        console.error(
+            "❌ MySQL Pool Error:",
+            error.code,
+            error.message
+        );
+
+    }
+);
 
 
 // ==========================================================
 // TEST DATABASE CONNECTION
 // ==========================================================
 
-db.query(
-    "SELECT 1",
-    (error) => {
-
-        if (error) {
-
-            console.error(
-                "❌ MySQL connection failed:",
-                error.message
-            );
-
-            return;
-
-        }
+db.promise()
+    .query("SELECT 1")
+    .then(() => {
 
         console.log(
             "✅ MySQL database connected successfully"
         );
 
-    }
-);
+    })
+    .catch((error) => {
+
+        console.error(
+            "❌ MySQL connection failed:",
+            error.code,
+            error.message
+        );
+
+    });
 
 
 // ==========================================================
