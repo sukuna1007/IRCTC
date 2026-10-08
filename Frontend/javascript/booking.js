@@ -968,37 +968,51 @@ document.addEventListener("DOMContentLoaded", () => {
                 // ==========================================
 
                 razorpay.on(
+    "payment.failed",
+    function (response) {
 
-                    "payment.failed",
+        console.error(
+            "Razorpay Payment Failed - Full Response:",
+            response
+        );
 
-                    function (response) {
+        const error =
+            response?.error || response || {};
 
-                        console.error(
-                            "Razorpay Payment Failed:",
-                            response.error
-                        );
+        const code =
+            error.code ||
+            error.reason ||
+            "PAYMENT_FAILED";
 
+        const description =
+            error.description ||
+            error.message ||
+            "Payment could not be completed. Please try another payment method.";
 
-                        alert(
+        const source =
+            error.source || "Razorpay";
 
-                            "Payment Failed\n\n" +
+        const step =
+            error.step || "Payment";
 
-                            "Code: " +
-                            response.error.code +
+        const reason =
+            error.reason || "Unknown";
 
-                            "\n\n" +
+        console.error("Payment Error Code:", code);
+        console.error("Payment Error Description:", description);
+        console.error("Payment Error Source:", source);
+        console.error("Payment Error Step:", step);
+        console.error("Payment Error Reason:", reason);
 
-                            "Description: " +
-                            response.error.description
+        alert(
+            "Payment Failed\n\n" +
+            "Code: " + code +
+            "\n\nDescription: " + description
+        );
 
-                        );
-
-
-                        resetPaymentButton();
-
-                    }
-
-                );
+        resetPaymentButton();
+    }
+);
 
 
                 // ==========================================

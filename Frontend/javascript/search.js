@@ -55,178 +55,178 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // ==========================================
-    // STATIONS
-    // ==========================================
-    // name = station shown to user
-    // code = railway station code
-    // city = value used in trains table
-    // ==========================================
+// STATIONS
+// ==========================================
+// name = station shown to user
+// code = railway station code
+// city = EXACT source/destination value in Supabase
+// ==========================================
 
-    const stations = [
+const stations = [
 
-        {
-            name: "New Delhi",
-            code: "NDLS",
-            city: "Delhi"
-        },
+    {
+        name: "New Delhi",
+        code: "NDLS",
+        city: "New Delhi"
+    },
 
-        {
-            name: "Delhi Junction",
-            code: "DLI",
-            city: "Delhi"
-        },
+    {
+        name: "Delhi Junction",
+        code: "DLI",
+        city: "Delhi Junction"
+    },
 
-        {
-            name: "Delhi Cantt",
-            code: "DEC",
-            city: "Delhi"
-        },
+    {
+        name: "Delhi Cantt",
+        code: "DEC",
+        city: "Delhi Cantt"
+    },
 
-        {
-            name: "Mumbai Central",
-            code: "MMCT",
-            city: "Mumbai"
-        },
+    {
+        name: "Mumbai Central",
+        code: "MMCT",
+        city: "Mumbai Central"
+    },
 
-        {
-            name: "Mumbai CSMT",
-            code: "CSMT",
-            city: "Mumbai"
-        },
+    {
+        name: "Mumbai CSMT",
+        code: "CSMT",
+        city: "Mumbai CSMT"
+    },
 
-        {
-            name: "Bandra Terminus",
-            code: "BDTS",
-            city: "Mumbai"
-        },
+    {
+        name: "Bandra Terminus",
+        code: "BDTS",
+        city: "Bandra Terminus"
+    },
 
-        {
-            name: "Ahmedabad Junction",
-            code: "ADI",
-            city: "Ahmedabad"
-        },
+    {
+        name: "Ahmedabad Junction",
+        code: "ADI",
+        city: "Ahmedabad Junction"
+    },
 
-        {
-            name: "Surat",
-            code: "ST",
-            city: "Surat"
-        },
+    {
+        name: "Surat",
+        code: "ST",
+        city: "Surat"
+    },
 
-        {
-            name: "Vadodara Junction",
-            code: "BRC",
-            city: "Vadodara"
-        },
+    {
+        name: "Vadodara Junction",
+        code: "BRC",
+        city: "Vadodara Junction"
+    },
 
-        {
-            name: "Rajkot Junction",
-            code: "RJT",
-            city: "Rajkot"
-        },
+    {
+        name: "Rajkot Junction",
+        code: "RJT",
+        city: "Rajkot Junction"
+    },
 
-        {
-            name: "Veraval",
-            code: "VRL",
-            city: "Veraval"
-        },
+    {
+        name: "Veraval",
+        code: "VRL",
+        city: "Veraval"
+    },
 
-        {
-            name: "Junagadh Junction",
-            code: "JND",
-            city: "Junagadh"
-        },
+    {
+        name: "Junagadh Junction",
+        code: "JND",
+        city: "Junagadh Junction"
+    },
 
-        {
-            name: "Somnath",
-            code: "SMNH",
-            city: "Somnath"
-        },
+    {
+        name: "Somnath",
+        code: "SMNH",
+        city: "Somnath"
+    },
 
-        {
-            name: "Jaipur Junction",
-            code: "JP",
-            city: "Jaipur"
-        },
+    {
+        name: "Jaipur Junction",
+        code: "JP",
+        city: "Jaipur Junction"
+    },
 
-        {
-            name: "Kota Junction",
-            code: "KOTA",
-            city: "Kota"
-        },
+    {
+        name: "Kota Junction",
+        code: "KOTA",
+        city: "Kota Junction"
+    },
 
-        {
-            name: "Howrah Junction",
-            code: "HWH",
-            city: "Kolkata"
-        },
+    {
+        name: "Howrah Junction",
+        code: "HWH",
+        city: "Howrah Junction"
+    },
 
-        {
-            name: "Sealdah",
-            code: "SDAH",
-            city: "Kolkata"
-        },
+    {
+        name: "Sealdah",
+        code: "SDAH",
+        city: "Sealdah"
+    },
 
-        {
-            name: "Chennai Central",
-            code: "MAS",
-            city: "Chennai"
-        },
+    {
+        name: "Chennai Central",
+        code: "MAS",
+        city: "Chennai Central"
+    },
 
-        {
-            name: "Bengaluru City Junction",
-            code: "SBC",
-            city: "Bengaluru"
-        },
+    {
+        name: "Bengaluru City Junction",
+        code: "SBC",
+        city: "Bengaluru City Junction"
+    },
 
-        {
-            name: "Hyderabad Deccan",
-            code: "HYB",
-            city: "Hyderabad"
-        },
+    {
+        name: "Hyderabad Deccan",
+        code: "HYB",
+        city: "Hyderabad Deccan"
+    },
 
-        {
-            name: "Pune Junction",
-            code: "PUNE",
-            city: "Pune"
-        },
+    {
+        name: "Pune Junction",
+        code: "PUNE",
+        city: "Pune Junction"
+    },
 
-        {
-            name: "Nagpur Junction",
-            code: "NGP",
-            city: "Nagpur"
-        },
+    {
+        name: "Nagpur Junction",
+        code: "NGP",
+        city: "Nagpur Junction"
+    },
 
-        {
-            name: "Lucknow",
-            code: "LKO",
-            city: "Lucknow"
-        },
+    {
+        name: "Lucknow",
+        code: "LKO",
+        city: "Lucknow"
+    },
 
-        {
-            name: "Kanpur Central",
-            code: "CNB",
-            city: "Kanpur"
-        },
+    {
+        name: "Kanpur Central",
+        code: "CNB",
+        city: "Kanpur Central"
+    },
 
-        {
-            name: "Varanasi Junction",
-            code: "BSB",
-            city: "Varanasi"
-        },
+    {
+        name: "Varanasi Junction",
+        code: "BSB",
+        city: "Varanasi Junction"
+    },
 
-        {
-            name: "Bhopal Junction",
-            code: "BPL",
-            city: "Bhopal"
-        },
+    {
+        name: "Bhopal Junction",
+        code: "BPL",
+        city: "Bhopal Junction"
+    },
 
-        {
-            name: "Indore Junction",
-            code: "INDB",
-            city: "Indore"
-        }
+    {
+        name: "Indore Junction",
+        code: "INDB",
+        city: "Indore Junction"
+    }
 
-    ];
+];
 
 
     // ==========================================
